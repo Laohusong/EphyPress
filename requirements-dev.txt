@@ -1,0 +1,6 @@
+-r requirements.txt
+pytest>=8
+build>=1.2
+twine>=6
+ruff>=0.9
+spikeinterface>=0.103.1,<0.106

@@ -1,0 +1,10 @@
+include LICENSE README.md README.zh-CN.md CHANGELOG.md requirements*.txt
+include CONTRIBUTING.md THIRD_PARTY_NOTICES.md CITATION.cff RELEASE_NOTES.md
+recursive-include LICENSES *.txt
+recursive-include src/ephypress *.cpp *.h *.json
+recursive-include vendor/fse *.c *.h LICENSE UPSTREAM.json
+recursive-include tests *.py
+recursive-include tests/fixtures *.spc *.md
+recursive-include examples *.py
+recursive-include docs *.md *.json
+exclude tools/_reader_methods.tmp

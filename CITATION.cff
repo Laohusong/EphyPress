@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use EphyPress, please cite this software repository."
+type: software
+title: EphyPress
+version: 0.1.0
+authors:
+  - family-names: Song
+    given-names: Jiatai
+url: "https://github.com/Laohusong/EphyPress"
+repository-code: "https://github.com/Laohusong/EphyPress"
+license: MIT

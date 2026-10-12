@@ -1,0 +1,20 @@
+{
+  "source": "SpikeCompressor Level1 implementation in the local workspace",
+  "original_sha256": {
+    "native.cpp": "0ed7b2c2c6e7916efc447de8f91ae1ebce4731df4f4af0cce52c333db95013e0",
+    "native.py": "fbd2cb33e8fbf1fff1f85c3b4cd19f3c4b88b629e22cf01dc9ee864d6892ca0f",
+    "predictors.json": "8b78ee53d92cae4ab81c141d07c7ea419f0c61bec5f2cde4905675f23706e5bd",
+    "container.py": "1f5735be317f5b92c2079cd3ef7390db4ccbeecfd3b6a0c25493bedf59f75fd3",
+    "mapped.py": "aa1c40deb1d9e5ff47b58308a06e285dc4adafaef29e7ff4fb3e06eeabe66ec1",
+    "entropy.py": "fef743f64a027910022c4b7643c6282ffcd2165e70986a9a9d5536ad4612c020"
+  },
+  "default_profile": {
+    "predictor": 53,
+    "quantum": 1,
+    "low_bits": 4,
+    "entropy_backend": "fse",
+    "entropy_group_channels": 1,
+    "batch_samples": 60000,
+    "halo": 0
+  }
+}

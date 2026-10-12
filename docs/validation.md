@@ -9,9 +9,9 @@ publication and conflicting output files. It also checks native Windows-compatib
 binary control bytes, the installed CLI, SpikeInterface metadata and
 JSON reload in a fresh process, and native KS4 padded batches.
 
-Local tests use CPython 3.12 with NumPy 1.26.4 + SpikeInterface 0.103.1 and NumPy
+The 24-test suite passes locally with CPython 3.12 with NumPy 1.26.4 + SpikeInterface 0.103.1 and NumPy
 2.5.4 + SpikeInterface 0.105.1, with KS4 4.1.7. CI independently installs/builds
-the package on Linux/macOS/Windows and CPython 3.10/3.12/3.13. The CPU KS4 job installs a
+the package on Linux/macOS/Windows and CPython 3.10/3.12/3.13. The Linux and Windows CPU KS4 jobs install a
 CPU PyTorch build; real GPU sorting is an opt-in check rather than a CI fixture.
 
 ## Real recording and complete sorting

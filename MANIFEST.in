@@ -5,5 +5,6 @@ recursive-include src/ephypress *.cpp *.h *.json
 recursive-include vendor/fse *.c *.h LICENSE UPSTREAM.json
 recursive-include tests *.py
 recursive-include examples *.py
+recursive-include tools *.py
 recursive-include docs *.md *.json
 exclude tools/_reader_methods.tmp

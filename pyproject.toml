@@ -56,8 +56,8 @@ ignore = ["E402"]
 [tool.cibuildwheel]
 build = "cp312-*"
 skip = "*-musllinux_* *-win32"
-test-requires = ["pytest>=8"]
-test-command = "pytest {project}/tests/test_codec.py {project}/tests/test_cli.py"
+test-requires = ["pytest>=8", "pefile; sys_platform == 'win32'"]
+test-command = "python {project}/tools/check_windows_runtime.py && pytest {project}/tests/test_codec.py {project}/tests/test_cli.py {project}/tests/test_platform_io.py"
 
 [tool.cibuildwheel.linux]
 archs = ["auto"]

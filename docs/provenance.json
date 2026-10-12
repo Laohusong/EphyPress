@@ -8,13 +8,11 @@
     "mapped.py": "aa1c40deb1d9e5ff47b58308a06e285dc4adafaef29e7ff4fb3e06eeabe66ec1",
     "entropy.py": "fef743f64a027910022c4b7643c6282ffcd2165e70986a9a9d5536ad4612c020"
   },
-  "default_profile": {
-    "predictor": 53,
-    "quantum": 1,
-    "low_bits": 4,
-    "entropy_backend": "fse",
-    "entropy_group_channels": 1,
-    "batch_samples": 60000,
-    "halo": 0
-  }
+  "default_prediction": "temporal",
+  "temporal_coefficient": {
+    "numerator": 5,
+    "denominator": 8
+  },
+  "residual_low_bits": 4,
+  "entropy_backend": "fse"
 }

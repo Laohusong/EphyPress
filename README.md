@@ -12,52 +12,55 @@ You can restore the original bytes, read arbitrary sample windows, or run sortin
 directly on compressed data. Decoded blocks are cached in bounded RAM; reading
 does not create a full raw data file.
 
-The default **Level1 p53** recipe uses a reversible integer temporal predictor,
-Zigzag residual mapping, four packed low bits, per-channel FSE and a Zstd upper
-plane. It preserves every ADC value. The previous p41 recipe and lossless
-SPC1/SPC3 archives remain readable. FSE is bundled, so no special system libzstd
-or runtime compilation is needed after a wheel has been installed.
+The default **temporal** predictor uses the previous sample in each channel.
+The optional **spatiotemporal** predictor also uses neighboring-channel residuals.
+Both preserve every int16 ADC value with integer prediction, Zigzag mapping,
+four packed low bits, per-channel FSE and a Zstd upper plane. Prediction names
+and explicit coefficients are stored in the checked index. FSE is bundled.
 
-## Installation
+## Installation on Linux, macOS and native Windows
 
-Use CPython 3.10 or newer. Linux is the primary platform and supports OpenMP and
-RAM page remapping. macOS uses normal block assembly and a serial native kernel.
-Windows users should use Linux/WSL2; native Windows support is not included.
+Use 64-bit CPython 3.10 or newer. The same CLI, Python, SpikeInterface and KS4
+interfaces run natively on all three desktop operating systems. Default readers
+select Linux RAM page remapping when available and portable block assembly on
+Windows/macOS. Threaded block encoding and prefetch are available everywhere.
 
-### Install from the GitHub release tag
-
-Source installation needs a C/C++ toolchain and Python development headers.
-On Ubuntu/Debian:
-
-```bash
-sudo apt-get install build-essential python3-dev
-python -m pip install --upgrade pip
-python -m pip install "ephypress @ git+https://github.com/Laohusong/EphyPress.git@v0.1.0"
-```
-
-On macOS, install the command line tools with `xcode-select --install` first.
-Platform wheels are provided under [GitHub Releases](https://github.com/Laohusong/EphyPress/releases).
-Download a wheel matching your OS and architecture and run `python -m pip install /path/to/the.whl`.
-The `cp310-abi3` wheel ABI supports CPython 3.10 and newer on the matching platform.
-
-Optional integrations:
+[GitHub Releases](https://github.com/Laohusong/EphyPress/releases/tag/v0.2.0)
+provides Linux, macOS and native Windows wheels for x86_64 and ARM64. Choose the
+wheel for your Python/OS architecture and install it without a compiler:
 
 ```bash
-# SpikeInterface, including SciPy for preprocessing
-python -m pip install "ephypress[spikeinterface] @ git+https://github.com/Laohusong/EphyPress.git@v0.1.0"
-# Native Kilosort4
-python -m pip install "ephypress[ks4] @ git+https://github.com/Laohusong/EphyPress.git@v0.1.0"
-# Both
-python -m pip install "ephypress[all] @ git+https://github.com/Laohusong/EphyPress.git@v0.1.0"
+python -m pip install /path/to/ephypress-0.2.0-...whl
 ```
 
-KS4 additionally needs an appropriate PyTorch/CUDA installation and GPU. Follow
-the [official Kilosort installation guide](https://github.com/MouseLand/Kilosort#instructions)
-and [PyTorch installation selector](https://pytorch.org/get-started/locally/).
-EphyPress does not choose a GPU driver or CUDA build for you.
+On Windows use a native Python installation and run the same command in
+PowerShell or Command Prompt; no Linux subsystem is required. Windows wheels
+statically link the compiler C++ runtime. ARM64 Windows requires a native ARM64
+Python release (3.11+); select the ARM64 wheel rather than the x86_64 wheel.
 
-This initial distribution is hosted on GitHub. These commands deliberately use
-the repository URL; they do not assume a package has been published on PyPI.
+### Install from the version tag
+
+Source builds require a native C/C++ compiler: GCC/Clang and Python development
+headers on Linux, `xcode-select --install` on macOS, or Microsoft Visual C++ Build
+Tools with the C++ workload on Windows.
+
+```bash
+python -m pip install "ephypress @ git+https://github.com/Laohusong/EphyPress.git@v0.2.0"
+python -m pip install "ephypress[spikeinterface] @ git+https://github.com/Laohusong/EphyPress.git@v0.2.0"
+python -m pip install "ephypress[ks4] @ git+https://github.com/Laohusong/EphyPress.git@v0.2.0"
+python -m pip install "ephypress[all] @ git+https://github.com/Laohusong/EphyPress.git@v0.2.0"
+```
+
+The initial distribution is hosted on GitHub, so the commands use an explicit
+repository URL. GPU sorting additionally needs a compatible PyTorch/CUDA build
+and real probe geometry; follow the [Kilosort guide](https://github.com/MouseLand/Kilosort#instructions)
+and [PyTorch selector](https://pytorch.org/get-started/locally/).
+
+### Format version
+
+Version 0.2 uses the EphyPress v1 container and descriptive prediction names.
+Earlier archive layouts are unsupported; recompress the original int16 data.
+The file extension remains `.spc`.
 
 ## Input format
 
@@ -107,9 +110,11 @@ ep.decompress("recording.spc", "restored.dat")
 ```
 
 The default block size is 60000 samples; it does not need to match a future
-sorter's batch size. To write the previous p41 recipe, pass `profile="legacy"`
-or `--profile legacy`. To use Zstd for both high planes, pass
-`entropy_backend="zstd"` or `--entropy zstd`. All profiles are lossless.
+sorter's batch size. Select spatial prediction with
+`prediction="spatiotemporal"` or `--prediction spatiotemporal`.
+The default is `prediction="temporal"`. To use Zstd for both high planes,
+pass `entropy_backend="zstd"` or `--entropy zstd`. Both modes are lossless and
+storage blocks do not include duplicated halos.
 
 ## Read compressed windows
 
@@ -117,7 +122,7 @@ or `--profile legacy`. To use Zstd for both high planes, pass
 import ephypress as ep
 
 with ep.open_recording("recording.spc") as recording:
-    print(recording.shape, recording.dtype, recording.metadata["fs"])
+    print(recording.shape, recording.dtype, recording.metadata["sampling_frequency"])
     traces = recording[100000:160000, :]
     selected = recording[100000:160000, [0, 2, 7]]
     batch = recording.read_batch(100000, 65536, halo=(2000, 2000), pad="edge")
@@ -163,7 +168,7 @@ import ephypress as ep
 
 with ep.open_recording("recording.spc") as recording:
     result = run_kilosort(
-        settings={"n_chan_bin": recording.shape[1], "fs": recording.metadata["fs"]},
+        settings={"n_chan_bin": recording.shape[1], "fs": recording.metadata["sampling_frequency"]},
         probe=load_probe("ProbeA.json"), filename="recording.spc",
         file_object=recording, data_dtype="int16", results_dir="ks4_output",
         save_preprocessed_copy=False,
@@ -273,8 +278,7 @@ with `save_preprocessed_copy=True`; that creates an additional, processed file.
 
 Compression ratio depends on the signal. No universal ratio or sorting speed
 is promised. This release is tested for exact reconstruction, corruption
-detection, arbitrary cross-block windows, retained-view lifetime, legacy p53/p41
-decoding, CLI installation, SpikeInterface metadata/JSON reload, and native KS4
+detection, arbitrary cross-block windows, retained-view lifetime, named prediction modes, CLI installation, SpikeInterface metadata/JSON reload, and native KS4
 padded batches. Full native KS4 and SpikeInterface KS4 were also run on a real
 60-second, 384-channel recording; see [validation details](docs/validation.md).
 
@@ -294,7 +298,7 @@ python -m build
 python -m twine check dist/*
 ```
 
-GitHub CI builds and tests the package. Tagged releases build Linux/macOS wheels
+GitHub CI builds and tests the package. Tagged releases build Linux/macOS/Windows wheels
 and a source distribution. GPU/real-data validation is opt-in via
 `tools/validate_real_recording.py`; recordings and sorting artifacts stay local.
 See [CONTRIBUTING](CONTRIBUTING.md) and [CHANGELOG](CHANGELOG.md).

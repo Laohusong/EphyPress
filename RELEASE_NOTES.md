@@ -1,20 +1,19 @@
-# EphyPress 0.1.0
+# EphyPress 0.2.0
 
-The first standalone release of the Level1 p53 lossless electrophysiology codec.
+Named lossless prediction and native desktop support.
 
-- CLI and Python compression, exact restoration and SHA256 verification.
-- Bundled BSD FSE and compiled C++ codec; no special system FSE dependency.
-- Bounded on-demand windows, Linux page remapping and asynchronous prefetch.
-- Compatible decoding of previous lossless SPC1/SPC3 p53/p41 archives.
-- Native Kilosort4 integration and a serializable SpikeInterface extractor/writer.
-- Detailed English and Chinese installation, compression and sorting guides.
+- `temporal` (default): reversible prediction from the previous sample.
+- `spatiotemporal`: additionally predict from neighboring channel residuals.
+- Descriptive coefficients and prediction rules replace experiment identifiers.
+- Native Windows wheels and MSVC source builds, with binary file handling,
+  synchronized positioned reads and statically linked C++ runtime.
+- Linux, macOS and Windows default readers, threaded compression/prefetch,
+  direct native KS4 and SpikeInterface integrations.
+- x86_64/ARM64 ABI3 wheels and a source distribution with platform CI.
 
-Platform assets include Linux x86_64, macOS arm64/x86_64 ABI3 wheels and a source
-distribution. CPython 3.10+ is required. Windows users can use WSL2/Linux.
-Install optional SpikeInterface/Kilosort dependencies as described in the README.
-PyTorch/CUDA and real probe geometry must be supplied for GPU sorting.
+The new EphyPress v1 container intentionally does not read previous file formats.
+Recompress the original int16 data. The extension remains `.spc` and both modes
+are completely lossless. Native ARM64 Windows requires ARM64 Python 3.11+.
 
-Exact codec tests, legacy compatibility and metadata serialization were checked
-locally with NumPy 1.x/2.x. Both direct KS4 and SpikeInterface KS4 completed on
-the same real 60s recording without a full raw copy. See `docs/validation.md` for
-the tested versions and scope. This is a GitHub release, not a PyPI publication.
+See the English/Chinese guides and `docs/validation.md` for setup and test scope.
+GPU sorting still requires appropriate PyTorch/CUDA and real probe geometry.

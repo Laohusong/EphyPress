@@ -1,4 +1,4 @@
-"""Lossless SPC1/SPC3 blocks and checked indexes, compatible with Level1 archives."""
+"""Versioned EphyPress container with independent lossless blocks and a checked index."""
 
 import hashlib
 import json
@@ -17,48 +17,32 @@ import numpy as np
 import zstandard as zstd
 
 from ._entropy import encode_bytes
-from ._native import decode_groups, decode_planes, encode_planes, library
-from ._predictors import REGISTRY
+from ._io import PositionedFile, publish_file
+from ._native import decode_channels, decode_planes, encode_planes, library
+from ._prediction import prediction_parameters
 
-MAGIC = b"SPKC01\x00\x00"
-MAGIC_FSE = b"SPKC03\x00\x00"
+MAGIC = b"EPHYPRS\0"
+FORMAT_VERSION = 1
 PREFIX = struct.Struct("<8sQQ")
-FRAME = struct.Struct("<II")
-FRAME_FSE = struct.Struct("<III")
+FRAME = struct.Struct("<III")
 LENGTH = struct.Struct("<I")
 
 
-def _validate_codec(quantum, predictor, low_bits):
-    if not (
-        type(quantum) is int
-        and quantum == 1
-        and type(predictor) is int
-        and (0 <= predictor <= 8 or predictor in (13, 14, 15) or predictor in REGISTRY)
-        and type(low_bits) is int
-        and 1 <= low_bits <= 8
-    ):
-        raise ValueError("Only supported lossless Level1 predictors and quantum=1 are accepted")
-
-
-def _encode_frame(data, predictor, low_bits, zstd_level, entropy_backend, entropy_group_channels):
-    low, high = encode_planes(data, 1, predictor, low_bits)
+def _encode_frame(data, prediction, zstd_level, entropy_backend):
+    low, high = encode_planes(data, prediction)
     if entropy_backend == "fse":
-        width = data.shape[1] + (predictor == 14)
-        n, m = data.shape[0] * width, high.size // 2
-        symbols = high[:n].reshape(data.shape[0], width)
-        planes = np.ascontiguousarray(symbols.T) if entropy_group_channels == 1 else None
+        count, padded = data.size, high.size // 2
+        planes = np.ascontiguousarray(high[:count].reshape(data.shape).T)
         packets = []
-        for c in range(0, width, entropy_group_channels):
-            packet = encode_bytes(
-                planes[c] if planes is not None else symbols[:, c : c + entropy_group_channels]
-            )
+        for symbols in planes:
+            packet = encode_bytes(symbols)
             packets.extend([LENGTH.pack(len(packet)), packet])
         primary = b"".join(packets)
-        upper = zstd.ZstdCompressor(level=zstd_level).compress(high[m:])
-        frame = FRAME_FSE.pack(low.nbytes, len(primary), len(upper)) + low.tobytes() + primary + upper
+        upper = zstd.ZstdCompressor(level=zstd_level).compress(high[padded:])
     else:
-        high = zstd.ZstdCompressor(level=zstd_level).compress(high)
-        frame = FRAME.pack(low.nbytes, len(high)) + low.tobytes() + high
+        primary = zstd.ZstdCompressor(level=zstd_level).compress(high)
+        upper = b""
+    frame = FRAME.pack(low.nbytes, len(primary), len(upper)) + low.tobytes() + primary + upper
     return frame, zlib.crc32(frame)
 
 
@@ -68,7 +52,7 @@ def write_blocks(
     shape,
     *,
     sampling_frequency=30000.0,
-    profile="level1",
+    prediction="temporal",
     block_samples=60000,
     workers=4,
     entropy_backend="fse",
@@ -78,16 +62,14 @@ def write_blocks(
 ):
     """Stream immutable blocks from a callback, never materializing the entire recording."""
     samples, channels = shape
-    if profile not in ("level1", "legacy"):
-        raise ValueError("profile must be 'level1' (p53) or 'legacy' (p41)")
-    predictor, halo = (53, 0) if profile == "level1" else (41, 61)
+    parameters = prediction_parameters(prediction)
     if (
         type(samples) is not int
         or type(channels) is not int
         or samples < 1
         or not 1 <= channels < 2**32
         or type(block_samples) is not int
-        or block_samples < max(1, halo)
+        or block_samples < 1
         or type(workers) is not int
         or workers < 1
     ):
@@ -112,22 +94,23 @@ def write_blocks(
     start = time.perf_counter()
     try:
         with os.fdopen(fd, "wb") as output, ThreadPoolExecutor(max_workers=workers) as executor:
-            output.write(PREFIX.pack(MAGIC_FSE if entropy_backend == "fse" else MAGIC, 0, 0))
+            output.write(PREFIX.pack(MAGIC, 0, 0))
             pending, submit = OrderedDict(), 0
             for block in range(blocks):
                 while submit < min(blocks, block + workers):
                     a, b = (
-                        max(0, submit * block_samples - halo),
-                        min(samples, (submit + 1) * block_samples + halo),
+                        submit * block_samples,
+                        min(samples, (submit + 1) * block_samples),
                     )
-                    data = np.array(get_block(a, b), dtype="<i2", order="C", copy=True)
+                    source = np.asarray(get_block(a, b))
+                    if source.dtype.kind != "i" or source.dtype.itemsize != 2:
+                        raise ValueError("Source blocks must contain unscaled int16 samples")
+                    data = np.array(source, dtype="<i2", order="C", copy=True)
                     if data.shape != (b - a, channels):
                         raise ValueError("Source returned an unexpected block shape")
                     core_stop = min(samples, (submit + 1) * block_samples)
                     digest.update(memoryview(data[submit * block_samples - a : core_stop - a]).cast("B"))
-                    future = executor.submit(
-                        _encode_frame, data, predictor, 4, zstd_level, entropy_backend, 1
-                    )
+                    future = executor.submit(_encode_frame, data, prediction, zstd_level, entropy_backend)
                     pending[submit] = (a, b, future)
                     submit += 1
                 a, b, future = pending.pop(block)
@@ -137,25 +120,20 @@ def write_blocks(
                 if progress:
                     progress(block + 1, blocks, output.tell(), time.perf_counter() - start)
             metadata = dict(
-                format="SPC3" if entropy_backend == "fse" else "SPC1",
+                format="ephypress",
+                format_version=FORMAT_VERSION,
                 shape=[samples, channels],
                 dtype="<i2",
-                fs=float(sampling_frequency),
-                quantum=1,
-                predictor=predictor,
+                sampling_frequency=float(sampling_frequency),
+                prediction=prediction,
+                prediction_parameters=parameters,
                 low_bits=4,
-                batch_samples=block_samples,
-                halo=halo,
+                block_samples=block_samples,
                 zstd_level=zstd_level,
                 source_bytes=samples * channels * 2,
                 source_sha256=digest.hexdigest(),
-                protected_intervals=[],
-                calibration_stride=0,
                 entropy_backend=entropy_backend,
-                entropy_group_channels=1,
-                waveform_protection=None,
                 blocks=entries,
-                predictor_model=REGISTRY[predictor],
             )
             if extra_metadata is not None:
                 metadata["ephypress_metadata"] = extra_metadata
@@ -166,11 +144,11 @@ def write_blocks(
             output.write(index)
             output.write(hashlib.sha256(index).digest())
             output.seek(0)
-            output.write(PREFIX.pack(MAGIC_FSE if entropy_backend == "fse" else MAGIC, offset, len(index)))
+            output.write(PREFIX.pack(MAGIC, offset, len(index)))
             output.flush()
             os.fsync(output.fileno())
         # Exclusive atomic publication: a concurrently created destination is never replaced.
-        os.link(temporary, destination)
+        publish_file(temporary, destination)
     finally:
         temporary.unlink(missing_ok=True)
     size = destination.stat().st_size
@@ -182,9 +160,7 @@ def write_blocks(
         source_sha256=digest.hexdigest(),
         encode_seconds=time.perf_counter() - start,
         blocks=blocks,
-        profile=profile,
-        predictor=predictor,
-        quantum=1,
+        prediction=prediction,
         entropy_backend=entropy_backend,
     )
 
@@ -202,77 +178,77 @@ class CompressedRecording:
         if prefetch_blocks not in (1, 2, 4, 8):
             raise ValueError("prefetch_blocks must be 1, 2, 4 or 8")
         self.path = Path(path)
-        self._fd = os.open(self.path, os.O_RDONLY)
+        self._file = PositionedFile(self.path)
         try:
-            size = os.fstat(self._fd).st_size
-            prefix = os.pread(self._fd, PREFIX.size, 0)
+            size = self._file.size
+            prefix = self._file.read_at(PREFIX.size, 0)
             if len(prefix) != PREFIX.size:
-                raise ValueError("Truncated SPC prefix")
+                raise ValueError("Truncated EphyPress prefix")
             magic, offset, length = PREFIX.unpack(prefix)
-            if magic not in (MAGIC, MAGIC_FSE):
-                raise ValueError("Only lossless SPC1/SPC3 archives are supported")
+            if magic != MAGIC:
+                raise ValueError("Unsupported EphyPress archive format")
             if offset < PREFIX.size or not 0 < length <= 16 * 1024**2 or offset + length + 32 != size:
-                raise ValueError("Invalid SPC index bounds or truncated archive")
-            index = os.pread(self._fd, length, offset)
-            if hashlib.sha256(index).digest() != os.pread(self._fd, 32, offset + length):
-                raise ValueError("SPC index checksum mismatch")
-            self.metadata = m = json.loads(index)
-            _validate_codec(m["quantum"], m["predictor"], m["low_bits"])
-            if m["predictor"] in REGISTRY and m.get("predictor_model") != REGISTRY[m["predictor"]]:
-                raise ValueError("Predictor definition mismatch")
-            self.shape, self.dtype = tuple(m["shape"]), np.dtype("<i2")
-            self.ndim, self.size = 2, int(np.prod(self.shape))
-            self._batch, self._halo, self._entries = m["batch_samples"], m["halo"], m["blocks"]
-            self._entropy_backend = m.get("entropy_backend", "zstd")
-            self._entropy_group_channels = m.get("entropy_group_channels", 8)
+                raise ValueError("Invalid index bounds or truncated archive")
+            index = self._file.read_at(length, offset)
+            if hashlib.sha256(index).digest() != self._file.read_at(32, offset + length):
+                raise ValueError("Archive index checksum mismatch")
+            self.metadata = metadata = json.loads(index)
+            if metadata.get("format") != "ephypress" or metadata.get("format_version") != FORMAT_VERSION:
+                raise ValueError("Unsupported EphyPress format version")
+            self._prediction = metadata["prediction"]
+            if (
+                metadata["prediction_parameters"] != prediction_parameters(self._prediction)
+                or metadata["low_bits"] != 4
+            ):
+                raise ValueError("Prediction parameters or residual layout do not match the codec")
+            self.shape, self.dtype = tuple(metadata["shape"]), np.dtype("<i2")
+            self._batch, self._entries = metadata["block_samples"], metadata["blocks"]
+            self._halo = 0
+            self._entropy_backend = metadata["entropy_backend"]
             if (
                 len(self.shape) != 2
-                or any(type(v) is not int or v < 1 for v in self.shape)
+                or any(type(value) is not int or value < 1 for value in self.shape)
                 or self.shape[1] >= 2**32
                 or type(self._batch) is not int
                 or self._batch < 1
-                or type(self._halo) is not int
-                or not 0 <= self._halo <= self._batch
-                or m["dtype"] != "<i2"
-                or m["source_bytes"] != self.shape[0] * self.shape[1] * 2
-                or not math.isfinite(m["fs"])
-                or m["fs"] <= 0
+                or metadata["dtype"] != "<i2"
+                or metadata["source_bytes"] != self.shape[0] * self.shape[1] * 2
+                or not math.isfinite(metadata["sampling_frequency"])
+                or metadata["sampling_frequency"] <= 0
             ):
-                raise ValueError("Invalid SPC dimensions or sampling frequency")
-            if (
-                self._entropy_backend not in ("fse", "zstd")
-                or type(self._entropy_group_channels) is not int
-                or self._entropy_group_channels < 1
-                or (magic == MAGIC_FSE) != (self._entropy_backend == "fse")
-                or m["format"] != ("SPC3" if magic == MAGIC_FSE else "SPC1")
-            ):
-                raise ValueError("Invalid SPC entropy format")
+                raise ValueError("Invalid recording dimensions or sampling frequency")
+            self.ndim, self.size = 2, self.shape[0] * self.shape[1]
+            if self._entropy_backend not in ("fse", "zstd"):
+                raise ValueError("Invalid entropy backend")
             if len(self._entries) != (self.shape[0] + self._batch - 1) // self._batch:
-                raise ValueError("Invalid SPC block count")
+                raise ValueError("Invalid block count")
             previous = PREFIX.size
-            for i, entry in enumerate(self._entries):
-                if len(entry) != 5 or any(type(v) is not int for v in entry):
-                    raise ValueError("Invalid SPC block entry")
-                pos, n, a, b, crc = entry
+            for block, entry in enumerate(self._entries):
+                if len(entry) != 5 or any(type(value) is not int for value in entry):
+                    raise ValueError("Invalid block entry")
+                position, size, first, last, checksum = entry
                 if (
-                    pos != previous
-                    or n < FRAME.size
-                    or pos + n > offset
-                    or not 0 <= crc <= 2**32 - 1
-                    or a != max(0, i * self._batch - self._halo)
-                    or b != min(self.shape[0], (i + 1) * self._batch + self._halo)
+                    position != previous
+                    or size < FRAME.size
+                    or position + size > offset
+                    or not 0 <= checksum <= 2**32 - 1
+                    or first != block * self._batch
+                    or last != min(self.shape[0], (block + 1) * self._batch)
                 ):
-                    raise ValueError("Invalid SPC block bounds")
-                previous = pos + n
+                    raise ValueError("Invalid block bounds")
+                previous = position + size
             if previous != offset:
-                raise ValueError("Invalid SPC payload end")
-            source_sha = m["source_sha256"]
-            if not isinstance(source_sha, str) or len(source_sha) != 64:
+                raise ValueError("Invalid payload end")
+            source_sha = metadata["source_sha256"]
+            if (
+                not isinstance(source_sha, str)
+                or len(source_sha) != 64
+                or len(bytes.fromhex(source_sha)) != 32
+            ):
                 raise ValueError("Invalid source SHA256")
-            bytes.fromhex(source_sha)
             library()
         except BaseException:
-            os.close(self._fd)
+            self._file.close()
             raise
         self._cache, self._pending = OrderedDict(), {}
         self._cache_limit, self._prefetch_enabled = cache_blocks, prefetch
@@ -294,49 +270,38 @@ class CompressedRecording:
         self._last, self._stride, self._closed = None, 1, False
 
     def _decode(self, block, *, out=None):
-        start = time.perf_counter()
-        pos, n, a, b, crc = self._entries[block]
-        payload = os.pread(self._fd, n, pos)
-        if len(payload) != n or (self._verify_crc and zlib.crc32(payload) != crc):
-            raise ValueError(f"SPC block {block} checksum mismatch or truncation")
-        width = self.shape[1] + (self.metadata["predictor"] == 14)
-        count, m = (b - a) * width, ((b - a) * width + 7) // 8 * 8
+        started = time.perf_counter()
+        position, size, first, last, checksum = self._entries[block]
+        payload = self._file.read_at(size, position)
+        if len(payload) != size or (self._verify_crc and zlib.crc32(payload) != checksum):
+            raise ValueError(f"Block {block} checksum mismatch or truncation")
+        rows, channels = last - first, self.shape[1]
+        count = rows * channels
+        padded = (count + 7) // 8 * 8
+        low_length, primary_length, upper_length = FRAME.unpack_from(payload)
+        if low_length != padded // 2 or FRAME.size + low_length + primary_length + upper_length != size:
+            raise ValueError("Invalid residual frame lengths")
+        low = memoryview(payload)[FRAME.size : FRAME.size + low_length]
+        primary = memoryview(payload)[FRAME.size + low_length : FRAME.size + low_length + primary_length]
         if self._entropy_backend == "fse":
-            nl, np_, nu = FRAME_FSE.unpack_from(payload)
-            if nl != m // 8 * self.metadata["low_bits"] or FRAME_FSE.size + nl + np_ + nu != n:
-                raise ValueError("Invalid FSE frame lengths")
-            low = memoryview(payload)[FRAME_FSE.size : FRAME_FSE.size + nl]
-            primary = memoryview(payload)[FRAME_FSE.size + nl : FRAME_FSE.size + nl + np_]
             upper = zstd.ZstdDecompressor().decompress(
-                memoryview(payload)[FRAME_FSE.size + nl + np_ :], max_output_size=m
+                memoryview(payload)[FRAME.size + low_length + primary_length :], max_output_size=padded
             )
-            if len(upper) != m:
-                raise ValueError("Invalid FSE upper plane length")
-            high = np.empty(m * 2, dtype="u1")
-            high[m:], high[count:m] = np.frombuffer(upper, dtype="u1"), 0
-            decode_groups(primary, b - a, width, self._entropy_group_channels, high[:count])
+            if len(upper) != padded:
+                raise ValueError("Invalid upper plane length")
+            high = np.empty(padded * 2, dtype="u1")
+            high[padded:], high[count:padded] = np.frombuffer(upper, dtype="u1"), 0
+            decode_channels(primary, rows, channels, high[:count])
         else:
-            nl, nh = FRAME.unpack_from(payload)
-            if nl != m // 8 * self.metadata["low_bits"] or FRAME.size + nl + nh != n:
-                raise ValueError("Invalid SPC frame lengths")
-            low = memoryview(payload)[FRAME.size : FRAME.size + nl]
-            high = zstd.ZstdDecompressor().decompress(
-                memoryview(payload)[FRAME.size + nl :], max_output_size=m * 2
-            )
-        data = decode_planes(
-            low,
-            high,
-            (b - a, self.shape[1]),
-            1,
-            self.metadata["predictor"],
-            self.metadata["low_bits"],
-            out=out,
-        )
+            if upper_length:
+                raise ValueError("Unexpected upper plane in a Zstd frame")
+            high = zstd.ZstdDecompressor().decompress(primary, max_output_size=padded * 2)
+        data = decode_planes(low, high, (rows, channels), self._prediction, out=out)
         data.flags.writeable = False
         with self._lock:
             self._stats["decoded_blocks"] += 1
-            self._stats["bytes_read"] += n
-            self._stats["decode_seconds"] += time.perf_counter() - start
+            self._stats["bytes_read"] += size
+            self._stats["decode_seconds"] += time.perf_counter() - started
         return data
 
     def __len__(self):
@@ -519,6 +484,7 @@ class CompressedRecording:
                 cache_blocks=self._cache_limit,
                 speculative_blocks_limit=self._prefetch_blocks,
                 prefetch_enabled=self._prefetch_enabled,
+                reader_mode="blocks",
                 full_recording_materialized=False,
                 raw_disk_cache=False,
             )
@@ -528,7 +494,7 @@ class CompressedRecording:
             self._executor.shutdown(wait=True, cancel_futures=True)
             self._pending.clear()
             self._cache.clear()
-            os.close(self._fd)
+            self._file.close()
             self._closed = True
 
     def __enter__(self):

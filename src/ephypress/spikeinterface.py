@@ -29,7 +29,9 @@ class EphyPressRecordingExtractor(BaseRecording):
         channel_ids = extra.get("channel_ids", list(range(metadata["shape"][1])))
         if len(channel_ids) != metadata["shape"][1]:
             raise ValueError("Stored channel IDs do not match the archive channel count")
-        super().__init__(sampling_frequency=metadata["fs"], channel_ids=channel_ids, dtype="int16")
+        super().__init__(
+            sampling_frequency=metadata["sampling_frequency"], channel_ids=channel_ids, dtype="int16"
+        )
         options = dict(
             reader_mode=reader_mode,
             prefetch=prefetch,
@@ -60,7 +62,8 @@ class EphyPressRecordingExtractor(BaseRecording):
 class _EphyPressSegment(BaseRecordingSegment):
     def __init__(self, path, metadata, options):
         super().__init__(
-            sampling_frequency=metadata["fs"], t_start=metadata.get("ephypress_metadata", {}).get("t_start")
+            sampling_frequency=metadata["sampling_frequency"],
+            t_start=metadata.get("ephypress_metadata", {}).get("t_start"),
         )
         self.path, self.samples, self.options = str(path), metadata["shape"][0], options
         self._reader = None
@@ -109,7 +112,7 @@ def write_recording(
     *,
     block_samples=60000,
     workers=4,
-    profile="level1",
+    prediction="temporal",
     entropy_backend="fse",
     keep_metadata=True,
 ):
@@ -156,7 +159,7 @@ def write_recording(
         sampling_frequency=float(recording.get_sampling_frequency()),
         block_samples=block_samples,
         workers=workers,
-        profile=profile,
+        prediction=prediction,
         entropy_backend=entropy_backend,
         extra_metadata=extra,
     )

@@ -8,6 +8,7 @@ from pathlib import Path
 import numpy as np
 
 from ._container import CompressedRecording, write_blocks
+from ._io import publish_file
 
 
 def compress(
@@ -18,16 +19,16 @@ def compress(
     sampling_frequency=30000.0,
     block_samples=60000,
     workers=4,
-    profile="level1",
+    prediction="temporal",
     entropy_backend="fse",
     zstd_level=3,
     progress=None,
 ):
     """Compress headerless, time-major little-endian int16 without quantization.
 
-    ``level1`` is p53/q1/k4/FSEgroup1/halo0; ``legacy`` is p41 with halo61.
-    workers controls concurrent storage blocks; OpenMP kernels use two threads
-    per phase on Linux builds with OpenMP enabled.
+    temporal predicts from the previous sample; spatiotemporal additionally
+    predicts across neighboring channels. No sample quantization is performed.
+    workers controls concurrent storage blocks.
     """
     source, destination = Path(source), Path(destination)
     if source.resolve() == destination.resolve():
@@ -46,7 +47,7 @@ def compress(
             sampling_frequency=sampling_frequency,
             block_samples=block_samples,
             workers=workers,
-            profile=profile,
+            prediction=prediction,
             entropy_backend=entropy_backend,
             zstd_level=zstd_level,
             progress=progress,
@@ -154,7 +155,7 @@ def decompress(source, destination, *, reader_mode="auto"):
                 raise ValueError("Lossless restoration SHA256 mismatch")
             output.flush()
             os.fsync(output.fileno())
-        os.link(temporary, destination)
+        publish_file(temporary, destination)
     finally:
         temporary.unlink(missing_ok=True)
     return dict(path=str(destination), bytes=count, sha256=digest.hexdigest(), exact_equal=True)

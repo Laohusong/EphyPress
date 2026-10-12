@@ -6,39 +6,38 @@ EphyPress 将电生理 `int16` 原始记录无损压缩为一个带索引的 `.s
 它支持完整还原、按需读取任意时间窗口，以及让 KS4 和 SpikeInterface 直接读取压缩后的采样值。
 读取器只在内存中保存有界的解码缓存，不自动生成完整原始数据副本。
 
-默认配方为当前 **Level1 p53 / q1 / k4 / FSE / group1 / halo0**：可逆整数时间预测、Zigzag、低位打包、逐通道 FSE，以及极高位 Zstd。所有 ADC 采样值完整保留。
-旧版 p41 配方和无损 SPC1/SPC3 文件仍可读取；有损 Level2/Level3 不属于本包。
-包内自带 FSE 源码，安装好的 wheel 不需要特殊系统 libzstd，也无需第一次读取时再编译。
+默认使用 **temporal（时间预测）**，可选 **spatiotemporal（时间与跨通道预测）**。
+两者都采用可逆整数预测、Zigzag、四个低位直接打包、逐通道 FSE 和极高位 Zstd，完整保留每个 int16 ADC 值。文件头记录预测方式与明确的系数，不再使用实验编号。FSE 随包分发。
 
-## 1. 安装与依赖
+## 1. Linux、macOS、原生 Windows 安装
 
-需要 CPython 3.10 或更高版本。Linux 支持 OpenMP 和 RAM 页映射；macOS 使用普通块拼接和单线程原生内核。Windows 当前请使用 WSL2/Linux。
+三种桌面系统均默认支持相同的压缩、解压、窗口读取、SpikeInterface 和 KS4 接口。
+使用 64 位 CPython 3.10+。Windows 直接使用原生 Python，在 PowerShell 或命令提示符运行即可；无需 Linux 子系统。
+默认读取器自动选择适合系统的实现：Linux 可用 RAM 页映射，Windows/macOS 使用线程安全的块读取。并行压缩块和预取在三种系统都可用。
 
-从 GitHub 标签安装会编译原生组件，需要 C/C++ 编译器和 Python 开发头文件。Ubuntu/Debian：
-
-```bash
-sudo apt-get install build-essential python3-dev
-python -m pip install --upgrade pip
-python -m pip install "ephypress @ git+https://github.com/Laohusong/EphyPress.git@v0.1.0"
-```
-
-macOS 先执行 `xcode-select --install`。也可以在 GitHub Releases 下载与系统、架构匹配的 wheel，执行：
+在 [GitHub Release](https://github.com/Laohusong/EphyPress/releases/tag/v0.2.0) 下载与操作系统及架构匹配的 wheel：
 
 ```bash
-python -m pip install /path/to/downloaded.whl
+python -m pip install /path/to/ephypress-0.2.0-...whl
 ```
 
-基础运行依赖为 NumPy 和 zstandard。可选接口分别安装：
+提供 Linux、macOS、Windows 的 x86_64/ARM64 包。Windows wheel 静态链接 C++ 运行库，不需要用户另装编译器运行库。
+Windows ARM64 请使用原生 ARM64 Python 3.11+ 和 ARM64 wheel；其他架构使用对应的 64 位 Python。
+
+源码安装需要原生编译器：Linux 的 GCC/Clang 与 Python 开发头文件、macOS 的 Xcode Command Line Tools、Windows 的 Microsoft Visual C++ Build Tools（C++ 工作负载）。
 
 ```bash
-python -m pip install "ephypress[spikeinterface] @ git+https://github.com/Laohusong/EphyPress.git@v0.1.0"
-python -m pip install "ephypress[ks4] @ git+https://github.com/Laohusong/EphyPress.git@v0.1.0"
-# 两者都需要时
-python -m pip install "ephypress[all] @ git+https://github.com/Laohusong/EphyPress.git@v0.1.0"
+python -m pip install "ephypress @ git+https://github.com/Laohusong/EphyPress.git@v0.2.0"
+python -m pip install "ephypress[spikeinterface] @ git+https://github.com/Laohusong/EphyPress.git@v0.2.0"
+python -m pip install "ephypress[ks4] @ git+https://github.com/Laohusong/EphyPress.git@v0.2.0"
+python -m pip install "ephypress[all] @ git+https://github.com/Laohusong/EphyPress.git@v0.2.0"
 ```
 
-KS4 还需要适合显卡的 PyTorch/CUDA 环境，按 [KS4 官方说明](https://github.com/MouseLand/Kilosort#instructions) 和 [PyTorch 安装页面](https://pytorch.org/get-started/locally/)配置。
-本初始版本从 GitHub 分发，以上命令不假定已发布到 PyPI。
+KS4 的 GPU 排序还需要适合显卡的 PyTorch/CUDA 环境和实际探针配置；见 [KS4 指南](https://github.com/MouseLand/Kilosort#instructions) 和 [PyTorch 安装页面](https://pytorch.org/get-started/locally/)。本版本从 GitHub 分发。
+
+### 新文件格式
+
+0.2 版本使用 EphyPress v1 文件格式，预测器名称直接表达算法含义。旧格式不再读取，请从原始 int16 数据重新压缩。扩展名仍为 `.spc`。
 
 ## 2. 原始数据要求
 
@@ -77,14 +76,14 @@ ep.decompress("recording.spc", "restored.dat")
 ```
 
 默认压缩块为 60000 点，不必与后续 sorting 的 batch 大小相同。
-旧配方用 `profile="legacy"` 或 `--profile legacy`，对应 p41 和 halo61。
+默认 `prediction="temporal"`。使用时间与跨通道预测时，传入 `prediction="spatiotemporal"` 或 `--prediction spatiotemporal`。两种模式均不存储重复 halo。
 高位全部使用 Zstd 时用 `entropy_backend="zstd"` 或 `--entropy zstd`，仍完全无损。
 
 ## 4. 不展开整个文件，直接读取窗口
 
 ```python
 with ep.open_recording("recording.spc") as recording:
-    print(recording.shape, recording.dtype, recording.metadata["fs"])
+    print(recording.shape, recording.dtype, recording.metadata["sampling_frequency"])
     traces = recording[100000:160000, :]
     selected = recording[100000:160000, [0, 2, 7]]
     batch = recording.read_batch(100000, 65536, halo=(2000, 2000), pad="edge")
@@ -123,7 +122,7 @@ from kilosort.io import load_probe
 
 with ep.open_recording("recording.spc") as recording:
     result = run_kilosort(
-        settings={"n_chan_bin": recording.shape[1], "fs": recording.metadata["fs"]},
+        settings={"n_chan_bin": recording.shape[1], "fs": recording.metadata["sampling_frequency"]},
         probe=load_probe("ProbeA.json"), filename="recording.spc",
         file_object=recording, data_dtype="int16", results_dir="ks4_output",
         save_preprocessed_copy=False,
@@ -207,7 +206,7 @@ recording.close()
 
 ## 8. 验证、性能和开发
 
-压缩率依赖信号，吞吐依赖硬件及读取配置。已验证无损、损坏检测、跨块窗口、旧配方、数组生命周期、CLI、SI 元数据重载和 KS4 padding；还对真实 60 秒记录完成了原生 KS4 与 SI KS4 的完整运行。具体版本、范围和限制见 [验证记录](docs/validation.md)。
+压缩率依赖信号，吞吐依赖硬件及读取配置。已验证无损、损坏检测、跨块窗口、两种具名预测、数组生命周期、CLI、SI 元数据重载和 KS4 padding；还对真实 60 秒记录完成了原生 KS4 与 SI KS4 的完整运行。具体版本、范围和限制见 [验证记录](docs/validation.md)。
 
 `workers` 只控制并行压缩块，Linux OpenMP 内核每阶段还可使用两个线程；预取线程与 Torch/BLAS 线程分别配置。构建时设置 `EPHYPRESS_OPENMP=0` 可生成单线程原生内核。
 
@@ -220,6 +219,6 @@ python -m build
 python -m twine check dist/*
 ```
 
-GitHub CI 自动构建和测试；版本标签构建 Linux/macOS wheel 与源码包。
+GitHub CI 自动构建和测试；版本标签构建 Linux/macOS/Windows wheel 与源码包。
 `tools/validate_real_recording.py` 可用用户自己的真实数据进行 GPU 验证，数据和结果保留在本地。
 主体代码 MIT 许可，FSE 为 BSD-2-Clause；详见 [第三方声明](THIRD_PARTY_NOTICES.md)。

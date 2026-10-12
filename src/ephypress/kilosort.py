@@ -26,9 +26,9 @@ def run_kilosort(path, *, settings=None, probe=None, results_dir=None, reader_op
         options = dict(settings or {})
         if options.get("n_chan_bin", reader.shape[1]) != reader.shape[1]:
             raise ValueError("n_chan_bin differs from the archive channel count")
-        if options.get("fs", reader.metadata["fs"]) != reader.metadata["fs"]:
+        if options.get("fs", reader.metadata["sampling_frequency"]) != reader.metadata["sampling_frequency"]:
             raise ValueError("fs differs from the archive sampling frequency")
-        options.update(n_chan_bin=reader.shape[1], fs=reader.metadata["fs"])
+        options.update(n_chan_bin=reader.shape[1], fs=reader.metadata["sampling_frequency"])
         kwargs.setdefault("save_preprocessed_copy", False)
         return run(
             settings=options,

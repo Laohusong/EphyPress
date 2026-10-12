@@ -9,7 +9,6 @@ dist/
 *.so
 *.dylib
 *.spc
-!tests/fixtures/*.spc
 *.bin
 *.dat
 *.npy

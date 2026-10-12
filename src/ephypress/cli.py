@@ -11,7 +11,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(
         prog="ephypress", description="Lossless int16 electrophysiology compression"
     )
-    parser.add_argument("--version", action="version", version="EphyPress 0.1.0")
+    parser.add_argument("--version", action="version", version="EphyPress 0.2.0")
     sub = parser.add_subparsers(dest="command", required=True)
     encode = sub.add_parser("compress", help="Compress headerless time-major little-endian int16")
     encode.add_argument("source")
@@ -20,7 +20,7 @@ def main(argv=None):
     encode.add_argument("--fs", type=float, default=30000.0)
     encode.add_argument("--block-samples", type=int, default=60000)
     encode.add_argument("--workers", type=int, default=4)
-    encode.add_argument("--profile", choices=["level1", "legacy"], default="level1")
+    encode.add_argument("--prediction", choices=["temporal", "spatiotemporal"], default="temporal")
     encode.add_argument("--entropy", choices=["fse", "zstd"], default="fse")
     decode = sub.add_parser("decompress", help="Restore and verify the original int16 bytes")
     decode.add_argument("source")
@@ -40,7 +40,7 @@ def main(argv=None):
                 sampling_frequency=args.fs,
                 block_samples=args.block_samples,
                 workers=args.workers,
-                profile=args.profile,
+                prediction=args.prediction,
                 entropy_backend=args.entropy,
             )
         elif args.command == "decompress":

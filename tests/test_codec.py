@@ -1,5 +1,3 @@
-from pathlib import Path
-
 import numpy as np
 import pytest
 
@@ -9,9 +7,9 @@ from ephypress._entropy import decode_bytes, encode_bytes
 
 
 @pytest.mark.parametrize("backend", ["fse", "zstd"])
-@pytest.mark.parametrize("profile", ["level1", "legacy"])
+@pytest.mark.parametrize("prediction", ["temporal", "spatiotemporal"])
 @pytest.mark.parametrize("mode", ["blocks", "auto"])
-def test_lossless_extrema_cross_block_windows_and_view_lifetime(tmp_path, backend, profile, mode):
+def test_lossless_extrema_cross_block_windows_and_view_lifetime(tmp_path, backend, prediction, mode):
     data = np.random.default_rng(17).integers(-32768, 32768, (12319, 3), dtype=np.int16)
     data[0, :2] = [-32768, 32767]
     raw, archive, restored = [tmp_path / name for name in ("input.dat", "test.spc", "restored.bin")]
@@ -23,11 +21,11 @@ def test_lossless_extrema_cross_block_windows_and_view_lifetime(tmp_path, backen
         sampling_frequency=20000,
         block_samples=4097,
         entropy_backend=backend,
-        profile=profile,
+        prediction=prediction,
         workers=2,
     )
     assert result["source_bytes"] == data.nbytes
-    assert info(archive)["quantum"] == 1
+    assert info(archive)["prediction"] == prediction
     with open_recording(archive, reader_mode=mode, prefetch_blocks=2) as reader:
         old = reader[4000:8300]
         assert np.array_equal(old, data[4000:8300])
@@ -67,7 +65,7 @@ def test_bundled_fse_raw_rle_and_compressed_packets(values):
         decode_bytes(b"", len(values))
 
 
-def test_corruption_and_lossy_archives_rejected(tmp_path):
+def test_corruption_and_unknown_formats_rejected(tmp_path):
     raw, archive = tmp_path / "raw.dat", tmp_path / "test.spc"
     np.arange(8000, dtype="<i2").tofile(raw)
     compress(raw, archive, 2, block_samples=512)
@@ -89,7 +87,7 @@ def test_corruption_and_lossy_archives_rejected(tmp_path):
     damaged = bytearray(contents)
     damaged[:8] = b"SPKC04\x00\x00"
     bad.write_bytes(damaged)
-    with pytest.raises(ValueError, match="lossless"):
+    with pytest.raises(ValueError, match="Unsupported"):
         info(bad)
 
 
@@ -114,10 +112,17 @@ def test_invalid_dimensions(tmp_path, value):
         compress(raw, tmp_path / "test.spc", value)
 
 
-@pytest.mark.parametrize("name", ["level1_p53", "legacy_p41"])
-def test_legacy_research_archive_compatibility(name):
-    path = Path(__file__).parent / "fixtures" / f"{name}.spc"
-    data = ((np.arange(777 * 3, dtype=np.int64) * 37) % 65536 - 32768).astype("<i2").reshape(777, 3)
-    with open_recording(path) as reader:
-        assert np.array_equal(reader[:], data)
-    assert verify(path)["exact_equal"]
+def test_info_uses_descriptive_rules_without_numeric_model_identifiers(tmp_path):
+    raw, archive = tmp_path / "source.dat", tmp_path / "recording.spc"
+    np.arange(100, dtype="<i2").tofile(raw)
+    compress(raw, archive, 2, prediction="spatiotemporal")
+    metadata = info(archive)
+    assert metadata["format"] == "ephypress"
+    assert metadata["format_version"] == 1
+    assert metadata["prediction_parameters"] == {
+        "temporal_numerator": 5,
+        "temporal_denominator": 8,
+        "spatial_weights": [7, 11, 2, 4],
+        "spatial_denominator": 32,
+    }
+    assert set(metadata).isdisjoint({"predictor", "predictor_model", "quantum", "calibration_stride"})

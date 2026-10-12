@@ -1,54 +1,57 @@
-"""Build the native kernel and vendored FSE; never compile on first import."""
+"""Build the bundled codec with native Unix or Windows compilers."""
 
 import os
 import sys
-from pathlib import Path
 
 from setuptools import Extension, setup
 from setuptools.command.build_ext import build_ext
 
-ROOT = Path(__file__).parent
+FSE_SOURCES = [
+    f"vendor/fse/{name}.c" for name in ("fse_compress", "fse_decompress", "entropy_common", "hist")
+]
 
 
 class BuildCodec(build_ext):
     def build_extensions(self):
-        if sys.platform == "win32":
-            raise RuntimeError("EphyPress currently supports Linux and macOS. Use Linux/WSL2 on Windows.")
+        msvc = self.compiler.compiler_type == "msvc"
         openmp = sys.platform.startswith("linux") and os.environ.get("EPHYPRESS_OPENMP", "1") != "0"
+        if msvc:
+            # Allocator ownership stays within this DLL. Static CRT linking avoids
+            # a separate MSVC C++/OpenMP runtime installation for wheel users.
+            self.compiler.initialize()
+            for name in ("compile_options", "compile_options_debug"):
+                setattr(
+                    self.compiler, name, [flag.replace("/MD", "/MT") for flag in getattr(self.compiler, name)]
+                )
+            c_flags, cpp_flags, link_flags = ["/O2", "/std:c11"], ["/O2", "/std:c++17"], []
+        else:
+            c_flags = ["-O3"]
+            cpp_flags = ["-O3", "-std=c++17"] + (["-fopenmp"] if openmp else [])
+            link_flags = ["-fopenmp"] if openmp else []
         for extension in self.extensions:
-            extension.extra_compile_args = ["-O3"] + (["-fopenmp"] if openmp else [])
-            extension.extra_link_args = ["-fopenmp"] if openmp else []
-        # Mixed C/C++ extension: apply the language standard only to C++ files.
-        original = self.compiler._compile
-
-        def compile_object(obj, src, ext, cc_args, extra_postargs, pp_opts):
-            flags = list(extra_postargs)
-            if ext in (".cpp", ".cc", ".cxx"):
-                flags.append("-std=c++17")
-            return original(obj, src, ext, cc_args, flags, pp_opts)
-
-        self.compiler._compile = compile_object
-        try:
-            super().build_extensions()
-        finally:
-            self.compiler._compile = original
+            objects = self.compiler.compile(
+                FSE_SOURCES,
+                output_dir=self.build_temp,
+                include_dirs=extension.include_dirs,
+                macros=extension.define_macros,
+                extra_postargs=c_flags,
+                debug=self.debug,
+            )
+            extension.extra_objects = objects
+            extension.extra_compile_args = cpp_flags
+            extension.extra_link_args = link_flags
+        super().build_extensions()
 
 
 setup(
     ext_modules=[
         Extension(
             "ephypress._codec",
-            sources=[
-                "src/ephypress/_module.cpp",
-                "src/ephypress/_kernel.cpp",
-                "vendor/fse/fse_compress.c",
-                "vendor/fse/fse_decompress.c",
-                "vendor/fse/entropy_common.c",
-                "vendor/fse/hist.c",
-            ],
+            sources=["src/ephypress/_module.cpp", "src/ephypress/_kernel.cpp"],
             include_dirs=["src/ephypress", "vendor/fse"],
             language="c++",
-            define_macros=[("Py_LIMITED_API", "0x030A0000"), ("FSE_DLL_EXPORT", "1")],
+            define_macros=[("Py_LIMITED_API", "0x030A0000"), ("FSE_DLL_EXPORT", "1"), ("NOMINMAX", "1")],
+            depends=FSE_SOURCES + ["src/ephypress/_prediction.h"],
             py_limited_api=True,
         )
     ],

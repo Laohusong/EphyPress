@@ -15,9 +15,9 @@ processes for raw/native KS4, compressed/native KS4 and compressed/SI KS4.
 It never uploads data. Use a new output directory. Compression covers the entire
 supplied file; `--duration` limits sorting only.
 
-Preserve predictor IDs, floor/wrap arithmetic, SPC framing and retained-array
+Keep named prediction rules, floor/wrap arithmetic and the versioned container consistent and retained-array
 lifetimes. Tests should cover consumer windows spanning storage boundaries and
-both FSE/Zstd. New format changes need versioning and compatibility fixtures.
+both FSE/Zstd. New format changes need versioning and format-version tests.
 Keep runtime dependencies minimal; optional integrations belong in extras.
 Do not commit real recordings, machine credentials or large sorting outputs.
 

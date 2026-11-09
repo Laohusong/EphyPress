@@ -1,0 +1,26 @@
+{
+  "status": "success",
+  "name": "ks4_raw_2000MBps",
+  "sorter": "ks4",
+  "kind": "raw",
+  "bandwidth_MB_s": 2000,
+  "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+  "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+  "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_raw_2000MBps",
+  "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_raw_2000MBps.limiter.bin",
+  "sorting_seconds": 742.0980006000027,
+  "process_cpu_seconds": 2187.546875,
+  "spikes": 5632713,
+  "units": 324,
+  "resultdir": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_raw_2000MBps\\results",
+  "completed_stage": "ks4_complete",
+  "peak_working_set_bytes": 7932719104,
+  "input_metrics": {
+    "charged_file_bytes": 129701443584,
+    "read_calls": 2809,
+    "first_request": 198595.1503961,
+    "last_delivery_deadline": 199126.36269022402,
+    "aggregate_bytes_per_active_span_MB_s": 244.16122333516986
+  },
+  "stage_seconds": {}
+}

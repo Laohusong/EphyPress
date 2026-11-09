@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "smoke_duration_seconds": 60,
+  "ks4_end_to_end_runs": 5,
+  "smoke_is_not_part_of_published_30min_curves": true,
+  "conditions": [
+    "input_read_only",
+    "all_read_write"
+  ],
+  "rates_tested": [
+    50,
+    5000
+  ],
+  "no_chronosort_dependency": true,
+  "multiprocess_budget_preflight": "passed",
+  "ephypress_src_files_checked": 22,
+  "ephypress_src_unchanged": true,
+  "chronosort": "Only frozen 62000 +1768/side source is supported; 28-job dry-run plan passed; no new full ChronoSort sorting claimed",
+  "historical_evidence_integrity": "check_integrity.py",
+  "note": "4 high-cap cases plus 1 compressed read/write 50MB/s case; short validation only, not a new 30min sweep",
+  "html_report_images": 2,
+  "plot_pdfs_valid": true,
+  "new_python_syntax": "passed",
+  "ruff": "passed",
+  "archived_files_verified": 185,
+  "primary_curve_points_verified": 42,
+  "chrono_hook_preflight": "passed"
+}

@@ -1,0 +1,59 @@
+{
+  "timing": {
+    "rates_MB_s": [
+      50,
+      100,
+      200,
+      500,
+      1000,
+      2000,
+      5000
+    ],
+    "runs": 28,
+    "sorters": [
+      "ks4"
+    ],
+    "inputs": [
+      "raw",
+      "compressed"
+    ],
+    "duration_seconds": 1800,
+    "channels": 384,
+    "conditions": {
+      "input_read_only": "Only original recording input bytes throttled; intermediate/model/probe reads and all writes counted but unthrottled.",
+      "all_read_write": "All instrumented data-file reads (original input + intermediate + probe/model) share one read budget; all data writes share a separate write budget, both set to the specified rate."
+    },
+    "fresh_controls": true,
+    "repeats": 1,
+    "read_write_budgets": "Independent, each per cap, shared across all processes/threads. Decimal MB/s.",
+    "scope": "Application logical bytes. OS file cache hits are charged. Decoded cache hits and in-RAM reuse are not disk reads. Package imports/DLL loading, filesystem metadata and benchmark instrumentation files are outside the data budget.",
+    "mapped_access": "Selection and whole-array coercion charge the source bytes. One-dimensional iteration preserves native memmap scalar ordering and uses bounded64KiB read-ahead accounting; consumer CPU time can satisfy delivery deadlines. Higher-dimensional iteration copies at most1MiB chunks. Same instrumentation in both conditions.",
+    "timer": "Public sorting API through final export plus CUDA synchronize. Imports, one scalar CUDA warmup, and KS4 probe loading/reader construction occur before the timer; data I/O budgets still apply during preparation. KS4 byte counters subtract pre-API counts. External output validation occurs after the timed counters are captured.",
+    "fixed": {
+      "seed": 1,
+      "numeric_threads": 8,
+      "ks4_batch_size": 60000
+    },
+    "limitations": "Single run per point; logical throttling is not a physical HDD simulation. Different bandwidth points can select different clustering branches; report final-array hashes and units.",
+    "order": "Caps5000,50,100,200,500,1000,2000; sorters serial; alternate condition and input order between caps to reduce systematic time/order confounds.",
+    "calibration_exclusions": "Three attempts archived separately: cancelled unmetered raw pilot; completed scalar-meter-overhead calibration; cancelled compressed calibration while switching instrumentation. None included in valid curves."
+  },
+  "environment": {
+    "python": "3.11.14 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 18:30:03) [MSC v.1929 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "gpu": "NVIDIA GeForce RTX 5090, 610.88, 32607 MiB",
+    "packages": {
+      "torch": "2.9.1+cu128",
+      "numpy": "1.26.4",
+      "scipy": "1.16.3",
+      "kilosort": "4.1.7",
+      "ephypress": "0.2.0",
+      "isosplit6": "0.1.4",
+      "triton-windows": "3.5.1.post24",
+      "matplotlib": "3.10.7",
+      "numba": "0.63.1"
+    },
+    "ephypress_commit": "8cb51381919ecbe1bf37ddaffbf81cbfbf260ce3"
+  },
+  "source": "KS4-only extraction from original 56-run experiment. ChronoSort zero-context results excluded."
+}

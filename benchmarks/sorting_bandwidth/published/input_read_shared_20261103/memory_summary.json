@@ -1,0 +1,71 @@
+{
+  "sample_interval_seconds": 2,
+  "started_utc": "2026-11-03T15:57:51.249669+00:00",
+  "scope": "Sampled sum of Windows working sets across sorting process and descendants. Shared pages can be double counted; not GPU memory; short spikes may be missed.",
+  "runs": {
+    "sorting_compressed_shared_5000MBps": {
+      "samples": 101,
+      "peak_sum_working_set_bytes": 35300417536,
+      "first_sample": 1793721703.968873,
+      "parent_start": 1793721697.0685349,
+      "partial_start": false,
+      "last_sample": 1793722427.8651707
+    },
+    "sorting_compressed_shared_0050MBps": {
+      "samples": 265,
+      "peak_sum_working_set_bytes": 34362736640,
+      "first_sample": 1793722441.871574,
+      "parent_start": 1793722434.2304547,
+      "partial_start": false,
+      "last_sample": 1793724150.3342896
+    },
+    "sorting_compressed_shared_0100MBps": {
+      "samples": 174,
+      "peak_sum_working_set_bytes": 35418750976,
+      "first_sample": 1793724156.6400087,
+      "parent_start": 1793724150.6012473,
+      "partial_start": false,
+      "last_sample": 1793725284.5867164
+    },
+    "sorting_compressed_shared_0200MBps": {
+      "samples": 126,
+      "peak_sum_working_set_bytes": 34431983616,
+      "first_sample": 1793725297.6063943,
+      "parent_start": 1793725289.7296417,
+      "partial_start": false,
+      "last_sample": 1793726158.376167
+    },
+    "sorting_compressed_shared_0500MBps": {
+      "samples": 101,
+      "peak_sum_working_set_bytes": 35126091776,
+      "first_sample": 1793726172.6825316,
+      "parent_start": 1793726165.1853185,
+      "partial_start": false,
+      "last_sample": 1793726907.770362
+    },
+    "sorting_compressed_shared_1000MBps": {
+      "samples": 103,
+      "peak_sum_working_set_bytes": 35505602560,
+      "first_sample": 1793726921.8197982,
+      "parent_start": 1793726914.4376428,
+      "partial_start": false,
+      "last_sample": 1793727649.27028
+    },
+    "sorting_compressed_shared_2000MBps": {
+      "samples": 98,
+      "peak_sum_working_set_bytes": 35193204736,
+      "first_sample": 1793727664.4606836,
+      "parent_start": 1793727652.1585991,
+      "partial_start": false,
+      "last_sample": 1793728385.859197
+    },
+    "sorting_raw_scheduled_5000MBps": {
+      "samples": 102,
+      "peak_sum_working_set_bytes": 35477053440,
+      "first_sample": 1793728400.5055935,
+      "parent_start": 1793728388.9324539,
+      "partial_start": false,
+      "last_sample": 1793729100.0013437
+    }
+  }
+}

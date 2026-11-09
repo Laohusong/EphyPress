@@ -1,0 +1,43 @@
+sorter,kind,condition,rate,seconds,units,spikes,provenance
+ks4,raw,input_read_only,5000,671.2146657999838,326,5635089,KS4 fresh input-only / all-data-read-write sweep
+ks4,compressed,input_read_only,5000,708.2406964000547,316,5634810,KS4 fresh input-only / all-data-read-write sweep
+ks4,compressed,all_read_write,5000,707.6795755000203,322,5634390,KS4 fresh input-only / all-data-read-write sweep
+ks4,raw,all_read_write,5000,670.4486425000359,316,5634077,KS4 fresh input-only / all-data-read-write sweep
+ks4,compressed,all_read_write,50,2071.670614600007,316,5634138,KS4 fresh input-only / all-data-read-write sweep
+ks4,raw,all_read_write,50,3269.242478500004,323,5634441,KS4 fresh input-only / all-data-read-write sweep
+ks4,raw,input_read_only,50,3241.381683899963,321,5632009,KS4 fresh input-only / all-data-read-write sweep
+ks4,compressed,input_read_only,50,2062.525444500032,322,5632029,KS4 fresh input-only / all-data-read-write sweep
+ks4,raw,input_read_only,100,1965.107191899966,324,5635097,KS4 fresh input-only / all-data-read-write sweep
+ks4,compressed,input_read_only,100,1149.7163961000042,315,5631769,KS4 fresh input-only / all-data-read-write sweep
+ks4,compressed,all_read_write,100,1173.9948200999643,323,5632002,KS4 fresh input-only / all-data-read-write sweep
+ks4,raw,all_read_write,100,2015.3091553000268,323,5634444,KS4 fresh input-only / all-data-read-write sweep
+ks4,compressed,all_read_write,200,854.7519013999845,324,5634383,KS4 fresh input-only / all-data-read-write sweep
+ks4,raw,all_read_write,200,1340.6606942000217,323,5634429,KS4 fresh input-only / all-data-read-write sweep
+ks4,raw,input_read_only,200,1338.4963894000393,315,5631765,KS4 fresh input-only / all-data-read-write sweep
+ks4,compressed,input_read_only,200,861.6743432999938,321,5632018,KS4 fresh input-only / all-data-read-write sweep
+ks4,raw,input_read_only,500,949.5065068000113,321,5632066,KS4 fresh input-only / all-data-read-write sweep
+ks4,compressed,input_read_only,500,778.4539243999752,324,5635089,KS4 fresh input-only / all-data-read-write sweep
+ks4,compressed,all_read_write,500,774.6903597000055,322,5632071,KS4 fresh input-only / all-data-read-write sweep
+ks4,raw,all_read_write,500,950.9178896999802,317,5634855,KS4 fresh input-only / all-data-read-write sweep
+ks4,compressed,all_read_write,1000,774.8297610000009,324,5635076,KS4 fresh input-only / all-data-read-write sweep
+ks4,raw,all_read_write,1000,818.0571120000095,323,5632064,KS4 fresh input-only / all-data-read-write sweep
+ks4,raw,input_read_only,1000,816.9403807999915,321,5632056,KS4 fresh input-only / all-data-read-write sweep
+ks4,compressed,input_read_only,1000,774.895398899971,323,5634389,KS4 fresh input-only / all-data-read-write sweep
+ks4,raw,input_read_only,2000,746.1806061000098,315,5632438,KS4 fresh input-only / all-data-read-write sweep
+ks4,compressed,input_read_only,2000,771.0126993000158,323,5632662,KS4 fresh input-only / all-data-read-write sweep
+ks4,compressed,all_read_write,2000,741.4318710999796,316,5634216,KS4 fresh input-only / all-data-read-write sweep
+ks4,raw,all_read_write,2000,760.7549541000044,324,5634383,KS4 fresh input-only / all-data-read-write sweep
+chronosort,compressed,input_read_only,50,1712.37750100001,624,8851833,new_shared_cache
+chronosort,compressed,input_read_only,100,1134.9341761999822,576,8724949,new_shared_cache
+chronosort,compressed,input_read_only,200,871.3292616000108,576,8724949,new_shared_cache
+chronosort,compressed,input_read_only,500,745.3490497999883,576,8724949,new_shared_cache
+chronosort,compressed,input_read_only,1000,733.6905243000074,576,8724949,new_shared_cache
+chronosort,compressed,input_read_only,2000,732.7063506999984,624,8851833,new_shared_cache
+chronosort,compressed,input_read_only,5000,733.1147903999954,576,8724949,new_shared_cache
+chronosort,raw,input_read_only,50,2571.409038700018,576,8724949,historical_original
+chronosort,raw,input_read_only,100,1472.5995774000185,576,8724949,historical_original
+chronosort,raw,input_read_only,200,959.7887035999738,624,8851833,historical_original
+chronosort,raw,input_read_only,500,658.3987486999831,576,8724949,historical_original
+chronosort,raw,input_read_only,1000,579.9987381999963,576,8724949,historical_original
+chronosort,raw,input_read_only,2000,579.3564959999931,576,8724949,historical_original
+chronosort,raw,input_read_only,5000,575.8314093000081,624,8851833,historical_original

@@ -24,7 +24,7 @@ def compress(
     zstd_level=3,
     progress=None,
 ):
-    """Compress headerless, time-major little-endian int16 without quantization.
+    """Compress headerless, time-major little-endian int16 to an .ep archive.
 
     temporal predicts from the previous sample; spatiotemporal additionally
     predicts across neighboring channels. No sample quantization is performed.
@@ -66,7 +66,7 @@ def open_recording(
     verify_crc=True,
     pool_frames=4,
 ):
-    """Open an array-like, read-only reader without expanding the full recording.
+    """Open an array-like .ep reader without expanding the full recording.
 
     auto selects Linux RAM page remapping when available, otherwise normal block
     assembly. Use a context manager or close() to release descriptors and workers.
@@ -130,7 +130,7 @@ def verify(path, *, original=None, reader_mode="auto"):
 
 
 def decompress(source, destination, *, reader_mode="auto"):
-    """Restore headerless int16 bytes atomically and verify the original SHA256."""
+    """Restore an .ep archive to int16 bytes atomically and verify the source SHA256."""
     source, destination = Path(source), Path(destination)
     if source.resolve() == destination.resolve():
         raise ValueError("Input and output must differ")

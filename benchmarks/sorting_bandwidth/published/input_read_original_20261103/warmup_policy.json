@@ -1,0 +1,9 @@
+{
+  "excluded_run": "warmup_chronosort_raw_5000MBps",
+  "reason": "First successful full ChronoSort call warms Triton/Numba and Windows runtime caches. Its cold-start time is excluded; rerun at end for the formal 5000 MB/s raw point.",
+  "failed_attempt": "failed_attempt_01_chronosort_raw_5000MBps",
+  "failed_reason": "Default initial GPU owner 1.4 GiB budget exhausted, then Windows temp log lock during cleanup.",
+  "uniform_override": {
+    "initial_cluster_gpu_owner_memory_gib": 4.0
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "raw": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\data\\recording.dat",
+  "archive": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\data\\recording.ep",
+  "probe": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\data\\ks4_probe.json",
+  "chrono_probe": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\data\\probe.npy",
+  "channels": 384,
+  "fs": 30000,
+  "samples": 1800000,
+  "duration_seconds": 60.0,
+  "source": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+  "sha256": "10500d07a522723674b09e60f34f39cc6553aaf5c85f07cec58684d953a758a9",
+  "raw_bytes": 1382400000,
+  "archive_sha256": "70808662f6e01612cfa77c7a4a3c22c53ecbaf13570626cd1406694402677394",
+  "archive_bytes": 765074219,
+  "compression": {
+    "path": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\data\\recording.ep",
+    "source_bytes": 1382400000,
+    "compressed_bytes": 765074219,
+    "ratio": 1.8068835227605546,
+    "source_sha256": "10500d07a522723674b09e60f34f39cc6553aaf5c85f07cec58684d953a758a9",
+    "encode_seconds": 2.5354688999941573,
+    "blocks": 30,
+    "prediction": "temporal",
+    "entropy_backend": "fse"
+  },
+  "verification": {
+    "path": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\data\\recording.ep",
+    "bytes": 1382400000,
+    "sha256": "10500d07a522723674b09e60f34f39cc6553aaf5c85f07cec58684d953a758a9",
+    "exact_equal": true,
+    "max_abs_error": 0,
+    "original_compared": true
+  },
+  "probe_sha256": "5c06c58019281c0353c50f8cce0197bde734aea25ef864a58e238401cc25fbd2"
+}

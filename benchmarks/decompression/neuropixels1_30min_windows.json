@@ -1,0 +1,54 @@
+{
+  "timestamp_utc": "2026-11-09T07:28:00.494870+00:00",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "python": "3.11.14",
+  "cpu_logical_count": 24,
+  "package": "D:\\EphyPress\\.venv-windows-gpu\\Lib\\site-packages\\ephypress\\__init__.py",
+  "versions": {
+    "ephypress": "0.2.0",
+    "numpy": "1.26.4",
+    "zstandard": "0.25.0"
+  },
+  "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+  "archive_bytes": 23227387437,
+  "metadata": {
+    "format": "ephypress",
+    "format_version": 1,
+    "shape": [
+      54000000,
+      384
+    ],
+    "dtype": "<i2",
+    "sampling_frequency": 30000.0,
+    "prediction": "temporal",
+    "prediction_parameters": {
+      "temporal_numerator": 5,
+      "temporal_denominator": 8
+    },
+    "low_bits": 4,
+    "block_samples": 60000,
+    "zstd_level": 3,
+    "source_bytes": 41472000000,
+    "source_sha256": "b3f6ffaf23681be08af594a485aad7809aa2e7c37a5befb78656b2a436425499",
+    "entropy_backend": "fse"
+  },
+  "scratch": "D:\\EphyPress\\artifacts\\decompression_scratch",
+  "protocol": "Normal OS file cache; no cache eviction or bandwidth cap. Each repeat first streams decoded blocks to memory, discarding each block, then restores to disk. Fresh default reader per operation. Timers include reader construction and close; exclude imports and output deletion. Restoration includes SHA256 verification, flush, fsync and atomic publication.",
+  "runs": [
+    {
+      "repeat": 1,
+      "decode_to_memory_seconds": 39.24803479993716,
+      "restore_to_disk_seconds": 46.53218679991551,
+      "verification": {
+        "path": "artifacts\\decompression_scratch\\ephypress-decode-m9azw7_1\\restored.dat",
+        "bytes": 41472000000,
+        "sha256": "b3f6ffaf23681be08af594a485aad7809aa2e7c37a5befb78656b2a436425499",
+        "exact_equal": true
+      }
+    }
+  ],
+  "median_seconds": {
+    "decode_to_memory_seconds": 39.24803479993716,
+    "restore_to_disk_seconds": 46.53218679991551
+  }
+}

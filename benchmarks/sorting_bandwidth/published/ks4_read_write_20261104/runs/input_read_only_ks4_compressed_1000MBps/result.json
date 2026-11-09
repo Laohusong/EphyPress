@@ -1,0 +1,60 @@
+{
+  "name": "input_read_only_ks4_compressed_1000MBps",
+  "type": "timing",
+  "sorter": "ks4",
+  "kind": "compressed",
+  "rate": 1000,
+  "profile": "default",
+  "io_condition": "input_read_only",
+  "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_1000MBps",
+  "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+  "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+  "bandwidth_MB_s": 1000,
+  "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_1000MBps\\input.bin",
+  "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_1000MBps\\io.bin",
+  "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+  "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+  "samples": 54000000,
+  "status": "success",
+  "seconds": 774.895398899971,
+  "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_1000MBps\\results",
+  "spikes": 5634389,
+  "units": 323,
+  "io_metrics": {
+    "input_read": {
+      "bytes": 89114229942,
+      "calls": 3453
+    },
+    "stream_read": {
+      "bytes": 45078204,
+      "calls": 177
+    },
+    "mapped_read": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "stream_write": {
+      "bytes": 1598385850,
+      "calls": 3191
+    },
+    "mapped_write": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "copy_reserved": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "total_read_bytes": 89159308146,
+    "total_write_bytes": 1598385850
+  },
+  "input_metrics": {
+    "charged_file_bytes": 89114276164,
+    "read_calls": 3456,
+    "first_request": 331358.3532673,
+    "last_delivery_deadline": 331902.571311655,
+    "aggregate_bytes_per_active_span_MB_s": 163.74737495082334
+  },
+  "spike_times_sha256": "be943c9270c9833ea92766a343ae56d6573e2775640fe453873940cf3057b02e",
+  "labels_sha256": "38257374b36795dfe5a08bb43d4c8fab48aacc48704a72a726c1205db65429bb"
+}

@@ -1,0 +1,8 @@
+{
+  "status": "success",
+  "value_equality": true,
+  "windows": 8,
+  "consumer_stride_samples": 248000,
+  "window_samples": 65536,
+  "native_consumer_window_policy": true
+}

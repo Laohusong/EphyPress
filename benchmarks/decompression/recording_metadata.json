@@ -1,0 +1,80 @@
+{
+  "source_settings_xml": "F:\\251009A05_251009B03\\Block0\\251107\\2025-11-07_12-40-28\\Record Node 106\\settings.xml",
+  "settings_xml_sha256": "156d5dc53dde9799f8b463ff6f7ed6600e62e0a66a190e276a6aa1e227b06135",
+  "matching_stream_attributes": [
+    {
+      "name": "ProbeB-AP",
+      "description": "description",
+      "sample_rate": "30000.0",
+      "channel_count": "384",
+      "device_name": "Neuropixels 1.0"
+    },
+    {
+      "name": "ProbeB-AP",
+      "description": "description",
+      "sample_rate": "30000.0",
+      "channel_count": "384",
+      "device_name": "Neuropixels 1.0"
+    },
+    {
+      "name": "ProbeB-AP",
+      "description": "description",
+      "sample_rate": "30000.0",
+      "channel_count": "384",
+      "device_name": "Neuropixels 1.0"
+    },
+    {
+      "isMainStream": "0",
+      "sync_line": "0",
+      "name": "ProbeB-AP",
+      "source_node_id": "100",
+      "sample_rate": "30000.0",
+      "channel_count": "384",
+      "device_name": "Neuropixels 1.0",
+      "recording_state": "ALL"
+    },
+    {
+      "name": "ProbeB-AP",
+      "description": "description",
+      "sample_rate": "30000.0",
+      "channel_count": "384",
+      "device_name": "Neuropixels 1.0"
+    },
+    {
+      "name": "ProbeB-AP",
+      "description": "description",
+      "sample_rate": "30000.0",
+      "channel_count": "384",
+      "device_name": "Neuropixels 1.0"
+    },
+    {
+      "name": "ProbeB-AP",
+      "description": "description",
+      "sample_rate": "30000.0",
+      "channel_count": "384",
+      "device_name": "Neuropixels 1.0"
+    },
+    {
+      "name": "ProbeB-AP",
+      "description": "description",
+      "sample_rate": "30000.0",
+      "channel_count": "384",
+      "device_name": "Neuropixels 1.0"
+    }
+  ],
+  "recording_subset": "../sorting_bandwidth/fixture/subset.json",
+  "cpu": "Intel(R) Core(TM) Ultra 7 270K Plus",
+  "cpu_physical_cores": 24,
+  "cpu_logical_processors": 24,
+  "input_volume": {
+    "drive": "F:",
+    "device": "KIOXIA KCMYXRUG30T7",
+    "media_type": "SSD"
+  },
+  "output_volume": {
+    "drive": "D:",
+    "device": "Samsung SSD 980 PRO 2TB",
+    "media_type": "SSD"
+  },
+  "hardware_source": "Local Win32_Processor, Get-Partition / Get-Disk and Get-PhysicalDisk queries on 2026-11-09"
+}

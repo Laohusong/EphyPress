@@ -24,7 +24,7 @@ def test_lazy_scaled_channels_serialization_and_probe_metadata(tmp_path):
     source.set_probe(probe, in_place=True)
     source.set_channel_gains([1.0, 2.0, 3.0, 4.0])
     source.set_channel_offsets([0.0, 1.0, 2.0, 3.0])
-    archive = tmp_path / "test.spc"
+    archive = tmp_path / "test.ep"
     recording = write_recording(source, archive, block_samples=2048, workers=2)
     assert recording._recording_segments[0]._reader is None
     assert recording.get_channel_ids().tolist() == source.get_channel_ids().tolist()
@@ -56,6 +56,6 @@ def test_lazy_scaled_channels_serialization_and_probe_metadata(tmp_path):
 
 def test_streaming_writer_refuses_float_and_multiple_segments(tmp_path):
     with pytest.raises(ValueError, match="int16"):
-        write_recording(NumpyRecording(np.zeros((100, 2), dtype="f4"), 30000), tmp_path / "float.spc")
+        write_recording(NumpyRecording(np.zeros((100, 2), dtype="f4"), 30000), tmp_path / "float.ep")
     with pytest.raises(ValueError, match="segment"):
-        write_recording(NumpyRecording([np.zeros((100, 2), dtype="i2")] * 2, 30000), tmp_path / "multi.spc")
+        write_recording(NumpyRecording([np.zeros((100, 2), dtype="i2")] * 2, 30000), tmp_path / "multi.ep")

@@ -1,0 +1,26 @@
+{
+  "status": "success",
+  "name": "ks4_compressed_0100MBps",
+  "sorter": "ks4",
+  "kind": "compressed",
+  "bandwidth_MB_s": 100,
+  "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+  "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+  "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_compressed_0100MBps",
+  "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_compressed_0100MBps.limiter.bin",
+  "sorting_seconds": 1165.832850900013,
+  "process_cpu_seconds": 3303.3125,
+  "spikes": 5632662,
+  "units": 323,
+  "resultdir": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_compressed_0100MBps\\results",
+  "completed_stage": "ks4_complete",
+  "peak_working_set_bytes": 8185864192,
+  "input_metrics": {
+    "charged_file_bytes": 89114276164,
+    "read_calls": 3456,
+    "first_request": 180953.3426158,
+    "last_delivery_deadline": 181906.59145844978,
+    "aggregate_bytes_per_active_span_MB_s": 93.48479869777393
+  },
+  "stage_seconds": {}
+}

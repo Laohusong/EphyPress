@@ -10,7 +10,7 @@ from ephypress import compress, open_recording
 
 def test_native_ks4_reads_cross_block_padding_and_variable_batches(tmp_path):
     data = np.random.default_rng(19).integers(-2000, 2000, (131071, 3), dtype=np.int16)
-    raw, archive = tmp_path / "raw.dat", tmp_path / "test.spc"
+    raw, archive = tmp_path / "raw.dat", tmp_path / "test.ep"
     data.tofile(raw)
     compress(raw, archive, 3, block_samples=40003, workers=2)
     with open_recording(archive) as reader:

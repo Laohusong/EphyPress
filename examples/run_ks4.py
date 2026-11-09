@@ -1,4 +1,4 @@
-"""python examples/run_ks4.py recording.spc ProbeA.json ks4_output"""
+"""python examples/run_ks4.py recording.ep ProbeA.json ks4_output"""
 
 import argparse
 

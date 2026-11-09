@@ -1,4 +1,4 @@
-"""python examples/spikeinterface_ks4.py recording.spc ProbeA.json ks4_si_output"""
+"""python examples/spikeinterface_ks4.py recording.ep ProbeA.json ks4_si_output"""
 
 import argparse
 

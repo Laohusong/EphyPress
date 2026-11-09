@@ -1,0 +1,11 @@
+{
+  "rate": 5000,
+  "seconds": 711.7633061000088,
+  "units": 576,
+  "spikes": 8724949,
+  "times_sha256": "6dca8d8125c7ddf302c824d36c2b2daf57af2db5b4daabfcaf61ac55974f46a2",
+  "labels_sha256": "1edd812a6b86517d804d06a863acd11433ab972c7ee6f7708432e4fb70e22e5b",
+  "read_GB": 110.650380288,
+  "contemporaneous_raw_over_shared": 0.9708756601563897,
+  "same_arrays_as_new_shared": true
+}

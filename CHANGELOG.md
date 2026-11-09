@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Use `.ep` for EphyPress archives throughout the CLI, examples, documentation,
+  tests and benchmark datasets. Existing v1 archives can be renamed without
+  recompression; the container layout and encoded bytes are unchanged.
+
 ## 0.2.0
 
 - Replace experiment identifiers with temporal/spatiotemporal prediction names.

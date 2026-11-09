@@ -8,7 +8,7 @@ build/
 dist/
 *.so
 *.dylib
-*.spc
+*.ep
 *.bin
 *.dat
 *.npy

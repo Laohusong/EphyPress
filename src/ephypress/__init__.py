@@ -1,4 +1,4 @@
-"""Lossless electrophysiology compression and bounded, on-demand readers."""
+"""Lossless .ep electrophysiology archives and bounded, on-demand readers."""
 
 from .api import compress, decompress, info, open_recording, verify
 

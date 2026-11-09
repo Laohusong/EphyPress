@@ -1,0 +1,60 @@
+{
+  "name": "all_read_write_ks4_raw_0100MBps",
+  "type": "timing",
+  "sorter": "ks4",
+  "kind": "raw",
+  "rate": 100,
+  "profile": "default",
+  "io_condition": "all_read_write",
+  "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0100MBps",
+  "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+  "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+  "bandwidth_MB_s": 100,
+  "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0100MBps\\input.bin",
+  "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0100MBps\\io.bin",
+  "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+  "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+  "samples": 54000000,
+  "status": "success",
+  "seconds": 2015.3091553000268,
+  "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0100MBps\\results",
+  "spikes": 5634444,
+  "units": 323,
+  "io_metrics": {
+    "input_read": {
+      "bytes": 129701443584,
+      "calls": 2809
+    },
+    "stream_read": {
+      "bytes": 45078644,
+      "calls": 177
+    },
+    "mapped_read": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "stream_write": {
+      "bytes": 1598390465,
+      "calls": 3191
+    },
+    "mapped_write": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "copy_reserved": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "total_read_bytes": 129746522228,
+    "total_write_bytes": 1598390465
+  },
+  "input_metrics": {
+    "charged_file_bytes": 129701443584,
+    "read_calls": 2809,
+    "first_request": 308487.8248499,
+    "last_delivery_deadline": 310257.71583028,
+    "aggregate_bytes_per_active_span_MB_s": 73.28216541120086
+  },
+  "spike_times_sha256": "6ae68617aa24bd07ff09a018c6fee49664746442973143d2c0cecc292f620f61",
+  "labels_sha256": "d9b478e0f05e3f49b5f6ff432b1c30b5b507336765021362b6a3a4fdf960a81c"
+}

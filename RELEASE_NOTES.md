@@ -12,7 +12,7 @@ Named lossless prediction and native desktop support.
 - x86_64/ARM64 ABI3 wheels and a source distribution with platform CI.
 
 The new EphyPress v1 container intentionally does not read previous file formats.
-Recompress the original int16 data. The extension remains `.spc` and both modes
+Recompress the original int16 data. Archives use `.ep` and both modes
 are completely lossless. Native ARM64 Windows requires ARM64 Python 3.11+.
 
 See the English/Chinese guides and `docs/validation.md` for setup and test scope.

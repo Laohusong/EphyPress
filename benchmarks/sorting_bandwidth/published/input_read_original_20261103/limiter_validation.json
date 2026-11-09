@@ -1,0 +1,17 @@
+{
+  "status": "success",
+  "value_equality": true,
+  "threads": 4,
+  "requested_MB_s": 50,
+  "observed_MB_s": 49.97922187249487,
+  "elapsed_seconds": 11.063797699986026,
+  "subprocesses": 4,
+  "subprocess_observed_MB_s": 48.98597542583032,
+  "metrics": {
+    "charged_file_bytes": 1418734937,
+    "read_calls": 44,
+    "first_request": 167200.2404775,
+    "last_delivery_deadline": 167229.2922092,
+    "aggregate_bytes_per_active_span_MB_s": 48.83478037211291
+  }
+}

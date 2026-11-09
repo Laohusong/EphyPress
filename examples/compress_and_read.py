@@ -1,4 +1,4 @@
-"""python examples/compress_and_read.py continuous.dat recording.spc --channels 384"""
+"""python examples/compress_and_read.py continuous.dat recording.ep --channels 384"""
 
 import argparse
 

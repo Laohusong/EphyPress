@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "repeats": 3,
+  "windows_per_repeat": 36,
+  "exact_equal": true,
+  "seconds": 194.81040730001405,
+  "input_metrics": {
+    "charged_file_bytes": 19432344963,
+    "read_calls": 762,
+    "first_request": 180718.3793046,
+    "last_delivery_deadline": 180913.02589498987,
+    "aggregate_bytes_per_active_span_MB_s": 99.83398591302469
+  }
+}

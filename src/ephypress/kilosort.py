@@ -6,7 +6,7 @@ from .api import open_recording
 
 
 def run_kilosort(path, *, settings=None, probe=None, results_dir=None, reader_options=None, **kwargs):
-    """Run full KS4 on compressed samples without a raw or preprocessed disk copy.
+    """Run full KS4 on an .ep archive without a raw or preprocessed disk copy.
 
     Install the ks4 extra and an appropriate PyTorch/CUDA build. Supply real probe
     geometry through probe, probe_name or settings['probe_path']. The returned

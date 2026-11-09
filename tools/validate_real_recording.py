@@ -26,7 +26,7 @@ def worker(args):
     torch.manual_seed(1)
     torch.cuda.manual_seed_all(1)
     probe = load_probe(args.probe)
-    archive = args.output / "recording.spc"
+    archive = args.output / "recording.ep"
     settings = dict(n_chan_bin=args.channels, fs=args.fs, batch_size=60000)
     if args.duration is not None:
         settings["tmax"] = args.duration
@@ -87,9 +87,9 @@ def main(args):
 
     args.output.mkdir(parents=True, exist_ok=False)
     compressed = ephypress.compress(
-        args.raw, args.output / "recording.spc", args.channels, sampling_frequency=args.fs
+        args.raw, args.output / "recording.ep", args.channels, sampling_frequency=args.fs
     )
-    verified = ephypress.verify(args.output / "recording.spc", original=args.raw)
+    verified = ephypress.verify(args.output / "recording.ep", original=args.raw)
     (args.output / "input.json").write_text(
         json.dumps(dict(compression=compressed, verification=verified), indent=2) + "\n"
     )

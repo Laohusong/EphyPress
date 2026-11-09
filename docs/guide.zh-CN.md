@@ -1,8 +1,8 @@
 # EphyPress 中文用户指南
 
-[English](README.md) · [发行版本](https://github.com/Laohusong/EphyPress/releases) · [文件格式](docs/format.md) · [验证记录](docs/validation.md)
+[English](../README.md) · [发行版本](https://github.com/Laohusong/EphyPress/releases) · [文件格式](format.md) · [验证记录](validation.md)
 
-EphyPress 将电生理 `int16` 原始记录无损压缩为一个带索引的 `.spc` 文件。
+EphyPress 将电生理 `int16` 原始记录无损压缩为一个带索引的 `.ep` 文件。
 它支持完整还原、按需读取任意时间窗口，以及让 KS4 和 SpikeInterface 直接读取压缩后的采样值。
 读取器只在内存中保存有界的解码缓存，不自动生成完整原始数据副本。
 
@@ -37,7 +37,7 @@ KS4 的 GPU 排序还需要适合显卡的 PyTorch/CUDA 环境和实际探针配
 
 ### 新文件格式
 
-0.2 版本使用 EphyPress v1 文件格式，预测器名称直接表达算法含义。旧格式不再读取，请从原始 int16 数据重新压缩。扩展名仍为 `.spc`。
+0.2 版本使用 EphyPress v1 文件格式，预测器名称直接表达算法含义。旧格式不再读取，请从原始 int16 数据重新压缩。文件后缀为 `.ep`；已有 v1 文件只需改名，无需重新压缩。
 
 ## 2. 原始数据要求
 
@@ -53,10 +53,10 @@ KS4 的 GPU 排序还需要适合显卡的 PyTorch/CUDA 环境和实际探针配
 ## 3. 压缩、校验与解压
 
 ```bash
-ephypress compress continuous.dat recording.spc --channels 384 --fs 30000 --workers 4
-ephypress info recording.spc
-ephypress verify recording.spc --original continuous.dat
-ephypress decompress recording.spc restored.dat
+ephypress compress continuous.dat recording.ep --channels 384 --fs 30000 --workers 4
+ephypress info recording.ep
+ephypress verify recording.ep --original continuous.dat
+ephypress decompress recording.ep restored.dat
 ```
 
 也可使用 `python -m ephypress`。输出是 JSON，失败时退出码非零。目标文件必须不存在，写入成功后才原子发布；失败会清理临时文件。
@@ -68,11 +68,11 @@ Python 接口：
 ```python
 import ephypress as ep
 
-report = ep.compress("continuous.dat", "recording.spc", n_channels=384,
+report = ep.compress("continuous.dat", "recording.ep", n_channels=384,
                      sampling_frequency=30000, workers=4)
 print(report["ratio"])  # 原始字节数 / 完整压缩文件字节数
-ep.verify("recording.spc", original="continuous.dat")
-ep.decompress("recording.spc", "restored.dat")
+ep.verify("recording.ep", original="continuous.dat")
+ep.decompress("recording.ep", "restored.dat")
 ```
 
 默认压缩块为 60000 点，不必与后续 sorting 的 batch 大小相同。
@@ -82,7 +82,7 @@ ep.decompress("recording.spc", "restored.dat")
 ## 4. 不展开整个文件，直接读取窗口
 
 ```python
-with ep.open_recording("recording.spc") as recording:
+with ep.open_recording("recording.ep") as recording:
     print(recording.shape, recording.dtype, recording.metadata["sampling_frequency"])
     traces = recording[100000:160000, :]
     selected = recording[100000:160000, [0, 2, 7]]
@@ -105,7 +105,7 @@ from kilosort.io import load_probe
 import ephypress as ep
 
 result = ep.run_kilosort(
-    "recording.spc", probe=load_probe("ProbeA.json"),
+    "recording.ep", probe=load_probe("ProbeA.json"),
     results_dir="ks4_output", settings={"batch_size": 60000},
     torch_thread_lim=8,
 )
@@ -120,24 +120,24 @@ result = ep.run_kilosort(
 from kilosort import run_kilosort
 from kilosort.io import load_probe
 
-with ep.open_recording("recording.spc") as recording:
+with ep.open_recording("recording.ep") as recording:
     result = run_kilosort(
         settings={"n_chan_bin": recording.shape[1], "fs": recording.metadata["sampling_frequency"]},
-        probe=load_probe("ProbeA.json"), filename="recording.spc",
+        probe=load_probe("ProbeA.json"), filename="recording.ep",
         file_object=recording, data_dtype="int16", results_dir="ks4_output",
         save_preprocessed_copy=False,
     )
 ```
 
-关键是 `file_object=recording`；仅把 `.spc` 路径交给 KS4 不会自动选择解码器。
-无需修改安装的 KS4 源码，但 KS4 GUI 不会自动识别 `.spc`。时间子集沿用 KS4 的 `tmin`、`tmax` 参数。
+关键是 `file_object=recording`；仅把 `.ep` 路径交给 KS4 不会自动选择解码器。
+无需修改安装的 KS4 源码，但 KS4 GUI 不会自动识别 `.ep`。时间子集沿用 KS4 的 `tmin`、`tmax` 参数。
 
 ## 6. 用 SpikeInterface 读取
 
 ```python
 from ephypress.spikeinterface import read_ephypress
 
-recording = read_ephypress("recording.spc")
+recording = read_ephypress("recording.ep")
 traces = recording.get_traces(start_frame=0, end_frame=30000)
 subset = recording.select_channels(recording.get_channel_ids()[:32])
 recording.dump_to_json("recording.json")
@@ -169,7 +169,7 @@ traces_uV = recording.get_traces(start_frame=0, end_frame=30000, return_in_uV=Tr
 ```python
 from ephypress.spikeinterface import write_recording
 
-compressed = write_recording(source_recording, "recording.spc", workers=4)
+compressed = write_recording(source_recording, "recording.ep", workers=4)
 compressed.close()
 ```
 
@@ -186,7 +186,7 @@ compressed.close()
 import spikeinterface.sorters as ss
 from ephypress.spikeinterface import read_ephypress
 
-recording = read_ephypress("recording.spc")
+recording = read_ephypress("recording.ep")
 recording.set_channel_locations(channel_positions_um)
 sorting = ss.run_sorter(
     "kilosort4", recording, folder="ks4_si_output",
@@ -201,12 +201,12 @@ recording.close()
 
 ## 7. Phy 波形查看
 
-本包不安装 Phy 的 `.spc` 解码器。需要查看 raw 波形时，显式解压到 `restored.dat`，并在 KS4 输出的 `params.py` 中把 `dat_path` 改为其绝对路径；dtype、采样率和**完整文件列数**须正确。
+本包不安装 Phy 的 `.ep` 解码器。需要查看 raw 波形时，显式解压到 `restored.dat`，并在 KS4 输出的 `params.py` 中把 `dat_path` 改为其绝对路径；dtype、采样率和**完整文件列数**须正确。
 也可设置 `save_preprocessed_copy=True` 让 KS4 导出预处理数据，但会生成额外文件。
 
 ## 8. 验证、性能和开发
 
-压缩率依赖信号，吞吐依赖硬件及读取配置。已验证无损、损坏检测、跨块窗口、两种具名预测、数组生命周期、CLI、SI 元数据重载和 KS4 padding；还对真实 60 秒记录完成了原生 KS4 与 SI KS4 的完整运行。具体版本、范围和限制见 [验证记录](docs/validation.md)。
+压缩率依赖信号，吞吐依赖硬件及读取配置。已验证无损、损坏检测、跨块窗口、两种具名预测、数组生命周期、CLI、SI 元数据重载和 KS4 padding；还对真实 60 秒记录完成了原生 KS4 与 SI KS4 的完整运行。具体版本、范围和限制见 [验证记录](validation.md)。
 
 `workers` 只控制并行压缩块，Linux OpenMP 内核每阶段还可使用两个线程；预取线程与 Torch/BLAS 线程分别配置。构建时设置 `EPHYPRESS_OPENMP=0` 可生成单线程原生内核。
 
@@ -221,4 +221,9 @@ python -m twine check dist/*
 
 GitHub CI 自动构建和测试；版本标签构建 Linux/macOS/Windows wheel 与源码包。
 `tools/validate_real_recording.py` 可用用户自己的真实数据进行 GPU 验证，数据和结果保留在本地。
-主体代码 MIT 许可，FSE 为 BSD-2-Clause；详见 [第三方声明](THIRD_PARTY_NOTICES.md)。
+主体代码 MIT 许可，FSE 为 BSD-2-Clause；详见 [第三方声明](../THIRD_PARTY_NOTICES.md)。
+
+
+## Sorting bandwidth benchmarks and reproduction
+
+[KS4 and ChronoSort bandwidth benchmarks](../benchmarks/sorting_bandwidth/README.md) include historical curves, CSV and HTML reports, environment and provenance records, and a standalone Windows KS4 reproduction runner. ChronoSort results use a 62000-sample core with context. Read/write measurements for that configuration are not yet available; results from other segment configurations are excluded.

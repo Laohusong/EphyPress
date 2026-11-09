@@ -29,7 +29,7 @@ def test_seek_read_fallback_is_safe_under_concurrent_prefetch(tmp_path):
 def test_default_reader_unicode_paths_and_binary_control_bytes(tmp_path):
     # Line endings and Ctrl-Z must remain bytes on native Windows.
     source, archive, restored = [
-        tmp_path / name for name in ("原始 数据.dat", "压缩 recording.spc", "还原 data.dat")
+        tmp_path / name for name in ("原始 数据.dat", "压缩 recording.ep", "还原 data.dat")
     ]
     data = np.resize(np.array([10, 13, 26, -32768, 32767, -1], dtype="<i2"), (13001, 3))
     data.tofile(source)
@@ -46,5 +46,5 @@ def test_writer_refuses_float_blocks_even_if_source_metadata_is_incorrect(tmp_pa
 
     with pytest.raises(ValueError, match="int16"):
         write_blocks(
-            lambda first, last: np.zeros((last - first, 1), dtype="f4"), tmp_path / "test.spc", (10, 1)
+            lambda first, last: np.zeros((last - first, 1), dtype="f4"), tmp_path / "test.ep", (10, 1)
         )

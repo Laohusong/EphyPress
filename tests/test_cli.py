@@ -6,7 +6,7 @@ import numpy as np
 
 
 def test_installed_module_cli_roundtrip_and_error_codes(tmp_path):
-    raw, archive, restored = tmp_path / "raw.bin", tmp_path / "raw.spc", tmp_path / "restored.bin"
+    raw, archive, restored = tmp_path / "raw.bin", tmp_path / "raw.ep", tmp_path / "restored.bin"
     np.arange(3001, dtype="<i2").tofile(raw)
 
     def run(*args):

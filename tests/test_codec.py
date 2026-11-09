@@ -12,7 +12,7 @@ from ephypress._entropy import decode_bytes, encode_bytes
 def test_lossless_extrema_cross_block_windows_and_view_lifetime(tmp_path, backend, prediction, mode):
     data = np.random.default_rng(17).integers(-32768, 32768, (12319, 3), dtype=np.int16)
     data[0, :2] = [-32768, 32767]
-    raw, archive, restored = [tmp_path / name for name in ("input.dat", "test.spc", "restored.bin")]
+    raw, archive, restored = [tmp_path / name for name in ("input.dat", "test.ep", "restored.bin")]
     data.tofile(raw)
     result = compress(
         raw,
@@ -66,13 +66,13 @@ def test_bundled_fse_raw_rle_and_compressed_packets(values):
 
 
 def test_corruption_and_unknown_formats_rejected(tmp_path):
-    raw, archive = tmp_path / "raw.dat", tmp_path / "test.spc"
+    raw, archive = tmp_path / "raw.dat", tmp_path / "test.ep"
     np.arange(8000, dtype="<i2").tofile(raw)
     compress(raw, archive, 2, block_samples=512)
     contents = archive.read_bytes()
     damaged = bytearray(contents)
     damaged[PREFIX.size + 20] ^= 1
-    bad = tmp_path / "payload.spc"
+    bad = tmp_path / "payload.ep"
     bad.write_bytes(damaged)
     with pytest.raises(ValueError, match="checksum"):
         verify(bad)
@@ -92,7 +92,7 @@ def test_corruption_and_unknown_formats_rejected(tmp_path):
 
 
 def test_atomic_publication_never_overwrites_a_racing_destination(tmp_path):
-    archive = tmp_path / "racing.spc"
+    archive = tmp_path / "racing.ep"
 
     def source(a, b):
         archive.write_bytes(b"existing data")
@@ -109,11 +109,11 @@ def test_invalid_dimensions(tmp_path, value):
     raw = tmp_path / "raw.dat"
     raw.write_bytes(b"\0\0")
     with pytest.raises(ValueError):
-        compress(raw, tmp_path / "test.spc", value)
+        compress(raw, tmp_path / "test.ep", value)
 
 
 def test_info_uses_descriptive_rules_without_numeric_model_identifiers(tmp_path):
-    raw, archive = tmp_path / "source.dat", tmp_path / "recording.spc"
+    raw, archive = tmp_path / "source.dat", tmp_path / "recording.ep"
     np.arange(100, dtype="<i2").tofile(raw)
     compress(raw, archive, 2, prediction="spatiotemporal")
     metadata = info(archive)

@@ -116,7 +116,7 @@ def write_recording(
     entropy_backend="fse",
     keep_metadata=True,
 ):
-    """Compress an unscaled int16 BaseRecording directly, without a raw intermediate.
+    """Compress an unscaled int16 BaseRecording to .ep, without a raw intermediate.
 
     One segment is supported per file. Channel IDs, location, gains, offsets and
     group properties are stored in the checked index. Fully connected probe
@@ -125,7 +125,7 @@ def write_recording(
     """
     if recording.get_num_segments() != 1:
         raise ValueError(
-            "Compress each recording segment separately; only one segment per SPC file is supported"
+            "Compress each recording segment separately; only one segment per .ep file is supported"
         )
     if np.dtype(recording.get_dtype()).kind != "i" or np.dtype(recording.get_dtype()).itemsize != 2:
         raise ValueError("Lossless Level1 requires unscaled int16 traces; float data are not quantized")

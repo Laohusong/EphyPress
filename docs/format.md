@@ -4,6 +4,10 @@ Version 0.2 uses one versioned container for both entropy backends. Earlier file
 layouts are unsupported. All integer fields are little-endian; files are portable
 between native Linux, macOS and Windows installations.
 
+Archives use the `.ep` extension. The extension change does not alter the v1
+container: existing v1 archives can be renamed without recompression. The reader
+identifies the container by its header rather than its filename suffix.
+
 ## Layout
 
 1. A 24-byte prefix `<8sQQ>` contains magic `EPHYPRS\0`, index offset and length.

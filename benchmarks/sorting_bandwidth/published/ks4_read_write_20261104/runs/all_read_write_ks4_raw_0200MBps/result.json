@@ -1,0 +1,60 @@
+{
+  "name": "all_read_write_ks4_raw_0200MBps",
+  "type": "timing",
+  "sorter": "ks4",
+  "kind": "raw",
+  "rate": 200,
+  "profile": "default",
+  "io_condition": "all_read_write",
+  "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0200MBps",
+  "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+  "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+  "bandwidth_MB_s": 200,
+  "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0200MBps\\input.bin",
+  "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0200MBps\\io.bin",
+  "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+  "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+  "samples": 54000000,
+  "status": "success",
+  "seconds": 1340.6606942000217,
+  "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0200MBps\\results",
+  "spikes": 5634429,
+  "units": 323,
+  "io_metrics": {
+    "input_read": {
+      "bytes": 129701443584,
+      "calls": 2809
+    },
+    "stream_read": {
+      "bytes": 45078524,
+      "calls": 177
+    },
+    "mapped_read": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "stream_write": {
+      "bytes": 1598400620,
+      "calls": 3191
+    },
+    "mapped_write": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "copy_reserved": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "total_read_bytes": 129746522108,
+    "total_write_bytes": 1598400620
+  },
+  "input_metrics": {
+    "charged_file_bytes": 129701443584,
+    "read_calls": 2809,
+    "first_request": 315593.2051399,
+    "last_delivery_deadline": 316722.51567494,
+    "aggregate_bytes_per_active_span_MB_s": 114.85011390547328
+  },
+  "spike_times_sha256": "4fa37cc387f12ab3d960247bd2292c92da5b57566b219f467fc91b86f2af8599",
+  "labels_sha256": "05626afe137619915e1c65072e00c6851bc4681b35fe16b1efc66532e84ef4b5"
+}

@@ -1,0 +1,286 @@
+[
+  {
+    "name": "input_read_only_ks4_raw_5000MBps_r1",
+    "sorter": "ks4",
+    "kind": "raw",
+    "rate": 5000,
+    "repeat": 1,
+    "io_condition": "input_read_only",
+    "folder": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\ks4\\input_read_only_ks4_raw_5000MBps_r1",
+    "raw": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\data\\recording.dat",
+    "archive": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\data\\recording.ep",
+    "probe": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\data\\ks4_probe.json",
+    "chrono_probe": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\data\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\ks4\\unused_source\\src",
+    "samples": 1800000,
+    "channels": 384,
+    "fs": 30000,
+    "bandwidth_MB_s": 5000,
+    "limiter_state": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\ks4\\input_read_only_ks4_raw_5000MBps_r1\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\ks4\\input_read_only_ks4_raw_5000MBps_r1\\io.bin",
+    "device": "cuda:0",
+    "seed": 1,
+    "threads": 8,
+    "chrono_segment": 62000,
+    "chrono_padding": [
+      1768,
+      1768
+    ],
+    "status": "success",
+    "seconds": 35.71027360006701,
+    "resultdir": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\ks4\\input_read_only_ks4_raw_5000MBps_r1\\results",
+    "spikes": 129541,
+    "units": 133,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 4478380032,
+        "calls": 97
+      },
+      "stream_read": {
+        "bytes": 1037650,
+        "calls": 9
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 63285037,
+        "calls": 1737
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 4479417682,
+      "total_write_bytes": 63285037
+    },
+    "input_metrics": {
+      "charged_file_bytes": 4478380032,
+      "read_calls": 97,
+      "first_request": 735931.37014,
+      "last_delivery_deadline": 735954.7736365695,
+      "aggregate_bytes_per_active_span_MB_s": 191.3551686049593
+    },
+    "spike_times_sha256": "155d031665ab39098912c076b7a7354a5a93e09f88dc1e4db72fb26b82cbd616",
+    "labels_sha256": "9096dc6009d8bd3b5d3abb9c3d1f439b3fb105a8e0b87246a4c3188967b63007",
+    "scope": "Public sorting API through export + CUDA synchronize; imports/probe/reader setup excluded"
+  },
+  {
+    "name": "input_read_only_ks4_compressed_5000MBps_r1",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "rate": 5000,
+    "repeat": 1,
+    "io_condition": "input_read_only",
+    "folder": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\ks4\\input_read_only_ks4_compressed_5000MBps_r1",
+    "raw": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\data\\recording.dat",
+    "archive": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\data\\recording.ep",
+    "probe": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\data\\ks4_probe.json",
+    "chrono_probe": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\data\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\ks4\\unused_source\\src",
+    "samples": 1800000,
+    "channels": 384,
+    "fs": 30000,
+    "bandwidth_MB_s": 5000,
+    "limiter_state": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\ks4\\input_read_only_ks4_compressed_5000MBps_r1\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\ks4\\input_read_only_ks4_compressed_5000MBps_r1\\io.bin",
+    "device": "cuda:0",
+    "seed": 1,
+    "threads": 8,
+    "chrono_segment": 62000,
+    "chrono_padding": [
+      1768,
+      1768
+    ],
+    "status": "success",
+    "seconds": 36.99703200010117,
+    "resultdir": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\ks4\\input_read_only_ks4_compressed_5000MBps_r1\\results",
+    "spikes": 129519,
+    "units": 133,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 3213206205,
+        "calls": 126
+      },
+      "stream_read": {
+        "bytes": 1037474,
+        "calls": 9
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 63278878,
+        "calls": 1737
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 3214243679,
+      "total_write_bytes": 63278878
+    },
+    "input_metrics": {
+      "charged_file_bytes": 3213208035,
+      "read_calls": 129,
+      "first_request": 735971.6080735,
+      "last_delivery_deadline": 735996.3248497556,
+      "aggregate_bytes_per_active_span_MB_s": 130.00109730197903
+    },
+    "spike_times_sha256": "37197413baf6130671c61618bce29844dd442837c206beb5c2870adb46bde582",
+    "labels_sha256": "816098277af05aa59f8b3e24290c7e0057c1913d94e64fbdec9b197bb1b48257",
+    "scope": "Public sorting API through export + CUDA synchronize; imports/probe/reader setup excluded"
+  },
+  {
+    "name": "all_read_write_ks4_compressed_5000MBps_r1",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "rate": 5000,
+    "repeat": 1,
+    "io_condition": "all_read_write",
+    "folder": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\ks4\\all_read_write_ks4_compressed_5000MBps_r1",
+    "raw": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\data\\recording.dat",
+    "archive": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\data\\recording.ep",
+    "probe": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\data\\ks4_probe.json",
+    "chrono_probe": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\data\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\ks4\\unused_source\\src",
+    "samples": 1800000,
+    "channels": 384,
+    "fs": 30000,
+    "bandwidth_MB_s": 5000,
+    "limiter_state": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\ks4\\all_read_write_ks4_compressed_5000MBps_r1\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\ks4\\all_read_write_ks4_compressed_5000MBps_r1\\io.bin",
+    "device": "cuda:0",
+    "seed": 1,
+    "threads": 8,
+    "chrono_segment": 62000,
+    "chrono_padding": [
+      1768,
+      1768
+    ],
+    "status": "success",
+    "seconds": 37.45218909997493,
+    "resultdir": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\ks4\\all_read_write_ks4_compressed_5000MBps_r1\\results",
+    "spikes": 129519,
+    "units": 133,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 3213206205,
+        "calls": 126
+      },
+      "stream_read": {
+        "bytes": 1037474,
+        "calls": 9
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 63278864,
+        "calls": 1737
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 3214243679,
+      "total_write_bytes": 63278864
+    },
+    "input_metrics": {
+      "charged_file_bytes": 3213208035,
+      "read_calls": 129,
+      "first_request": 736013.4981804,
+      "last_delivery_deadline": 736038.6274642556,
+      "aggregate_bytes_per_active_span_MB_s": 127.86707545945372
+    },
+    "spike_times_sha256": "37197413baf6130671c61618bce29844dd442837c206beb5c2870adb46bde582",
+    "labels_sha256": "816098277af05aa59f8b3e24290c7e0057c1913d94e64fbdec9b197bb1b48257",
+    "scope": "Public sorting API through export + CUDA synchronize; imports/probe/reader setup excluded"
+  },
+  {
+    "name": "all_read_write_ks4_raw_5000MBps_r1",
+    "sorter": "ks4",
+    "kind": "raw",
+    "rate": 5000,
+    "repeat": 1,
+    "io_condition": "all_read_write",
+    "folder": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\ks4\\all_read_write_ks4_raw_5000MBps_r1",
+    "raw": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\data\\recording.dat",
+    "archive": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\data\\recording.ep",
+    "probe": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\data\\ks4_probe.json",
+    "chrono_probe": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\data\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\ks4\\unused_source\\src",
+    "samples": 1800000,
+    "channels": 384,
+    "fs": 30000,
+    "bandwidth_MB_s": 5000,
+    "limiter_state": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\ks4\\all_read_write_ks4_raw_5000MBps_r1\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\ks4\\all_read_write_ks4_raw_5000MBps_r1\\io.bin",
+    "device": "cuda:0",
+    "seed": 1,
+    "threads": 8,
+    "chrono_segment": 62000,
+    "chrono_padding": [
+      1768,
+      1768
+    ],
+    "status": "success",
+    "seconds": 35.239859500085004,
+    "resultdir": "F:\\EphyPress_benchmarks\\repository_reproduction_smoke_20261109\\ks4\\all_read_write_ks4_raw_5000MBps_r1\\results",
+    "spikes": 129541,
+    "units": 133,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 4478380032,
+        "calls": 97
+      },
+      "stream_read": {
+        "bytes": 1037650,
+        "calls": 9
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 63284996,
+        "calls": 1737
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 4479417682,
+      "total_write_bytes": 63284996
+    },
+    "input_metrics": {
+      "charged_file_bytes": 4478380032,
+      "read_calls": 97,
+      "first_request": 736055.6462913,
+      "last_delivery_deadline": 736078.7206284696,
+      "aggregate_bytes_per_active_span_MB_s": 194.08488309218083
+    },
+    "spike_times_sha256": "155d031665ab39098912c076b7a7354a5a93e09f88dc1e4db72fb26b82cbd616",
+    "labels_sha256": "9096dc6009d8bd3b5d3abb9c3d1f439b3fb105a8e0b87246a4c3188967b63007",
+    "scope": "Public sorting API through export + CUDA synchronize; imports/probe/reader setup excluded"
+  }
+]

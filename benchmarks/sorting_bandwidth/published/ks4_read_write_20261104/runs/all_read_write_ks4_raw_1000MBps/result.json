@@ -1,0 +1,60 @@
+{
+  "name": "all_read_write_ks4_raw_1000MBps",
+  "type": "timing",
+  "sorter": "ks4",
+  "kind": "raw",
+  "rate": 1000,
+  "profile": "default",
+  "io_condition": "all_read_write",
+  "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_1000MBps",
+  "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+  "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+  "bandwidth_MB_s": 1000,
+  "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_1000MBps\\input.bin",
+  "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_1000MBps\\io.bin",
+  "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+  "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+  "samples": 54000000,
+  "status": "success",
+  "seconds": 818.0571120000095,
+  "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_1000MBps\\results",
+  "spikes": 5632064,
+  "units": 323,
+  "io_metrics": {
+    "input_read": {
+      "bytes": 129701443584,
+      "calls": 2809
+    },
+    "stream_read": {
+      "bytes": 45059605,
+      "calls": 177
+    },
+    "mapped_read": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "stream_write": {
+      "bytes": 1597722512,
+      "calls": 3191
+    },
+    "mapped_write": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "copy_reserved": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "total_read_bytes": 129746503189,
+    "total_write_bytes": 1597722512
+  },
+  "input_metrics": {
+    "charged_file_bytes": 129701443584,
+    "read_calls": 2809,
+    "first_request": 329707.0094784,
+    "last_delivery_deadline": 330293.255302848,
+    "aggregate_bytes_per_active_span_MB_s": 221.24071195922494
+  },
+  "spike_times_sha256": "eae8194f57a716c86ce703b0869923848d9c4aa5d17b7fae5b00a9350f687968",
+  "labels_sha256": "39a248767f3b7530a2050d5eb62db2691c5e7530400d984595a7a12a21015ec9"
+}

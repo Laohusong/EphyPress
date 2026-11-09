@@ -1,4 +1,4 @@
-include LICENSE README.md README.zh-CN.md CHANGELOG.md requirements*.txt
+include LICENSE README.md CHANGELOG.md requirements*.txt
 include CONTRIBUTING.md THIRD_PARTY_NOTICES.md CITATION.cff RELEASE_NOTES.md
 recursive-include LICENSES *.txt
 recursive-include src/ephypress *.cpp *.h *.json

@@ -1,0 +1,7 @@
+{
+  "status": "success",
+  "windows": 217,
+  "checked_ADC_values_including_overlaps": 5460983808,
+  "worker": 3,
+  "batch_size": 1
+}

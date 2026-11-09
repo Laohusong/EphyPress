@@ -1,0 +1,1682 @@
+[
+  {
+    "name": "all_read_write_ks4_compressed_0050MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "rate": 50,
+    "profile": "default",
+    "io_condition": "all_read_write",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_0050MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 50,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_0050MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_0050MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 2071.670614600007,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_0050MBps\\results",
+    "spikes": 5634138,
+    "units": 316,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 89114229942,
+        "calls": 3453
+      },
+      "stream_read": {
+        "bytes": 45076129,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1597436014,
+        "calls": 3161
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 89159306071,
+      "total_write_bytes": 1597436014
+    },
+    "input_metrics": {
+      "charged_file_bytes": 89114276164,
+      "read_calls": 3456,
+      "first_request": 287265.7811186,
+      "last_delivery_deadline": 289109.09975399956,
+      "aggregate_bytes_per_active_span_MB_s": 48.3444774292552
+    },
+    "spike_times_sha256": "dd8f3645d858396134c807b5c0c00c5c37679933691dd2d4ff2f4d73fc75f75e",
+    "labels_sha256": "d2ef1e2688703c7293ef582daa625c0de02c23ea4adfe9084937f4e21d6a4abe"
+  },
+  {
+    "name": "all_read_write_ks4_compressed_0100MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "rate": 100,
+    "profile": "default",
+    "io_condition": "all_read_write",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_0100MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 100,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_0100MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_0100MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 1173.9948200999643,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_0100MBps\\results",
+    "spikes": 5632002,
+    "units": 323,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 89114229942,
+        "calls": 3453
+      },
+      "stream_read": {
+        "bytes": 45059109,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1597692212,
+        "calls": 3191
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 89159289051,
+      "total_write_bytes": 1597692212
+    },
+    "input_metrics": {
+      "charged_file_bytes": 89114276164,
+      "read_calls": 3456,
+      "first_request": 307304.8384947,
+      "last_delivery_deadline": 308257.8365526506,
+      "aggregate_bytes_per_active_span_MB_s": 93.50939954236074
+    },
+    "spike_times_sha256": "2e70a454520d2242a682e5584871188428d37c153b10025893087a69303084e4",
+    "labels_sha256": "444e4b9cb18edbce10cfb0fa9f9d2d63448b72332925ddd863fd67ec0385000d"
+  },
+  {
+    "name": "all_read_write_ks4_compressed_0200MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "rate": 200,
+    "profile": "default",
+    "io_condition": "all_read_write",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_0200MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 200,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_0200MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_0200MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 854.7519013999845,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_0200MBps\\results",
+    "spikes": 5634383,
+    "units": 324,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 89114229942,
+        "calls": 3453
+      },
+      "stream_read": {
+        "bytes": 45078166,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1598469746,
+        "calls": 3194
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 89159308108,
+      "total_write_bytes": 1598469746
+    },
+    "input_metrics": {
+      "charged_file_bytes": 89114276164,
+      "read_calls": 3456,
+      "first_request": 314729.557985,
+      "last_delivery_deadline": 315368.4136502703,
+      "aggregate_bytes_per_active_span_MB_s": 139.49046867463576
+    },
+    "spike_times_sha256": "98119cc8f70e195ce80f820e1118c0b4307a5f666fb57f2ca30a29a0a683393b",
+    "labels_sha256": "ec3f482c54e72893533bcc6b16ea92eab0dfbf009446610da363062b6573bcab"
+  },
+  {
+    "name": "all_read_write_ks4_compressed_0500MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "rate": 500,
+    "profile": "default",
+    "io_condition": "all_read_write",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_0500MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 500,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_0500MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_0500MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 774.6903597000055,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_0500MBps\\results",
+    "spikes": 5632071,
+    "units": 322,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 89114229942,
+        "calls": 3453
+      },
+      "stream_read": {
+        "bytes": 45059651,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1597546339,
+        "calls": 3185
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 89159289593,
+      "total_write_bytes": 1597546339
+    },
+    "input_metrics": {
+      "charged_file_bytes": 89114276164,
+      "read_calls": 3456,
+      "first_request": 324168.0356907,
+      "last_delivery_deadline": 324709.27472401,
+      "aggregate_bytes_per_active_span_MB_s": 164.64865000406087
+    },
+    "spike_times_sha256": "668ce7b940a8932212d14630e4268033bb1adac28af5aec7675e6762ab6b2a3d",
+    "labels_sha256": "5ad5376ee95c8d6e3ee4afd65215745b99f62fd16aa90a8c440046283413bf01"
+  },
+  {
+    "name": "all_read_write_ks4_compressed_1000MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "rate": 1000,
+    "profile": "default",
+    "io_condition": "all_read_write",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_1000MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 1000,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_1000MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_1000MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 774.8297610000009,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_1000MBps\\results",
+    "spikes": 5635076,
+    "units": 324,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 89114229942,
+        "calls": 3453
+      },
+      "stream_read": {
+        "bytes": 45083712,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1598705818,
+        "calls": 3197
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 89159313654,
+      "total_write_bytes": 1598705818
+    },
+    "input_metrics": {
+      "charged_file_bytes": 89114276164,
+      "read_calls": 3456,
+      "first_request": 328924.2536506,
+      "last_delivery_deadline": 329462.839180155,
+      "aggregate_bytes_per_active_span_MB_s": 165.45984114653535
+    },
+    "spike_times_sha256": "a7d120446a01fa71d1d2600088692e53c31e2b3baa6f6a306f5bd4fe1be6901e",
+    "labels_sha256": "f76ad53a74744a51501b84cad05a53bb4a37f5d43653d82f51710e2f1e27c3e8"
+  },
+  {
+    "name": "all_read_write_ks4_compressed_2000MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "rate": 2000,
+    "profile": "default",
+    "io_condition": "all_read_write",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_2000MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 2000,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_2000MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_2000MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 741.4318710999796,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_2000MBps\\results",
+    "spikes": 5634216,
+    "units": 316,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 89114229942,
+        "calls": 3453
+      },
+      "stream_read": {
+        "bytes": 45076755,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1597474457,
+        "calls": 3164
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 89159306697,
+      "total_write_bytes": 1597474457
+    },
+    "input_metrics": {
+      "charged_file_bytes": 89114276164,
+      "read_calls": 3456,
+      "first_request": 336619.7274046,
+      "last_delivery_deadline": 337153.0967962275,
+      "aggregate_bytes_per_active_span_MB_s": 167.0779717825234
+    },
+    "spike_times_sha256": "7f84ac655e020d43c962b53505ce9e2dbf385b92fd14bf639ff9ad29facc6d93",
+    "labels_sha256": "7c89e3672ae71172a1816ff5412a8e05b79caf33d9b4d8bfbdaf09bccd9ee8f1"
+  },
+  {
+    "name": "all_read_write_ks4_compressed_5000MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "rate": 5000,
+    "profile": "default",
+    "io_condition": "all_read_write",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_5000MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 5000,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_5000MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_5000MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 707.6795755000203,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_compressed_5000MBps\\results",
+    "spikes": 5634390,
+    "units": 322,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 89114229942,
+        "calls": 3453
+      },
+      "stream_read": {
+        "bytes": 45078202,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1598229587,
+        "calls": 3185
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 89159308144,
+      "total_write_bytes": 1598229587
+    },
+    "input_metrics": {
+      "charged_file_bytes": 89114276164,
+      "read_calls": 3456,
+      "first_request": 275630.8383416,
+      "last_delivery_deadline": 276134.64362685103,
+      "aggregate_bytes_per_active_span_MB_s": 176.88237653085034
+    },
+    "spike_times_sha256": "83b93e4bf28a6fbbf3d503d387df8fb30ad7b30e4ded00b6421b28c4fbaa3a5a",
+    "labels_sha256": "b28afd8643813e9acf18197c1023322fc1624085df2f60114ba1ea556ffdabc9"
+  },
+  {
+    "name": "all_read_write_ks4_raw_0050MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "raw",
+    "rate": 50,
+    "profile": "default",
+    "io_condition": "all_read_write",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0050MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 50,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0050MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0050MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 3269.242478500004,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0050MBps\\results",
+    "spikes": 5634441,
+    "units": 323,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 129701443584,
+        "calls": 2809
+      },
+      "stream_read": {
+        "bytes": 45078620,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1598403110,
+        "calls": 3191
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 129746522204,
+      "total_write_bytes": 1598403110
+    },
+    "input_metrics": {
+      "charged_file_bytes": 129701443584,
+      "read_calls": 2809,
+      "first_request": 289346.3639194,
+      "last_delivery_deadline": 292381.48120455997,
+      "aggregate_bytes_per_active_span_MB_s": 42.73358536033153
+    },
+    "spike_times_sha256": "2f4509d7671f4b8e4b87658f250eb2dcaf4c94e0f2ca25c00df7e95a745c69a2",
+    "labels_sha256": "df5b7b50a924ec6d4c91c61acfd36bb4fd9bbfc9688156e778cd006c6b236657"
+  },
+  {
+    "name": "all_read_write_ks4_raw_0100MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "raw",
+    "rate": 100,
+    "profile": "default",
+    "io_condition": "all_read_write",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0100MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 100,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0100MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0100MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 2015.3091553000268,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0100MBps\\results",
+    "spikes": 5634444,
+    "units": 323,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 129701443584,
+        "calls": 2809
+      },
+      "stream_read": {
+        "bytes": 45078644,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1598390465,
+        "calls": 3191
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 129746522228,
+      "total_write_bytes": 1598390465
+    },
+    "input_metrics": {
+      "charged_file_bytes": 129701443584,
+      "read_calls": 2809,
+      "first_request": 308487.8248499,
+      "last_delivery_deadline": 310257.71583028,
+      "aggregate_bytes_per_active_span_MB_s": 73.28216541120086
+    },
+    "spike_times_sha256": "6ae68617aa24bd07ff09a018c6fee49664746442973143d2c0cecc292f620f61",
+    "labels_sha256": "d9b478e0f05e3f49b5f6ff432b1c30b5b507336765021362b6a3a4fdf960a81c"
+  },
+  {
+    "name": "all_read_write_ks4_raw_0200MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "raw",
+    "rate": 200,
+    "profile": "default",
+    "io_condition": "all_read_write",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0200MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 200,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0200MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0200MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 1340.6606942000217,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0200MBps\\results",
+    "spikes": 5634429,
+    "units": 323,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 129701443584,
+        "calls": 2809
+      },
+      "stream_read": {
+        "bytes": 45078524,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1598400620,
+        "calls": 3191
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 129746522108,
+      "total_write_bytes": 1598400620
+    },
+    "input_metrics": {
+      "charged_file_bytes": 129701443584,
+      "read_calls": 2809,
+      "first_request": 315593.2051399,
+      "last_delivery_deadline": 316722.51567494,
+      "aggregate_bytes_per_active_span_MB_s": 114.85011390547328
+    },
+    "spike_times_sha256": "4fa37cc387f12ab3d960247bd2292c92da5b57566b219f467fc91b86f2af8599",
+    "labels_sha256": "05626afe137619915e1c65072e00c6851bc4681b35fe16b1efc66532e84ef4b5"
+  },
+  {
+    "name": "all_read_write_ks4_raw_0500MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "raw",
+    "rate": 500,
+    "profile": "default",
+    "io_condition": "all_read_write",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0500MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 500,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0500MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0500MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 950.9178896999802,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_0500MBps\\results",
+    "spikes": 5634855,
+    "units": 317,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 129701443584,
+        "calls": 2809
+      },
+      "stream_read": {
+        "bytes": 45081875,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1597989283,
+        "calls": 3176
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 129746525459,
+      "total_write_bytes": 1597989283
+    },
+    "input_metrics": {
+      "charged_file_bytes": 129701443584,
+      "read_calls": 2809,
+      "first_request": 324951.0011033,
+      "last_delivery_deadline": 325670.065383796,
+      "aggregate_bytes_per_active_span_MB_s": 180.37531150141078
+    },
+    "spike_times_sha256": "54c3e70228bb7e0b57670f1a1737ce1938e24f4a4c99926b69f1b886c6bae6fc",
+    "labels_sha256": "aba059cf20fa0da9696128a15905640cbe1b40735f9bd0ff5686307484146aa3"
+  },
+  {
+    "name": "all_read_write_ks4_raw_1000MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "raw",
+    "rate": 1000,
+    "profile": "default",
+    "io_condition": "all_read_write",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_1000MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 1000,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_1000MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_1000MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 818.0571120000095,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_1000MBps\\results",
+    "spikes": 5632064,
+    "units": 323,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 129701443584,
+        "calls": 2809
+      },
+      "stream_read": {
+        "bytes": 45059605,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1597722512,
+        "calls": 3191
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 129746503189,
+      "total_write_bytes": 1597722512
+    },
+    "input_metrics": {
+      "charged_file_bytes": 129701443584,
+      "read_calls": 2809,
+      "first_request": 329707.0094784,
+      "last_delivery_deadline": 330293.255302848,
+      "aggregate_bytes_per_active_span_MB_s": 221.24071195922494
+    },
+    "spike_times_sha256": "eae8194f57a716c86ce703b0869923848d9c4aa5d17b7fae5b00a9350f687968",
+    "labels_sha256": "39a248767f3b7530a2050d5eb62db2691c5e7530400d984595a7a12a21015ec9"
+  },
+  {
+    "name": "all_read_write_ks4_raw_2000MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "raw",
+    "rate": 2000,
+    "profile": "default",
+    "io_condition": "all_read_write",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_2000MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 2000,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_2000MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_2000MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 760.7549541000044,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_2000MBps\\results",
+    "spikes": 5634383,
+    "units": 324,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 129701443584,
+        "calls": 2809
+      },
+      "stream_read": {
+        "bytes": 45078166,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1598469897,
+        "calls": 3194
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 129746521750,
+      "total_write_bytes": 1598469897
+    },
+    "input_metrics": {
+      "charged_file_bytes": 129701443584,
+      "read_calls": 2809,
+      "first_request": 337369.8270223,
+      "last_delivery_deadline": 337923.381306524,
+      "aggregate_bytes_per_active_span_MB_s": 234.30663853649506
+    },
+    "spike_times_sha256": "152cbea4b20131328438b80caceb9133ea185cc587e902c2e41b6ddfee9cf7e3",
+    "labels_sha256": "a7e33fb11d794f2aab0a1abd9689cb88b5ffc4e21a13e6a1aa9d536dac09941f"
+  },
+  {
+    "name": "all_read_write_ks4_raw_5000MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "raw",
+    "rate": 5000,
+    "profile": "default",
+    "io_condition": "all_read_write",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_5000MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 5000,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_5000MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_5000MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 670.4486425000359,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\all_read_write_ks4_raw_5000MBps\\results",
+    "spikes": 5634077,
+    "units": 316,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 129701443584,
+        "calls": 2809
+      },
+      "stream_read": {
+        "bytes": 45075641,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1597442330,
+        "calls": 3164
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 129746519225,
+      "total_write_bytes": 1597442330
+    },
+    "input_metrics": {
+      "charged_file_bytes": 129701443584,
+      "read_calls": 2809,
+      "first_request": 276350.0030702,
+      "last_delivery_deadline": 276823.9799992696,
+      "aggregate_bytes_per_active_span_MB_s": 273.6450566034845
+    },
+    "spike_times_sha256": "af4a0995f8dabd629e603b370041b33d18aabbb1b32959eba8e7f3ec39aad86d",
+    "labels_sha256": "bee085a55c0506d4804da8b7e489d8d2ee1e2d4d658eb45a7646e5bb4e46a0a6"
+  },
+  {
+    "name": "input_read_only_ks4_compressed_0050MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "rate": 50,
+    "profile": "default",
+    "io_condition": "input_read_only",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_0050MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 50,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_0050MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_0050MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 2062.525444500032,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_0050MBps\\results",
+    "spikes": 5632029,
+    "units": 322,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 89114229942,
+        "calls": 3453
+      },
+      "stream_read": {
+        "bytes": 45059317,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1597653035,
+        "calls": 3188
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 89159289259,
+      "total_write_bytes": 1597653035
+    },
+    "input_metrics": {
+      "charged_file_bytes": 89114276164,
+      "read_calls": 3456,
+      "first_request": 295875.7950675,
+      "last_delivery_deadline": 297718.46584779955,
+      "aggregate_bytes_per_active_span_MB_s": 48.36147461431599
+    },
+    "spike_times_sha256": "caa395327bc0357738a36da728f6f4e06a7191b07e2e6cb41a2afedf3d3cb528",
+    "labels_sha256": "a1a97ff1d72235ca10970c5f4bf26d05c4e67cf23eb93a72c2450454890f9bc4"
+  },
+  {
+    "name": "input_read_only_ks4_compressed_0100MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "rate": 100,
+    "profile": "default",
+    "io_condition": "input_read_only",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_0100MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 100,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_0100MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_0100MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 1149.7163961000042,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_0100MBps\\results",
+    "spikes": 5631769,
+    "units": 315,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 89114229942,
+        "calls": 3453
+      },
+      "stream_read": {
+        "bytes": 45057168,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1596750854,
+        "calls": 3161
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 89159287110,
+      "total_write_bytes": 1596750854
+    },
+    "input_metrics": {
+      "charged_file_bytes": 89114276164,
+      "read_calls": 3456,
+      "first_request": 306147.0880877,
+      "last_delivery_deadline": 307099.7288002506,
+      "aggregate_bytes_per_active_span_MB_s": 93.54447588682692
+    },
+    "spike_times_sha256": "9b38fe4e6d4c92ec864b18d3e2827b09bfd3d8349aa553304a36dc87ec7da358",
+    "labels_sha256": "204d32316cba6edb75b0f4c1266e256bdda463805f90a62c83a3d24b4624af48"
+  },
+  {
+    "name": "input_read_only_ks4_compressed_0200MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "rate": 200,
+    "profile": "default",
+    "io_condition": "input_read_only",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_0200MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 200,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_0200MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_0200MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 861.6743432999938,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_0200MBps\\results",
+    "spikes": 5632018,
+    "units": 321,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 89114229942,
+        "calls": 3453
+      },
+      "stream_read": {
+        "bytes": 45059217,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1597484805,
+        "calls": 3182
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 89159289159,
+      "total_write_bytes": 1597484805
+    },
+    "input_metrics": {
+      "charged_file_bytes": 89114276164,
+      "read_calls": 3456,
+      "first_request": 318288.3950083,
+      "last_delivery_deadline": 318918.3218704454,
+      "aggregate_bytes_per_active_span_MB_s": 141.46765524572172
+    },
+    "spike_times_sha256": "91e5d220aa025bd697c607064a5fedf6ec69b43526dfa367342d2503819f7c51",
+    "labels_sha256": "8797fe7093c183a50e0b65ee3261df4c9b63ffb12af5fc473eb73774c3d0a9ec"
+  },
+  {
+    "name": "input_read_only_ks4_compressed_0500MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "rate": 500,
+    "profile": "default",
+    "io_condition": "input_read_only",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_0500MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 500,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_0500MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_0500MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 778.4539243999752,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_0500MBps\\results",
+    "spikes": 5635089,
+    "units": 324,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 89114229942,
+        "calls": 3453
+      },
+      "stream_read": {
+        "bytes": 45083815,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1598709076,
+        "calls": 3197
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 89159313757,
+      "total_write_bytes": 1598709076
+    },
+    "input_metrics": {
+      "charged_file_bytes": 89114276164,
+      "read_calls": 3456,
+      "first_request": 323381.6330122,
+      "last_delivery_deadline": 323925.99799381,
+      "aggregate_bytes_per_active_span_MB_s": 163.70317557981298
+    },
+    "spike_times_sha256": "c2e78074f6e3bc195d81df7f210b13fc2635289a37f51886e575942aeef30532",
+    "labels_sha256": "12cd923451cb3337cf589e0dfeb89d0f0531c70c099a4cc6727d8f7ac42def72"
+  },
+  {
+    "name": "input_read_only_ks4_compressed_1000MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "rate": 1000,
+    "profile": "default",
+    "io_condition": "input_read_only",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_1000MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 1000,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_1000MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_1000MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 774.895398899971,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_1000MBps\\results",
+    "spikes": 5634389,
+    "units": 323,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 89114229942,
+        "calls": 3453
+      },
+      "stream_read": {
+        "bytes": 45078204,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1598385850,
+        "calls": 3191
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 89159308146,
+      "total_write_bytes": 1598385850
+    },
+    "input_metrics": {
+      "charged_file_bytes": 89114276164,
+      "read_calls": 3456,
+      "first_request": 331358.3532673,
+      "last_delivery_deadline": 331902.571311655,
+      "aggregate_bytes_per_active_span_MB_s": 163.74737495082334
+    },
+    "spike_times_sha256": "be943c9270c9833ea92766a343ae56d6573e2775640fe453873940cf3057b02e",
+    "labels_sha256": "38257374b36795dfe5a08bb43d4c8fab48aacc48704a72a726c1205db65429bb"
+  },
+  {
+    "name": "input_read_only_ks4_compressed_2000MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "rate": 2000,
+    "profile": "default",
+    "io_condition": "input_read_only",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_2000MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 2000,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_2000MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_2000MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 771.0126993000158,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_2000MBps\\results",
+    "spikes": 5632662,
+    "units": 323,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 89114229942,
+        "calls": 3453
+      },
+      "stream_read": {
+        "bytes": 45064390,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1597905530,
+        "calls": 3191
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 89159294332,
+      "total_write_bytes": 1597905530
+    },
+    "input_metrics": {
+      "charged_file_bytes": 89114276164,
+      "read_calls": 3456,
+      "first_request": 335840.8990461,
+      "last_delivery_deadline": 336379.0195478275,
+      "aggregate_bytes_per_active_span_MB_s": 165.602826649273
+    },
+    "spike_times_sha256": "3e932c8c1828183d3c51a2080233e17ee1d59354c6fb285b011b2c8c6d431fab",
+    "labels_sha256": "c087314457ad0aee0fef615cfbbccf2fa549df6d517261e84d9b40df2771a4be"
+  },
+  {
+    "name": "input_read_only_ks4_compressed_5000MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "rate": 5000,
+    "profile": "default",
+    "io_condition": "input_read_only",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_5000MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 5000,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_5000MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_5000MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 708.2406964000547,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_compressed_5000MBps\\results",
+    "spikes": 5634810,
+    "units": 316,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 89114229942,
+        "calls": 3453
+      },
+      "stream_read": {
+        "bytes": 45081505,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1597775269,
+        "calls": 3170
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 89159311447,
+      "total_write_bytes": 1597775269
+    },
+    "input_metrics": {
+      "charged_file_bytes": 89114276164,
+      "read_calls": 3456,
+      "first_request": 274915.0854699,
+      "last_delivery_deadline": 275419.305785651,
+      "aggregate_bytes_per_active_span_MB_s": 176.73678227594627
+    },
+    "spike_times_sha256": "82bc5818a76f66ddc5655f1818f5bc774f7d56f5203730cfff8af85d726be82d",
+    "labels_sha256": "064a5a068d9ab5b2a5fd0ed3793c0c4add263bdce5268326b90516388ff7c4a5"
+  },
+  {
+    "name": "input_read_only_ks4_raw_0050MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "raw",
+    "rate": 50,
+    "profile": "default",
+    "io_condition": "input_read_only",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_0050MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 50,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_0050MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_0050MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 3241.381683899963,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_0050MBps\\results",
+    "spikes": 5632009,
+    "units": 321,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 129701443584,
+        "calls": 2809
+      },
+      "stream_read": {
+        "bytes": 45059145,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1597458968,
+        "calls": 3182
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 129746502729,
+      "total_write_bytes": 1597458968
+    },
+    "input_metrics": {
+      "charged_file_bytes": 129701443584,
+      "read_calls": 2809,
+      "first_request": 292625.4986301,
+      "last_delivery_deadline": 295663.86291926,
+      "aggregate_bytes_per_active_span_MB_s": 42.687917326680314
+    },
+    "spike_times_sha256": "1e366961d79764915d43235db2932e30d87b1d4b77f9efdfd419affc5b7310c9",
+    "labels_sha256": "e7e5033d951f1feb1115d00860e3ab593e812918849623540753305074f0e8f4"
+  },
+  {
+    "name": "input_read_only_ks4_raw_0100MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "raw",
+    "rate": 100,
+    "profile": "default",
+    "io_condition": "input_read_only",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_0100MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 100,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_0100MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_0100MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 1965.107191899966,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_0100MBps\\results",
+    "spikes": 5635097,
+    "units": 324,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 129701443584,
+        "calls": 2809
+      },
+      "stream_read": {
+        "bytes": 45083880,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1598714783,
+        "calls": 3197
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 129746527464,
+      "total_write_bytes": 1598714783
+    },
+    "input_metrics": {
+      "charged_file_bytes": 129701443584,
+      "read_calls": 2809,
+      "first_request": 304173.3154471,
+      "last_delivery_deadline": 305931.23119908,
+      "aggregate_bytes_per_active_span_MB_s": 73.78137629059313
+    },
+    "spike_times_sha256": "a062e569f5426bfed5219b5ba80add10dc192536a0ac85fe11d0bb612f91bf8a",
+    "labels_sha256": "0f43c398346af61f05b91f40b7255bc6a2739b802571a1fed7163734e8a4eebc"
+  },
+  {
+    "name": "input_read_only_ks4_raw_0200MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "raw",
+    "rate": 200,
+    "profile": "default",
+    "io_condition": "input_read_only",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_0200MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 200,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_0200MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_0200MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 1338.4963894000393,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_0200MBps\\results",
+    "spikes": 5631765,
+    "units": 315,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 129701443584,
+        "calls": 2809
+      },
+      "stream_read": {
+        "bytes": 45057136,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1596778537,
+        "calls": 3164
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 129746500720,
+      "total_write_bytes": 1596778537
+    },
+    "input_metrics": {
+      "charged_file_bytes": 129701443584,
+      "read_calls": 2809,
+      "first_request": 316941.973254,
+      "last_delivery_deadline": 318056.30004684004,
+      "aggregate_bytes_per_active_span_MB_s": 116.39444049750988
+    },
+    "spike_times_sha256": "9659c9801cbcb4555c7bda669d585a9d84af57ec978fac183ba12186c2b3b72f",
+    "labels_sha256": "ca1e69e44eb1b0f37ac871d9f6d8edf064ba93f8a136b54f4debe97bdc3a82a4"
+  },
+  {
+    "name": "input_read_only_ks4_raw_0500MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "raw",
+    "rate": 500,
+    "profile": "default",
+    "io_condition": "input_read_only",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_0500MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 500,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_0500MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_0500MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 949.5065068000113,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_0500MBps\\results",
+    "spikes": 5632066,
+    "units": 321,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 129701443584,
+        "calls": 2809
+      },
+      "stream_read": {
+        "bytes": 45059601,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1597472529,
+        "calls": 3182
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 129746503185,
+      "total_write_bytes": 1597472529
+    },
+    "input_metrics": {
+      "charged_file_bytes": 129701443584,
+      "read_calls": 2809,
+      "first_request": 322424.4313063,
+      "last_delivery_deadline": 323142.594803996,
+      "aggregate_bytes_per_active_span_MB_s": 180.60155382459246
+    },
+    "spike_times_sha256": "7f533c5611690dfb9344c1911fe8c39176388efb83dfc57f6dbd188e60758551",
+    "labels_sha256": "2c67454b39ea7b0305da041ddbb9014dda5336fe64c06c57f805a8d7910caa35"
+  },
+  {
+    "name": "input_read_only_ks4_raw_1000MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "raw",
+    "rate": 1000,
+    "profile": "default",
+    "io_condition": "input_read_only",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_1000MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 1000,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_1000MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_1000MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 816.9403807999915,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_1000MBps\\results",
+    "spikes": 5632056,
+    "units": 321,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 129701443584,
+        "calls": 2809
+      },
+      "stream_read": {
+        "bytes": 45059521,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1597487853,
+        "calls": 3182
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 129746503105,
+      "total_write_bytes": 1597487853
+    },
+    "input_metrics": {
+      "charged_file_bytes": 129701443584,
+      "read_calls": 2809,
+      "first_request": 330533.6939251,
+      "last_delivery_deadline": 331119.80963804806,
+      "aggregate_bytes_per_active_span_MB_s": 221.28982506136668
+    },
+    "spike_times_sha256": "c619305791c85aeb851ac96cb15f1ca5759ce8439ec43c329d7672e83009105d",
+    "labels_sha256": "89b7313a07eee3808e4d86d527f8db048637f016556efefae1d57654adc3dec8"
+  },
+  {
+    "name": "input_read_only_ks4_raw_2000MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "raw",
+    "rate": 2000,
+    "profile": "default",
+    "io_condition": "input_read_only",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_2000MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 2000,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_2000MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_2000MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 746.1806061000098,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_2000MBps\\results",
+    "spikes": 5632438,
+    "units": 315,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 129701443584,
+        "calls": 2809
+      },
+      "stream_read": {
+        "bytes": 45062520,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1597035130,
+        "calls": 3167
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 129746506104,
+      "total_write_bytes": 1597035130
+    },
+    "input_metrics": {
+      "charged_file_bytes": 129701443584,
+      "read_calls": 2809,
+      "first_request": 335086.7845935,
+      "last_delivery_deadline": 335601.845051724,
+      "aggregate_bytes_per_active_span_MB_s": 251.81790120568508
+    },
+    "spike_times_sha256": "8fac0c925b37bf0746c398fe6c9433154646e665c9ffdfef0bb0ec78b97ce0d2",
+    "labels_sha256": "1eaa98338e7b90a4f3bbe31dffec05ad569330799c8072f6252e1730873380c0"
+  },
+  {
+    "name": "input_read_only_ks4_raw_5000MBps",
+    "type": "timing",
+    "sorter": "ks4",
+    "kind": "raw",
+    "rate": 5000,
+    "profile": "default",
+    "io_condition": "input_read_only",
+    "folder": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_5000MBps",
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "bandwidth_MB_s": 5000,
+    "limiter_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_5000MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_5000MBps\\io.bin",
+    "probe": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\probe.npy",
+    "source_root": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\source_snapshot\\src",
+    "samples": 54000000,
+    "status": "success",
+    "seconds": 671.2146657999838,
+    "resultdir": "F:\\EphyPress_benchmarks\\segment60000_no_overlap_20261104\\input_read_only_ks4_raw_5000MBps\\results",
+    "spikes": 5635089,
+    "units": 326,
+    "io_metrics": {
+      "input_read": {
+        "bytes": 129701443584,
+        "calls": 2809
+      },
+      "stream_read": {
+        "bytes": 45083835,
+        "calls": 177
+      },
+      "mapped_read": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "stream_write": {
+        "bytes": 1598950092,
+        "calls": 3206
+      },
+      "mapped_write": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "copy_reserved": {
+        "bytes": 0,
+        "calls": 0
+      },
+      "total_read_bytes": 129746527419,
+      "total_write_bytes": 1598950092
+    },
+    "input_metrics": {
+      "charged_file_bytes": 129701443584,
+      "read_calls": 2809,
+      "first_request": 274236.5210615,
+      "last_delivery_deadline": 274701.99205166963,
+      "aggregate_bytes_per_active_span_MB_s": 278.64560052762147
+    },
+    "spike_times_sha256": "0a7733fe6469f8f10b629ec64a5dadffca1006e72755213abb8282a0d0402968",
+    "labels_sha256": "30cc39176bc174c6b52b4b924b3613abee9e5d0223dcfcbf3980fc2c6f703702"
+  }
+]

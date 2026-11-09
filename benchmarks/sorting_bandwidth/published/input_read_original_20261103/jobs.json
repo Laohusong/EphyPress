@@ -1,0 +1,282 @@
+[
+  {
+    "name": "chronosort_raw_5000MBps",
+    "sorter": "chronosort",
+    "kind": "raw",
+    "bandwidth_MB_s": 5000,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_raw_5000MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_raw_5000MBps.limiter.bin"
+  },
+  {
+    "name": "chronosort_compressed_5000MBps",
+    "sorter": "chronosort",
+    "kind": "compressed",
+    "bandwidth_MB_s": 5000,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_compressed_5000MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_compressed_5000MBps.limiter.bin"
+  },
+  {
+    "name": "ks4_raw_0050MBps",
+    "sorter": "ks4",
+    "kind": "raw",
+    "bandwidth_MB_s": 50,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_raw_0050MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_raw_0050MBps.limiter.bin"
+  },
+  {
+    "name": "ks4_compressed_0050MBps",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "bandwidth_MB_s": 50,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_compressed_0050MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_compressed_0050MBps.limiter.bin"
+  },
+  {
+    "name": "chronosort_raw_0050MBps",
+    "sorter": "chronosort",
+    "kind": "raw",
+    "bandwidth_MB_s": 50,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_raw_0050MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_raw_0050MBps.limiter.bin"
+  },
+  {
+    "name": "chronosort_compressed_0050MBps",
+    "sorter": "chronosort",
+    "kind": "compressed",
+    "bandwidth_MB_s": 50,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_compressed_0050MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_compressed_0050MBps.limiter.bin"
+  },
+  {
+    "name": "ks4_compressed_0100MBps",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "bandwidth_MB_s": 100,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_compressed_0100MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_compressed_0100MBps.limiter.bin"
+  },
+  {
+    "name": "ks4_raw_0100MBps",
+    "sorter": "ks4",
+    "kind": "raw",
+    "bandwidth_MB_s": 100,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_raw_0100MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_raw_0100MBps.limiter.bin"
+  },
+  {
+    "name": "chronosort_compressed_0100MBps",
+    "sorter": "chronosort",
+    "kind": "compressed",
+    "bandwidth_MB_s": 100,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_compressed_0100MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_compressed_0100MBps.limiter.bin"
+  },
+  {
+    "name": "chronosort_raw_0100MBps",
+    "sorter": "chronosort",
+    "kind": "raw",
+    "bandwidth_MB_s": 100,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_raw_0100MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_raw_0100MBps.limiter.bin"
+  },
+  {
+    "name": "ks4_raw_0200MBps",
+    "sorter": "ks4",
+    "kind": "raw",
+    "bandwidth_MB_s": 200,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_raw_0200MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_raw_0200MBps.limiter.bin"
+  },
+  {
+    "name": "ks4_compressed_0200MBps",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "bandwidth_MB_s": 200,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_compressed_0200MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_compressed_0200MBps.limiter.bin"
+  },
+  {
+    "name": "chronosort_raw_0200MBps",
+    "sorter": "chronosort",
+    "kind": "raw",
+    "bandwidth_MB_s": 200,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_raw_0200MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_raw_0200MBps.limiter.bin"
+  },
+  {
+    "name": "chronosort_compressed_0200MBps",
+    "sorter": "chronosort",
+    "kind": "compressed",
+    "bandwidth_MB_s": 200,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_compressed_0200MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_compressed_0200MBps.limiter.bin"
+  },
+  {
+    "name": "ks4_compressed_0500MBps",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "bandwidth_MB_s": 500,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_compressed_0500MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_compressed_0500MBps.limiter.bin"
+  },
+  {
+    "name": "ks4_raw_0500MBps",
+    "sorter": "ks4",
+    "kind": "raw",
+    "bandwidth_MB_s": 500,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_raw_0500MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_raw_0500MBps.limiter.bin"
+  },
+  {
+    "name": "chronosort_compressed_0500MBps",
+    "sorter": "chronosort",
+    "kind": "compressed",
+    "bandwidth_MB_s": 500,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_compressed_0500MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_compressed_0500MBps.limiter.bin"
+  },
+  {
+    "name": "chronosort_raw_0500MBps",
+    "sorter": "chronosort",
+    "kind": "raw",
+    "bandwidth_MB_s": 500,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_raw_0500MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_raw_0500MBps.limiter.bin"
+  },
+  {
+    "name": "ks4_raw_1000MBps",
+    "sorter": "ks4",
+    "kind": "raw",
+    "bandwidth_MB_s": 1000,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_raw_1000MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_raw_1000MBps.limiter.bin"
+  },
+  {
+    "name": "ks4_compressed_1000MBps",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "bandwidth_MB_s": 1000,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_compressed_1000MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_compressed_1000MBps.limiter.bin"
+  },
+  {
+    "name": "chronosort_raw_1000MBps",
+    "sorter": "chronosort",
+    "kind": "raw",
+    "bandwidth_MB_s": 1000,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_raw_1000MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_raw_1000MBps.limiter.bin"
+  },
+  {
+    "name": "chronosort_compressed_1000MBps",
+    "sorter": "chronosort",
+    "kind": "compressed",
+    "bandwidth_MB_s": 1000,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_compressed_1000MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_compressed_1000MBps.limiter.bin"
+  },
+  {
+    "name": "ks4_compressed_2000MBps",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "bandwidth_MB_s": 2000,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_compressed_2000MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_compressed_2000MBps.limiter.bin"
+  },
+  {
+    "name": "ks4_raw_2000MBps",
+    "sorter": "ks4",
+    "kind": "raw",
+    "bandwidth_MB_s": 2000,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_raw_2000MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_raw_2000MBps.limiter.bin"
+  },
+  {
+    "name": "chronosort_compressed_2000MBps",
+    "sorter": "chronosort",
+    "kind": "compressed",
+    "bandwidth_MB_s": 2000,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_compressed_2000MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_compressed_2000MBps.limiter.bin"
+  },
+  {
+    "name": "chronosort_raw_2000MBps",
+    "sorter": "chronosort",
+    "kind": "raw",
+    "bandwidth_MB_s": 2000,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_raw_2000MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\chronosort_raw_2000MBps.limiter.bin"
+  },
+  {
+    "name": "ks4_raw_5000MBps",
+    "sorter": "ks4",
+    "kind": "raw",
+    "bandwidth_MB_s": 5000,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_raw_5000MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_raw_5000MBps.limiter.bin"
+  },
+  {
+    "name": "ks4_compressed_5000MBps",
+    "sorter": "ks4",
+    "kind": "compressed",
+    "bandwidth_MB_s": 5000,
+    "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+    "archive": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.ep",
+    "output": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_compressed_5000MBps",
+    "limiter_state": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\ks4_compressed_5000MBps.limiter.bin"
+  }
+]

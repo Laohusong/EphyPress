@@ -1,1 +1,6 @@
 * text=auto
+
+# Keep historical evidence byte-identical across checkout platforms.
+patent/data/** -text -whitespace
+patent/config/** -text -whitespace
+patent/data/**/*.log -diff

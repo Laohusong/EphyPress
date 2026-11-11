@@ -1,0 +1,44 @@
+{
+  "source_archive": "F:\\EphyPress_benchmarks\\delta_rans_mtscomp_20261110\\full\\neuropixels_delta_ans0.ep",
+  "source_archive_bytes": 14963371137,
+  "target_archive": "F:\\EphyPress_benchmarks\\patent_ks4_v03_20261111\\recording_v3.ep",
+  "target_archive_bytes": 14963379335,
+  "archive_sha256": "3719793e3c156e0aef76b9c50031b2aea3a4597db09b9f1f935f682d9132c33b",
+  "unchanged_payload_sha256": "b11e64b11b1f589189ead36fd21dd8ac8fcf9d92208d34e840682cafe0b05422",
+  "verification": {
+    "path": "F:\\EphyPress_benchmarks\\patent_ks4_v03_20261111\\recording_v3.ep",
+    "bytes": 41472000000,
+    "sha256": "b3f6ffaf23681be08af594a485aad7809aa2e7c37a5befb78656b2a436425499",
+    "exact_equal": true,
+    "max_abs_error": 0,
+    "original_compared": true
+  },
+  "metadata_without_blocks": {
+    "format": "ephypress",
+    "format_version": 3,
+    "shape": [
+      54000000,
+      384
+    ],
+    "dtype": "<i2",
+    "block_samples": 60000,
+    "sampling_frequency": 30000,
+    "prediction": "delta",
+    "prediction_parameters": {
+      "temporal_numerator": 1,
+      "temporal_denominator": 1
+    },
+    "entropy_backend": "rans",
+    "rans_parameters": {
+      "scale_bits": 14,
+      "lanes": 4,
+      "escape_symbol": 1024,
+      "model": "block_unconditional"
+    },
+    "residual_layout": "channel_int16",
+    "low_bits": 0,
+    "source_bytes": 41472000000,
+    "source_sha256": "b3f6ffaf23681be08af594a485aad7809aa2e7c37a5befb78656b2a436425499"
+  },
+  "operation": "保持所有rANS包、偏移及CRC不变，仅重写生产版v3文件头和JSON索引；随后当前公共API全量逐值及SHA验证"
+}

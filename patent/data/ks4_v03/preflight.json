@@ -1,0 +1,47 @@
+{
+  "cache_hit_uncharged": true,
+  "single_block_payload_exact": 16664220,
+  "shared_budget": {
+    "threads": 4,
+    "bytes": 66662833,
+    "seconds": 0.6721522998996079,
+    "minimum_seconds": 0.66662833
+  },
+  "default_reader_payload_exact": 1312760443,
+  "padded_batches_exact": [
+    0,
+    1,
+    450,
+    899
+  ],
+  "cross_block_strided_tail_exact": true,
+  "status": "success",
+  "io_metrics": {
+    "input_read": {
+      "bytes": 1396225823,
+      "calls": 93
+    },
+    "stream_read": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "mapped_read": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "stream_write": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "mapped_write": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "copy_reserved": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "total_read_bytes": 1396225823,
+    "total_write_bytes": 0
+  }
+}

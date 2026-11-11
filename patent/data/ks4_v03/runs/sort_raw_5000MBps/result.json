@@ -1,0 +1,71 @@
+{
+  "status": "success",
+  "kind": "raw",
+  "bandwidth_MB_s": 5000,
+  "seconds": 754.4938862000126,
+  "minutes": 12.574898103333544,
+  "io_metrics": {
+    "input_read": {
+      "bytes": 129701443584,
+      "calls": 2809
+    },
+    "stream_read": {
+      "bytes": 45078524,
+      "calls": 177
+    },
+    "mapped_read": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "stream_write": {
+      "bytes": 1598400303,
+      "calls": 3191
+    },
+    "mapped_write": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "copy_reserved": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "total_read_bytes": 129746522108,
+    "total_write_bytes": 1598400303
+  },
+  "rans_payload_bytes_at_timer_stop": 0,
+  "rans_payload_bytes_after_close": 0,
+  "reader_statistics_after_close": null,
+  "cpu_seconds": 2162.90625,
+  "peak_working_set": 7942164480,
+  "units": 323,
+  "spikes": 5634429,
+  "spike_times_sha256": "46d4ed7957f6d22956d7f2a8bb222bb3c89809d83ca1c4cae0ab7af04676e415",
+  "labels_sha256": "6ce7ed6cfc201b57d117389db1ac8e1eafd1895fdac2c70ec20aaafcb3c9c602",
+  "source_hashes": {
+    "benchmarks\\sorting_bandwidth\\runtime\\bandwidth_adapter.py": "e55ca8756548c19fe18b85295b5907e8db02dc88bce1f059b424f46b01ce2343",
+    "benchmarks\\sorting_bandwidth\\runtime\\io_budget.py": "be6becde633ddf0fa2c03c15f5ce248ddac91011c2bda157a5a5782de33b1c7e",
+    "benchmarks\\sorting_bandwidth\\runtime\\policy.py": "76053e8975095bb95d31bbacbc63eebab94bad20c4e8a1a76d49bc031f67a787",
+    "benchmarks\\sorting_bandwidth\\runtime\\shared_cache.py": "6a889e97d78b358b6a054a029c1790f6335ae6dd6ad9099e236b7fab6f7b70fc",
+    "benchmarks\\sorting_bandwidth\\runtime\\sitecustomize.py": "8d6475cbf16ae40859e4e8508f1b9a9e361ec5826c4e49ccfb7fbe4ac6f74161",
+    "patent\\benchmark_ks4.py": "12cc13d1c59efe00344126411cd93138fd6c13b0b5665274fa81ce466b2d3fde",
+    "src\\ephypress\\__init__.py": "1c2d26b8fbd7dbb9a81a6e3e52134751c500d08a6fbc93674ee679fec1353087",
+    "src\\ephypress\\__main__.py": "482b8693e2fe6dbd732e3d7961e03827d3efa187bad11d29da188be580ebbeea",
+    "src\\ephypress\\_codec.pyd": "dff263f705ff8d0e7962f4e51f25040f7518b5f8d6420620d7fa2f7a838b9bd4",
+    "src\\ephypress\\_container.py": "5435dac4202f3146964865ce07bd082c63113a5a463e8c1f88919553d89b50cb",
+    "src\\ephypress\\_entropy.py": "bd5e2d8fbdbc56bbf0516c6f8f060e1ba208a11a9accf9f2a827f57033b4a46e",
+    "src\\ephypress\\_io.py": "2f594166ff2ce71789f7790eb5a694a1ec5f60f0774bbc9140c2a942e865e961",
+    "src\\ephypress\\_kernel.cpp": "79b5e47c819cd69529c40cc075d0dc4e12b2655e14c5954c3d337711ec59e1c1",
+    "src\\ephypress\\_mapped.py": "65a0992b50d04a37e03a602d941fc01f0362ca8ae11fbb8cc6c973704e0ee208",
+    "src\\ephypress\\_mapping.py": "d0c0b83fba139890ba942900b90bc0e6ed781b6fc3156a9d7a4496b5dbe335a6",
+    "src\\ephypress\\_module.cpp": "6247fa213ee65accb50eda7e6519cdb333a84ff6ae995bdde4314b13fdc19bd7",
+    "src\\ephypress\\_native.py": "e30548bca1d5eebf1a9880da471204a6999358b068d17391538b0773c2c61e81",
+    "src\\ephypress\\_prediction.h": "6016f020f689f68a90fc8bd0c0a56de939e808a649ba625c5e0f99e55cabe7bc",
+    "src\\ephypress\\_prediction.py": "12180f8b2bf187d7141100a3db406039b40199d677e6061fa9ef7bf2f25d56cc",
+    "src\\ephypress\\_rans.cpp": "20cddc63bf1114b952083d130742fb57718bcbf582f509b13879aff70c7512d5",
+    "src\\ephypress\\_rans.py": "d0bada67c68b20da93bd5b112515a78cc16e41dce28777b7ec571f2b59b75d50",
+    "src\\ephypress\\api.py": "0a990c2d28a2f71eeb5dc0fcf613945aab7c89b368176332fd9130a41444f9d2",
+    "src\\ephypress\\cli.py": "956f4f1d50ca9b7a1b6871c2c70003fbdda30a7c08de4b1bbb0920384e6bb2d6",
+    "src\\ephypress\\kilosort.py": "a8e333cb0ec1c4070c2fa3bdab88ea72a69902e46a98b10255719a9d11cdc7d3",
+    "src\\ephypress\\spikeinterface.py": "75b3bf61217510784acd58f2581fd967ada6412fd9ec367c520c0a9ba6017aa1"
+  }
+}

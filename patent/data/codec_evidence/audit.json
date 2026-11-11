@@ -1,0 +1,29 @@
+{
+  "status": "success",
+  "formal_jobs": 42,
+  "full_byte_and_sha256_checks": 6,
+  "decode_trials": 30,
+  "eight_distinct_physical_cores": true,
+  "identical_cpu_affinity": true,
+  "identical_input_and_chunk_boundaries": true,
+  "entire_archives_prewarmed": true,
+  "no_decoded_cache": true,
+  "frozen_source_hashes_verified": true,
+  "src_unchanged": true,
+  "rhd_all_amplifier_values_independently_checked": true,
+  "external_artifacts": "F:\\EphyPress_benchmarks\\delta_rans_mtscomp_20261110\\full",
+  "process_formal_jobs": 36,
+  "process_full_verifications": 6,
+  "process_decode_trials": 30,
+  "eight_distinct_worker_pids": true,
+  "process_range_hashes_match_between_codecs": true,
+  "final_src_hashes_unchanged": true,
+  "final_mtscomp_hash_unchanged": true,
+  "final_production_dll_hash_unchanged": true,
+  "process_common_hash_matches_thread_harness": true,
+  "report_links_valid": true,
+  "report_generator_sha256": {
+    "export.py": "a4a3775e81348d0619805df8a9b3ac598cc7d90f7fa2d4bc2d28260320e88f2f",
+    "export_processes.py": "a89e4ea59686e0a112cbd3496792972af3a04f308a788e6528d8f4dd76f5a5bf"
+  }
+}

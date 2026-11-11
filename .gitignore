@@ -17,7 +17,10 @@ artifacts/
 tools/_reader_methods.tmp
 
 # Research artifacts are maintained on the patent branch.
-/patent/
 /benchmarks/
 *.dll
 *.cbin
+
+/patent/runs/
+/patent/config.local.json
+/patent/output/rebuilt/

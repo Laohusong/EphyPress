@@ -1,0 +1,259 @@
+{
+  "timestamp_utc": "2026-11-10T09:57:02.114467+00:00",
+  "python": "3.11.14 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 18:30:03) [MSC v.1929 64 bit (AMD64)]",
+  "executable": "D:\\EphyPress\\.venv-windows-gpu\\Scripts\\python.exe",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "cpus": [
+    0,
+    1,
+    10,
+    11,
+    12,
+    13,
+    22,
+    23
+  ],
+  "cpu_topology": [
+    {
+      "id": 256,
+      "group": 0,
+      "logical": 0,
+      "core": 0,
+      "efficiency_class": 1,
+      "flags": 0
+    },
+    {
+      "id": 257,
+      "group": 0,
+      "logical": 1,
+      "core": 1,
+      "efficiency_class": 1,
+      "flags": 0
+    },
+    {
+      "id": 258,
+      "group": 0,
+      "logical": 2,
+      "core": 2,
+      "efficiency_class": 0,
+      "flags": 0
+    },
+    {
+      "id": 259,
+      "group": 0,
+      "logical": 3,
+      "core": 3,
+      "efficiency_class": 0,
+      "flags": 1
+    },
+    {
+      "id": 260,
+      "group": 0,
+      "logical": 4,
+      "core": 4,
+      "efficiency_class": 0,
+      "flags": 1
+    },
+    {
+      "id": 261,
+      "group": 0,
+      "logical": 5,
+      "core": 5,
+      "efficiency_class": 0,
+      "flags": 1
+    },
+    {
+      "id": 262,
+      "group": 0,
+      "logical": 6,
+      "core": 6,
+      "efficiency_class": 0,
+      "flags": 1
+    },
+    {
+      "id": 263,
+      "group": 0,
+      "logical": 7,
+      "core": 7,
+      "efficiency_class": 0,
+      "flags": 1
+    },
+    {
+      "id": 264,
+      "group": 0,
+      "logical": 8,
+      "core": 8,
+      "efficiency_class": 0,
+      "flags": 1
+    },
+    {
+      "id": 265,
+      "group": 0,
+      "logical": 9,
+      "core": 9,
+      "efficiency_class": 0,
+      "flags": 1
+    },
+    {
+      "id": 266,
+      "group": 0,
+      "logical": 10,
+      "core": 10,
+      "efficiency_class": 1,
+      "flags": 0
+    },
+    {
+      "id": 267,
+      "group": 0,
+      "logical": 11,
+      "core": 11,
+      "efficiency_class": 1,
+      "flags": 0
+    },
+    {
+      "id": 268,
+      "group": 0,
+      "logical": 12,
+      "core": 12,
+      "efficiency_class": 1,
+      "flags": 0
+    },
+    {
+      "id": 269,
+      "group": 0,
+      "logical": 13,
+      "core": 13,
+      "efficiency_class": 1,
+      "flags": 0
+    },
+    {
+      "id": 270,
+      "group": 0,
+      "logical": 14,
+      "core": 14,
+      "efficiency_class": 0,
+      "flags": 1
+    },
+    {
+      "id": 271,
+      "group": 0,
+      "logical": 15,
+      "core": 15,
+      "efficiency_class": 0,
+      "flags": 1
+    },
+    {
+      "id": 272,
+      "group": 0,
+      "logical": 16,
+      "core": 16,
+      "efficiency_class": 0,
+      "flags": 1
+    },
+    {
+      "id": 273,
+      "group": 0,
+      "logical": 17,
+      "core": 17,
+      "efficiency_class": 0,
+      "flags": 1
+    },
+    {
+      "id": 274,
+      "group": 0,
+      "logical": 18,
+      "core": 18,
+      "efficiency_class": 0,
+      "flags": 1
+    },
+    {
+      "id": 275,
+      "group": 0,
+      "logical": 19,
+      "core": 19,
+      "efficiency_class": 0,
+      "flags": 1
+    },
+    {
+      "id": 276,
+      "group": 0,
+      "logical": 20,
+      "core": 20,
+      "efficiency_class": 0,
+      "flags": 1
+    },
+    {
+      "id": 277,
+      "group": 0,
+      "logical": 21,
+      "core": 21,
+      "efficiency_class": 0,
+      "flags": 1
+    },
+    {
+      "id": 278,
+      "group": 0,
+      "logical": 22,
+      "core": 22,
+      "efficiency_class": 1,
+      "flags": 0
+    },
+    {
+      "id": 279,
+      "group": 0,
+      "logical": 23,
+      "core": 23,
+      "efficiency_class": 1,
+      "flags": 0
+    }
+  ],
+  "packages": {
+    "ephypress": "0.3.0",
+    "mtscomp": "1.0.2",
+    "numpy": "1.26.4",
+    "psutil": "7.1.3",
+    "neo": "0.14.3",
+    "threadpoolctl": "3.6.0"
+  },
+  "mtscomp_source": "D:\\EphyPress\\.venv-windows-gpu\\Lib\\site-packages\\mtscomp.py",
+  "mtscomp_sha256": "8e9b84d99812203e880ae2eb860fa5f4da823eb163dc269a4edf69f765fceecd",
+  "production_dll": "D:\\EphyPress\\src\\ephypress\\_codec.pyd",
+  "production_dll_sha256": "e61758493f4714e74eb6c16bafc1ea9a31cf175d8d97f20439065b81020658db",
+  "src_sha256": {
+    "src\\ephypress\\api.py": "6d41387c8c4ae1942ddab191e648020b83f6ead038f1e2f36b7028acb9756d08",
+    "src\\ephypress\\cli.py": "5e45aa235bdbf771277f122880d36624132036c053dad303d1799667d802e482",
+    "src\\ephypress\\kilosort.py": "a8e333cb0ec1c4070c2fa3bdab88ea72a69902e46a98b10255719a9d11cdc7d3",
+    "src\\ephypress\\spikeinterface.py": "712b7c69ce84812267a2f5c09ddf8ef80a2476f03174e3359fced28f2dfd3a27",
+    "src\\ephypress\\_container.py": "48182edd29ebbcda931c2e7c71c3a7577867935cd0e30e6eed6279ff30d3b661",
+    "src\\ephypress\\_entropy.py": "bd5e2d8fbdbc56bbf0516c6f8f060e1ba208a11a9accf9f2a827f57033b4a46e",
+    "src\\ephypress\\_io.py": "2f594166ff2ce71789f7790eb5a694a1ec5f60f0774bbc9140c2a942e865e961",
+    "src\\ephypress\\_kernel.cpp": "79b5e47c819cd69529c40cc075d0dc4e12b2655e14c5954c3d337711ec59e1c1",
+    "src\\ephypress\\_mapped.py": "65a0992b50d04a37e03a602d941fc01f0362ca8ae11fbb8cc6c973704e0ee208",
+    "src\\ephypress\\_mapping.py": "d0c0b83fba139890ba942900b90bc0e6ed781b6fc3156a9d7a4496b5dbe335a6",
+    "src\\ephypress\\_module.cpp": "6247fa213ee65accb50eda7e6519cdb333a84ff6ae995bdde4314b13fdc19bd7",
+    "src\\ephypress\\_native.py": "b9c8bc584d3c474032446d4740d28953693f94adae4437d477473759181a5484",
+    "src\\ephypress\\_prediction.h": "6016f020f689f68a90fc8bd0c0a56de939e808a649ba625c5e0f99e55cabe7bc",
+    "src\\ephypress\\_prediction.py": "12180f8b2bf187d7141100a3db406039b40199d677e6061fa9ef7bf2f25d56cc",
+    "src\\ephypress\\__init__.py": "1c2d26b8fbd7dbb9a81a6e3e52134751c500d08a6fbc93674ee679fec1353087",
+    "src\\ephypress\\__main__.py": "482b8693e2fe6dbd732e3d7961e03827d3efa187bad11d29da188be580ebbeea"
+  },
+  "snapshot_sha256": {
+    "benchmarks\\delta_rans_mtscomp\\prepare.py": "9a956944fa546128a32c3784b29de3a38fb0b0599eb0697b60d18b72d30d4f81",
+    "benchmarks\\delta_rans_mtscomp\\run.py": "84c2aebd393f5b459ad6ede5830cd1b00491cfbcd412cd32f1246ccf6aeb2489",
+    "benchmarks\\delta_rans_mtscomp\\worker.py": "51b421f09800d55218722f583500eb9058ba73ff54ac3027546d8a6de1ed06e0",
+    "benchmarks\\mtscomp_comparison\\common.py": "e72a3202a691e5672b1c92f5b1930d04b26fc92903471f83731a536e1d35e1c4",
+    "benchmarks\\temporal_interpolation\\build.py": "3a81f84a0d6c7effda8df229542e5e682fb066a85a06f3bb3a4443c25e2fa088",
+    "benchmarks\\temporal_interpolation\\codec.py": "8569d1aceb875775ce42ac9971d96099210ec52fc5594e775a9e28c649ccd37d",
+    "benchmarks\\temporal_interpolation\\conditional.cpp": "259bc4f77456f26f838754429c67cfe4369a511c466f527d7ab26805ed8f21ce",
+    "benchmarks\\temporal_interpolation\\conditional_diagnostics.py": "472baa34e9d71e5a6d0d4d473e1583c5a01787b3c4a743bb047430d1afb3f4cb",
+    "benchmarks\\temporal_interpolation\\export.py": "1a908440f4953fb4844c678259d40c7be671756dc49e2ab8bd0f3fa6180c58c5",
+    "benchmarks\\temporal_interpolation\\kernel.cpp": "c589800862ecee4eabd11ebd99702118f17fd111126d30224bb3f0652f4dc9aa",
+    "benchmarks\\temporal_interpolation\\prototype.dll": "b3381c40c48733810c93237c27bd9ddecea915e421613879c6135ad832f7770a",
+    "benchmarks\\temporal_interpolation\\raw_diagnostics.py": "7e6c9fe4d01d13ab6152f573a6745ffd8b811eef70a56c69f866240d5d7a330d",
+    "benchmarks\\temporal_interpolation\\run.py": "4126b702b4d8509fd8f4e51ce9e31ac1d62b411f44018cb41ad5c5b151c5ebb3",
+    "benchmarks\\temporal_interpolation\\screen.py": "9a9aead131156a79ec2c4987fbba191ad9d2a7dde84f4c61d14b005039188726",
+    "benchmarks\\temporal_interpolation\\validate.py": "ed2fe023003f568c22dd0529d6a59dfcd6afb8548115decd484d9c635d1f5cc3",
+    "benchmarks\\temporal_interpolation\\validate_conditional.py": "73d0d88ee37bdfff36bc535c0a5084c8fec64bd2b5f0394492ec019496083b8a",
+    "benchmarks\\temporal_interpolation\\worker.py": "30a2aa51d33c33b39a6f92fdf7706ee454b225e41d529d3d229463f44c9282f1"
+  }
+}

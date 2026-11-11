@@ -1,0 +1,16 @@
+{
+  "python": "3.11.14 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 18:30:03) [MSC v.1929 64 bit (AMD64)]",
+  "executable": "D:\\EphyPress\\.venv-windows-gpu\\Scripts\\python.exe",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "packages": {
+    "ephypress": "0.3.0",
+    "numpy": "1.26.4",
+    "torch": "2.9.1+cu128",
+    "kilosort": "4.1.7",
+    "psutil": "7.1.3"
+  },
+  "gpu": "NVIDIA GeForce RTX 5090, 610.88, 32607 MiB",
+  "cpu": "Intel Core Ultra 7 270K Plus，24核24逻辑处理器",
+  "input_output_storage": "F盘 KIOXIA KCMYXRUG30T7 SSD",
+  "timestamp_utc": "2026-11-10T18:53:26.563859+00:00"
+}

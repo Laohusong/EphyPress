@@ -1,0 +1,19 @@
+{
+  "sorter": "ks4",
+  "io_condition": "input_read_only",
+  "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+  "archive": "F:\\EphyPress_benchmarks\\patent_ks4_v03_20261111\\recording_v3.ep",
+  "probe": "D:\\EphyPress\\benchmarks\\sorting_bandwidth\\fixture\\ks4_probe.json",
+  "source_root": "D:\\EphyPress\\src",
+  "samples": 54000000,
+  "channels": 384,
+  "fs": 30000,
+  "operation": "sort",
+  "kind": "rans",
+  "rate": 100,
+  "bandwidth_MB_s": 100,
+  "folder": "F:\\EphyPress_benchmarks\\patent_ks4_v03_20261111\\sort_rans_0100MBps",
+  "job_path": "F:\\EphyPress_benchmarks\\patent_ks4_v03_20261111\\sort_rans_0100MBps\\job.json",
+  "limiter_state": "F:\\EphyPress_benchmarks\\patent_ks4_v03_20261111\\sort_rans_0100MBps\\input.bin",
+  "io_state": "F:\\EphyPress_benchmarks\\patent_ks4_v03_20261111\\sort_rans_0100MBps\\io.bin"
+}

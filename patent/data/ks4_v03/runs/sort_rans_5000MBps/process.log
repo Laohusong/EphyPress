@@ -1,0 +1,190 @@
+kilosort.run_kilosort: Kilosort version 4.1.7
+kilosort.run_kilosort: Python version 3.11.14
+kilosort.run_kilosort: ----------------------------------------
+kilosort.run_kilosort: System information:
+kilosort.run_kilosort: Windows-10-10.0.19045-SP0 AMD64
+kilosort.run_kilosort: Intel64 Family 6 Model 198 Stepping 2, GenuineIntel
+kilosort.run_kilosort: Using CUDA device: NVIDIA GeForce RTX 5090 31.84GB
+kilosort.run_kilosort: ----------------------------------------
+kilosort.run_kilosort: Sorting [WindowsPath('F:/EphyPress_benchmarks/patent_ks4_v03_20261111/recording_v3.ep')]
+kilosort.run_kilosort:  
+kilosort.run_kilosort: Resource usage before sorting
+kilosort.run_kilosort: ********************************************************
+kilosort.run_kilosort: CPU usage:    20.20 %
+kilosort.run_kilosort: Mem used:     25.50 %     |      32.49 GB
+kilosort.run_kilosort: Mem avail:    94.79 / 127.27 GB
+kilosort.run_kilosort: ------------------------------------------------------
+kilosort.run_kilosort: GPU usage:    `conda install pynvml` for GPU usage
+kilosort.run_kilosort: GPU memory:    5.31 %     |      1.69   /    31.84 GB
+kilosort.run_kilosort: Allocated:     0.00 %     |      0.00   /    31.84 GB
+kilosort.run_kilosort: Max alloc:     0.00 %     |      0.00   /    31.84 GB
+kilosort.run_kilosort: ********************************************************
+kilosort.run_kilosort:  
+kilosort.run_kilosort: Computing preprocessing variables.
+kilosort.run_kilosort: ----------------------------------------
+kilosort.run_kilosort: N samples: 54000000
+kilosort.run_kilosort: N seconds: 1800.0
+kilosort.run_kilosort: N batches: 900
+kilosort.run_kilosort: Preprocessing filters computed in 6.94s; total 6.96s
+kilosort.run_kilosort:  
+kilosort.run_kilosort: Resource usage after preprocessing
+kilosort.run_kilosort: ********************************************************
+kilosort.run_kilosort: CPU usage:    83.60 %
+kilosort.run_kilosort: Mem used:     29.70 %     |      37.74 GB
+kilosort.run_kilosort: Mem avail:    89.53 / 127.27 GB
+kilosort.run_kilosort: ------------------------------------------------------
+kilosort.run_kilosort: GPU usage:    `conda install pynvml` for GPU usage
+kilosort.run_kilosort: GPU memory:   10.94 %     |      3.48   /    31.84 GB
+kilosort.run_kilosort: Allocated:     0.03 %     |      0.01   /    31.84 GB
+kilosort.run_kilosort: Max alloc:     4.10 %     |      1.31   /    31.84 GB
+kilosort.run_kilosort: ********************************************************
+kilosort.run_kilosort:  
+kilosort.run_kilosort: Computing drift correction.
+kilosort.run_kilosort: ----------------------------------------
+kilosort.spikedetect: Re-computing universal templates from data.
+kilosort.spikedetect: Number of universal templates: 1532
+kilosort.spikedetect: Detecting spikes...
+
+kilosort.run_kilosort: drift computed in 179.59s; total 186.87s
+kilosort.run_kilosort:  
+kilosort.run_kilosort: Resource usage after drift correction
+kilosort.run_kilosort: ********************************************************
+kilosort.run_kilosort: CPU usage:    59.10 %
+kilosort.run_kilosort: Mem used:     30.00 %     |      38.22 GB
+kilosort.run_kilosort: Mem avail:    89.05 / 127.27 GB
+kilosort.run_kilosort: ------------------------------------------------------
+kilosort.run_kilosort: GPU usage:    `conda install pynvml` for GPU usage
+kilosort.run_kilosort: GPU memory:   22.01 %     |      7.01   /    31.84 GB
+kilosort.run_kilosort: Allocated:     0.03 %     |      0.01   /    31.84 GB
+kilosort.run_kilosort: Max alloc:    10.38 %     |      3.30   /    31.84 GB
+kilosort.run_kilosort: ********************************************************
+kilosort.run_kilosort: Generating drift plots ...
+kilosort.run_kilosort:  
+kilosort.run_kilosort: Extracting spikes using templates
+kilosort.run_kilosort: ----------------------------------------
+kilosort.spikedetect: Re-computing universal templates from data.
+kilosort.spikedetect: Number of universal templates: 1532
+kilosort.spikedetect: Detecting spikes...
+
+kilosort.run_kilosort: 2477082 spikes extracted in 178.35s; total 389.05s
+kilosort.run_kilosort:  
+kilosort.run_kilosort: Resource usage after spike detect (univ)
+kilosort.run_kilosort: ********************************************************
+kilosort.run_kilosort: CPU usage:     0.00 %
+kilosort.run_kilosort: Mem used:     31.00 %     |      39.45 GB
+kilosort.run_kilosort: Mem avail:    87.83 / 127.27 GB
+kilosort.run_kilosort: ------------------------------------------------------
+kilosort.run_kilosort: GPU usage:    `conda install pynvml` for GPU usage
+kilosort.run_kilosort: GPU memory:   22.02 %     |      7.01   /    31.84 GB
+kilosort.run_kilosort: Allocated:     0.03 %     |      0.01   /    31.84 GB
+kilosort.run_kilosort: Max alloc:    10.38 %     |      3.31   /    31.84 GB
+kilosort.run_kilosort: ********************************************************
+kilosort.run_kilosort:  
+kilosort.run_kilosort: First clustering
+kilosort.run_kilosort: ----------------------------------------
+
+kilosort.run_kilosort: 431 clusters found, in 35.41s; total 424.49s
+kilosort.run_kilosort:  
+kilosort.run_kilosort: Resource usage after first clustering
+kilosort.run_kilosort: ********************************************************
+kilosort.run_kilosort: CPU usage:    62.50 %
+kilosort.run_kilosort: Mem used:     31.30 %     |      39.80 GB
+kilosort.run_kilosort: Mem avail:    87.47 / 127.27 GB
+kilosort.run_kilosort: ------------------------------------------------------
+kilosort.run_kilosort: GPU usage:    `conda install pynvml` for GPU usage
+kilosort.run_kilosort: GPU memory:   22.03 %     |      7.01   /    31.84 GB
+kilosort.run_kilosort: Allocated:     0.04 %     |      0.01   /    31.84 GB
+kilosort.run_kilosort: Max alloc:     1.57 %     |      0.50   /    31.84 GB
+kilosort.run_kilosort: ********************************************************
+kilosort.run_kilosort:  
+kilosort.run_kilosort: Extracting spikes using cluster waveforms
+kilosort.run_kilosort: ----------------------------------------
+
+kilosort.run_kilosort: 5637953 spikes extracted in 82.71s; total 507.23s
+kilosort.run_kilosort:  
+kilosort.run_kilosort: Resource usage after spike detect (learned)
+kilosort.run_kilosort: ********************************************************
+kilosort.run_kilosort: CPU usage:     6.70 %
+kilosort.run_kilosort: Mem used:     32.90 %     |      41.84 GB
+kilosort.run_kilosort: Mem avail:    85.43 / 127.27 GB
+kilosort.run_kilosort: ------------------------------------------------------
+kilosort.run_kilosort: GPU usage:    `conda install pynvml` for GPU usage
+kilosort.run_kilosort: GPU memory:   22.03 %     |      7.01   /    31.84 GB
+kilosort.run_kilosort: Allocated:     0.04 %     |      0.01   /    31.84 GB
+kilosort.run_kilosort: Max alloc:     4.61 %     |      1.47   /    31.84 GB
+kilosort.run_kilosort: ********************************************************
+kilosort.run_kilosort: Generating diagnostic plots ...
+kilosort.run_kilosort:  
+kilosort.run_kilosort: Final clustering
+kilosort.run_kilosort: ----------------------------------------
+
+kilosort.run_kilosort: 364 clusters found, in 65.55s; total 573.89s
+kilosort.run_kilosort:  
+kilosort.run_kilosort: Merging clusters
+kilosort.run_kilosort: ----------------------------------------
+kilosort.run_kilosort: 323 units found, in 71.47s; total 645.38s
+kilosort.run_kilosort:  
+kilosort.run_kilosort: Resource usage after clustering
+kilosort.run_kilosort: ********************************************************
+kilosort.run_kilosort: CPU usage:    37.50 %
+kilosort.run_kilosort: Mem used:     32.70 %     |      41.64 GB
+kilosort.run_kilosort: Mem avail:    85.64 / 127.27 GB
+kilosort.run_kilosort: ------------------------------------------------------
+kilosort.run_kilosort: GPU usage:    `conda install pynvml` for GPU usage
+kilosort.run_kilosort: GPU memory:   22.03 %     |      7.02   /    31.84 GB
+kilosort.run_kilosort: Allocated:     0.03 %     |      0.01   /    31.84 GB
+kilosort.run_kilosort: Max alloc:     2.95 %     |      0.94   /    31.84 GB
+kilosort.run_kilosort: ********************************************************
+kilosort.run_kilosort:  
+kilosort.run_kilosort: Saving to phy and computing refractory periods
+kilosort.run_kilosort: ----------------------------------------
+kilosort.run_kilosort: 143 units found with good refractory periods
+kilosort.run_kilosort: Exporting to Phy took: 12.49s
+kilosort.run_kilosort: Total runtime: 657.92s = 00:10:58 h:m:s
+kilosort.run_kilosort: Sorting output saved in: F:\EphyPress_benchmarks\patent_ks4_v03_20261111\sort_rans_5000MBps\results.
+kilosort.run_kilosort:  
+kilosort.run_kilosort: Resource usage after saving
+kilosort.run_kilosort: ********************************************************
+kilosort.run_kilosort: CPU usage:     8.30 %
+kilosort.run_kilosort: Mem used:     33.50 %     |      42.62 GB
+kilosort.run_kilosort: Mem avail:    84.65 / 127.27 GB
+kilosort.run_kilosort: ------------------------------------------------------
+kilosort.run_kilosort: GPU usage:    `conda install pynvml` for GPU usage
+kilosort.run_kilosort: GPU memory:   22.03 %     |      7.02   /    31.84 GB
+kilosort.run_kilosort: Allocated:     0.03 %     |      0.01   /    31.84 GB
+kilosort.run_kilosort: Max alloc:     0.04 %     |      0.01   /    31.84 GB
+kilosort.run_kilosort: ********************************************************
+kilosort.run_kilosort: Generating spike position plot ...
+kilosort.run_kilosort: Sorting finished.
+kilosort.run_kilosort:  
+kilosort.run_kilosort: ********************************************************
+kilosort.run_kilosort: Sorting summary
+kilosort.run_kilosort: --------------------------------------------------------
+kilosort.run_kilosort: Total number of units:                              323
+kilosort.run_kilosort: Number of good units:                               143
+kilosort.run_kilosort: Number of spikes                                5632662
+kilosort.run_kilosort: Mean abs. drift                                  2.1 um
+kilosort.run_kilosort: Total runtime                                   657.92s
+kilosort.run_kilosort:  
+kilosort.run_kilosort: Runtime by step
+kilosort.run_kilosort: --------------------------------------------------------
+kilosort.run_kilosort: preprocessing:                          6.9s   (1.06) %
+kilosort.run_kilosort: drift corr:                           179.6s  (27.30) %
+kilosort.run_kilosort: spike det. (univ):                    178.3s  (27.11) %
+kilosort.run_kilosort: cluster (temp):                        35.4s   (5.38) %
+kilosort.run_kilosort: spike det. (learn):                    82.7s  (12.57) %
+kilosort.run_kilosort: cluster (final):                       65.6s   (9.96) %
+kilosort.run_kilosort: cluster merge:                         71.5s  (10.86) %
+kilosort.run_kilosort: postprocessing:                        12.5s   (1.90) %
+kilosort.run_kilosort:  
+kilosort.run_kilosort: Memory usage by step
+kilosort.run_kilosort: --------------------------------------------------------
+kilosort.run_kilosort: preprocessing:         sys    37.6 GB  |  gpu    1.3 GB
+kilosort.run_kilosort: drift corr:            sys    38.2 GB  |  gpu    3.3 GB
+kilosort.run_kilosort: spike det. (univ):     sys    39.4 GB  |  gpu    3.3 GB
+kilosort.run_kilosort: cluster (temp):        sys    39.8 GB  |  gpu    0.5 GB
+kilosort.run_kilosort: spike det. (learn):    sys    41.8 GB  |  gpu    1.5 GB
+kilosort.run_kilosort: cluster (final):       sys    40.0 GB  |  gpu    0.9 GB
+kilosort.run_kilosort: cluster merge:         sys    41.6 GB  |  gpu    0.9 GB
+kilosort.run_kilosort: postprocessing:        sys    42.6 GB  |  gpu    0.0 GB
+kilosort.run_kilosort: ********************************************************

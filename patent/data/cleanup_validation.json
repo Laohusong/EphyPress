@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-11",
+  "main_commit": "1eca837",
+  "library_tests": {
+    "passed": 46,
+    "failed": 0
+  },
+  "installed_wheel_core_tests": {
+    "passed": 42,
+    "failed": 0
+  },
+  "windows_native_dependencies": [
+    "python3.dll",
+    "kernel32.dll"
+  ],
+  "real_recording": {
+    "bytes": 41472000000,
+    "sha256": "b3f6ffaf23681be08af594a485aad7809aa2e7c37a5befb78656b2a436425499",
+    "exact_equal": true,
+    "original_compared": true
+  },
+  "fresh_experiment_smoke": {
+    "samples": 12521,
+    "channels": 8,
+    "block_samples": 1000,
+    "codec_workers": 2,
+    "operations": [
+      "encode",
+      "full_byte_verify",
+      "thread_decode",
+      "process_decode",
+      "raw_rans_mtscomp_KS4_padded_batch_preflight",
+      "shared_input_metering"
+    ],
+    "passed": true,
+    "performance_measurement": false
+  },
+  "full_GPU_sweep_repeated": false
+}

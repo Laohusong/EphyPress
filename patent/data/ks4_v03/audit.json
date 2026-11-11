@@ -1,0 +1,867 @@
+{
+  "status": "passed",
+  "run_count": 6,
+  "settings_equal_excluding_input_output_paths": true,
+  "all_source_hashes_equal": true,
+  "all_full_recording_batches": true,
+  "note": "每点单次；吞吐为共享应用层输入读取上限；全量无损输入验证不等同于GPU分选输出逐位确定；每轮KS4结果均独立完整导出；无大.npy复制。",
+  "pairs": [
+    {
+      "bandwidth_MB_s": 100,
+      "raw_seconds": 1977.9933718999382,
+      "rans_seconds": 1215.482484899927,
+      "speedup": 1.6273318591364072,
+      "time_reduction_percent": 38.54971901486153,
+      "raw_input_read_bytes": 129701443584,
+      "rans_input_read_bytes": 89779999356
+    },
+    {
+      "bandwidth_MB_s": 500,
+      "raw_seconds": 936.5710790000157,
+      "rans_seconds": 784.4964114000322,
+      "speedup": 1.1938500487575043,
+      "time_reduction_percent": 16.237386676765077,
+      "raw_input_read_bytes": 129701443584,
+      "rans_input_read_bytes": 89779999356
+    },
+    {
+      "bandwidth_MB_s": 5000,
+      "raw_seconds": 754.4938862000126,
+      "rans_seconds": 713.6046525000129,
+      "speedup": 1.0572995615383813,
+      "time_reduction_percent": 5.419425451667637,
+      "raw_input_read_bytes": 129701443584,
+      "rans_input_read_bytes": 89779999356
+    }
+  ],
+  "runs": [
+    {
+      "name": "sort_raw_5000MBps",
+      "source": "F:\\EphyPress_benchmarks\\patent_ks4_v03_20261111\\sort_raw_5000MBps",
+      "seconds": 754.4938862000126,
+      "input_read_bytes": 129701443584,
+      "payload_after_close_bytes": 0,
+      "payload_after_timer_stop_bytes": 0,
+      "batches": 900,
+      "batch_size": 60000,
+      "source_samples": 54000000,
+      "spikes": 5634429,
+      "spike_time_min": 20,
+      "spike_time_max": 53999965,
+      "units": 323,
+      "exported_files": [
+        {
+          "name": "amplitudes.npy",
+          "bytes": 22537844
+        },
+        {
+          "name": "channel_map.npy",
+          "bytes": 1664
+        },
+        {
+          "name": "channel_positions.npy",
+          "bytes": 3200
+        },
+        {
+          "name": "channel_shanks.npy",
+          "bytes": 1664
+        },
+        {
+          "name": "cluster_Amplitude.tsv",
+          "bytes": 2971
+        },
+        {
+          "name": "cluster_ContamPct.tsv",
+          "bytes": 3074
+        },
+        {
+          "name": "cluster_group.tsv",
+          "bytes": 2958
+        },
+        {
+          "name": "cluster_KSLabel.tsv",
+          "bytes": 2958
+        },
+        {
+          "name": "diagnostics.png",
+          "bytes": 889915
+        },
+        {
+          "name": "drift_amount.png",
+          "bytes": 122179
+        },
+        {
+          "name": "drift_scatter.png",
+          "bytes": 8877110
+        },
+        {
+          "name": "kept_spikes.npy",
+          "bytes": 5639940
+        },
+        {
+          "name": "kilosort4.log",
+          "bytes": 114213
+        },
+        {
+          "name": "ops.npy",
+          "bytes": 3783328
+        },
+        {
+          "name": "params.py",
+          "bytes": 201
+        },
+        {
+          "name": "pc_feature_ind.npy",
+          "bytes": 13048
+        },
+        {
+          "name": "pc_features.npy",
+          "bytes": 1352263088
+        },
+        {
+          "name": "similar_templates.npy",
+          "bytes": 417444
+        },
+        {
+          "name": "spike_clusters.npy",
+          "bytes": 22537844
+        },
+        {
+          "name": "spike_detection_templates.npy",
+          "bytes": 22537844
+        },
+        {
+          "name": "spike_positions.npy",
+          "bytes": 45075560
+        },
+        {
+          "name": "spike_positions.png",
+          "bytes": 13431054
+        },
+        {
+          "name": "spike_templates.npy",
+          "bytes": 22537844
+        },
+        {
+          "name": "spike_times.npy",
+          "bytes": 45075560
+        },
+        {
+          "name": "templates.npy",
+          "bytes": 30263936
+        },
+        {
+          "name": "templates_ind.npy",
+          "bytes": 496256
+        },
+        {
+          "name": "whitening_mat.npy",
+          "bytes": 589952
+        },
+        {
+          "name": "whitening_mat_dat.npy",
+          "bytes": 589952
+        },
+        {
+          "name": "whitening_mat_inv.npy",
+          "bytes": 589952
+        }
+      ],
+      "original_log_sha256": "cc55411ed7ab6fe60c474d735814516762b7819dc755fb7b3ffc593f5dbdf476",
+      "original_log_bytes": 176336,
+      "saved_log": "删除tqdm进度条行，其余逐行保留；完整原日志留在外置盘",
+      "settings_equal_excluding_paths": true,
+      "source_hashes_equal": true
+    },
+    {
+      "name": "sort_rans_5000MBps",
+      "source": "F:\\EphyPress_benchmarks\\patent_ks4_v03_20261111\\sort_rans_5000MBps",
+      "seconds": 713.6046525000129,
+      "input_read_bytes": 89779999356,
+      "payload_after_close_bytes": 89779999356,
+      "payload_after_timer_stop_bytes": 0,
+      "batches": 900,
+      "batch_size": 60000,
+      "source_samples": 54000000,
+      "spikes": 5632662,
+      "spike_time_min": 20,
+      "spike_time_max": 53999965,
+      "units": 323,
+      "exported_files": [
+        {
+          "name": "amplitudes.npy",
+          "bytes": 22530776
+        },
+        {
+          "name": "channel_map.npy",
+          "bytes": 1664
+        },
+        {
+          "name": "channel_positions.npy",
+          "bytes": 3200
+        },
+        {
+          "name": "channel_shanks.npy",
+          "bytes": 1664
+        },
+        {
+          "name": "cluster_Amplitude.tsv",
+          "bytes": 2972
+        },
+        {
+          "name": "cluster_ContamPct.tsv",
+          "bytes": 3076
+        },
+        {
+          "name": "cluster_group.tsv",
+          "bytes": 2960
+        },
+        {
+          "name": "cluster_KSLabel.tsv",
+          "bytes": 2960
+        },
+        {
+          "name": "diagnostics.png",
+          "bytes": 890899
+        },
+        {
+          "name": "drift_amount.png",
+          "bytes": 122179
+        },
+        {
+          "name": "drift_scatter.png",
+          "bytes": 8877397
+        },
+        {
+          "name": "kept_spikes.npy",
+          "bytes": 5638081
+        },
+        {
+          "name": "kilosort4.log",
+          "bytes": 114213
+        },
+        {
+          "name": "ops.npy",
+          "bytes": 3783328
+        },
+        {
+          "name": "params.py",
+          "bytes": 201
+        },
+        {
+          "name": "pc_feature_ind.npy",
+          "bytes": 13048
+        },
+        {
+          "name": "pc_features.npy",
+          "bytes": 1351839008
+        },
+        {
+          "name": "similar_templates.npy",
+          "bytes": 417444
+        },
+        {
+          "name": "spike_clusters.npy",
+          "bytes": 22530776
+        },
+        {
+          "name": "spike_detection_templates.npy",
+          "bytes": 22530776
+        },
+        {
+          "name": "spike_positions.npy",
+          "bytes": 45061424
+        },
+        {
+          "name": "spike_positions.png",
+          "bytes": 13417455
+        },
+        {
+          "name": "spike_templates.npy",
+          "bytes": 22530776
+        },
+        {
+          "name": "spike_times.npy",
+          "bytes": 45061424
+        },
+        {
+          "name": "templates.npy",
+          "bytes": 30263936
+        },
+        {
+          "name": "templates_ind.npy",
+          "bytes": 496256
+        },
+        {
+          "name": "whitening_mat.npy",
+          "bytes": 589952
+        },
+        {
+          "name": "whitening_mat_dat.npy",
+          "bytes": 589952
+        },
+        {
+          "name": "whitening_mat_inv.npy",
+          "bytes": 589952
+        }
+      ],
+      "original_log_sha256": "9323dbc500bca2dfde2ed03559b12949dccccdd4c6fa198f5b671c57820794f5",
+      "original_log_bytes": 176337,
+      "saved_log": "删除tqdm进度条行，其余逐行保留；完整原日志留在外置盘",
+      "settings_equal_excluding_paths": true,
+      "source_hashes_equal": true
+    },
+    {
+      "name": "sort_rans_0100MBps",
+      "source": "F:\\EphyPress_benchmarks\\patent_ks4_v03_20261111\\sort_rans_0100MBps",
+      "seconds": 1215.482484899927,
+      "input_read_bytes": 89779999356,
+      "payload_after_close_bytes": 89779999356,
+      "payload_after_timer_stop_bytes": 0,
+      "batches": 900,
+      "batch_size": 60000,
+      "source_samples": 54000000,
+      "spikes": 5635026,
+      "spike_time_min": 20,
+      "spike_time_max": 53999965,
+      "units": 323,
+      "exported_files": [
+        {
+          "name": "amplitudes.npy",
+          "bytes": 22540232
+        },
+        {
+          "name": "channel_map.npy",
+          "bytes": 1664
+        },
+        {
+          "name": "channel_positions.npy",
+          "bytes": 3200
+        },
+        {
+          "name": "channel_shanks.npy",
+          "bytes": 1664
+        },
+        {
+          "name": "cluster_Amplitude.tsv",
+          "bytes": 2971
+        },
+        {
+          "name": "cluster_ContamPct.tsv",
+          "bytes": 3074
+        },
+        {
+          "name": "cluster_group.tsv",
+          "bytes": 2960
+        },
+        {
+          "name": "cluster_KSLabel.tsv",
+          "bytes": 2960
+        },
+        {
+          "name": "diagnostics.png",
+          "bytes": 889930
+        },
+        {
+          "name": "drift_amount.png",
+          "bytes": 122179
+        },
+        {
+          "name": "drift_scatter.png",
+          "bytes": 8877168
+        },
+        {
+          "name": "kept_spikes.npy",
+          "bytes": 5640442
+        },
+        {
+          "name": "kilosort4.log",
+          "bytes": 114222
+        },
+        {
+          "name": "ops.npy",
+          "bytes": 3783336
+        },
+        {
+          "name": "params.py",
+          "bytes": 201
+        },
+        {
+          "name": "pc_feature_ind.npy",
+          "bytes": 13048
+        },
+        {
+          "name": "pc_features.npy",
+          "bytes": 1352406368
+        },
+        {
+          "name": "similar_templates.npy",
+          "bytes": 417444
+        },
+        {
+          "name": "spike_clusters.npy",
+          "bytes": 22540232
+        },
+        {
+          "name": "spike_detection_templates.npy",
+          "bytes": 22540232
+        },
+        {
+          "name": "spike_positions.npy",
+          "bytes": 45080336
+        },
+        {
+          "name": "spike_positions.png",
+          "bytes": 13448034
+        },
+        {
+          "name": "spike_templates.npy",
+          "bytes": 22540232
+        },
+        {
+          "name": "spike_times.npy",
+          "bytes": 45080336
+        },
+        {
+          "name": "templates.npy",
+          "bytes": 30263936
+        },
+        {
+          "name": "templates_ind.npy",
+          "bytes": 496256
+        },
+        {
+          "name": "whitening_mat.npy",
+          "bytes": 589952
+        },
+        {
+          "name": "whitening_mat_dat.npy",
+          "bytes": 589952
+        },
+        {
+          "name": "whitening_mat_inv.npy",
+          "bytes": 589952
+        }
+      ],
+      "original_log_sha256": "3aafed465609300ef888ce30460c7e75d11b00720f452d7214830bc9d2f39302",
+      "original_log_bytes": 176346,
+      "saved_log": "删除tqdm进度条行，其余逐行保留；完整原日志留在外置盘",
+      "settings_equal_excluding_paths": true,
+      "source_hashes_equal": true
+    },
+    {
+      "name": "sort_raw_0100MBps",
+      "source": "F:\\EphyPress_benchmarks\\patent_ks4_v03_20261111\\sort_raw_0100MBps",
+      "seconds": 1977.9933718999382,
+      "input_read_bytes": 129701443584,
+      "payload_after_close_bytes": 0,
+      "payload_after_timer_stop_bytes": 0,
+      "batches": 900,
+      "batch_size": 60000,
+      "source_samples": 54000000,
+      "spikes": 5632714,
+      "spike_time_min": 20,
+      "spike_time_max": 53999965,
+      "units": 324,
+      "exported_files": [
+        {
+          "name": "amplitudes.npy",
+          "bytes": 22530984
+        },
+        {
+          "name": "channel_map.npy",
+          "bytes": 1664
+        },
+        {
+          "name": "channel_positions.npy",
+          "bytes": 3200
+        },
+        {
+          "name": "channel_shanks.npy",
+          "bytes": 1664
+        },
+        {
+          "name": "cluster_Amplitude.tsv",
+          "bytes": 2982
+        },
+        {
+          "name": "cluster_ContamPct.tsv",
+          "bytes": 3084
+        },
+        {
+          "name": "cluster_group.tsv",
+          "bytes": 2970
+        },
+        {
+          "name": "cluster_KSLabel.tsv",
+          "bytes": 2970
+        },
+        {
+          "name": "diagnostics.png",
+          "bytes": 890734
+        },
+        {
+          "name": "drift_amount.png",
+          "bytes": 122179
+        },
+        {
+          "name": "drift_scatter.png",
+          "bytes": 8877071
+        },
+        {
+          "name": "kept_spikes.npy",
+          "bytes": 5638126
+        },
+        {
+          "name": "kilosort4.log",
+          "bytes": 114221
+        },
+        {
+          "name": "ops.npy",
+          "bytes": 3783328
+        },
+        {
+          "name": "params.py",
+          "bytes": 201
+        },
+        {
+          "name": "pc_feature_ind.npy",
+          "bytes": 13088
+        },
+        {
+          "name": "pc_features.npy",
+          "bytes": 1351851488
+        },
+        {
+          "name": "similar_templates.npy",
+          "bytes": 420032
+        },
+        {
+          "name": "spike_clusters.npy",
+          "bytes": 22530984
+        },
+        {
+          "name": "spike_detection_templates.npy",
+          "bytes": 22530984
+        },
+        {
+          "name": "spike_positions.npy",
+          "bytes": 45061840
+        },
+        {
+          "name": "spike_positions.png",
+          "bytes": 13414670
+        },
+        {
+          "name": "spike_templates.npy",
+          "bytes": 22530984
+        },
+        {
+          "name": "spike_times.npy",
+          "bytes": 45061840
+        },
+        {
+          "name": "templates.npy",
+          "bytes": 30357632
+        },
+        {
+          "name": "templates_ind.npy",
+          "bytes": 497792
+        },
+        {
+          "name": "whitening_mat.npy",
+          "bytes": 589952
+        },
+        {
+          "name": "whitening_mat_dat.npy",
+          "bytes": 589952
+        },
+        {
+          "name": "whitening_mat_inv.npy",
+          "bytes": 589952
+        }
+      ],
+      "original_log_sha256": "edabad434cf7b570c6a6ed0dd79448a3e5a7389f9d91dd70918cfd18b634f3b5",
+      "original_log_bytes": 176344,
+      "saved_log": "删除tqdm进度条行，其余逐行保留；完整原日志留在外置盘",
+      "settings_equal_excluding_paths": true,
+      "source_hashes_equal": true
+    },
+    {
+      "name": "sort_raw_0500MBps",
+      "source": "F:\\EphyPress_benchmarks\\patent_ks4_v03_20261111\\sort_raw_0500MBps",
+      "seconds": 936.5710790000157,
+      "input_read_bytes": 129701443584,
+      "payload_after_close_bytes": 0,
+      "payload_after_timer_stop_bytes": 0,
+      "batches": 900,
+      "batch_size": 60000,
+      "source_samples": 54000000,
+      "spikes": 5634389,
+      "spike_time_min": 20,
+      "spike_time_max": 53999965,
+      "units": 323,
+      "exported_files": [
+        {
+          "name": "amplitudes.npy",
+          "bytes": 22537684
+        },
+        {
+          "name": "channel_map.npy",
+          "bytes": 1664
+        },
+        {
+          "name": "channel_positions.npy",
+          "bytes": 3200
+        },
+        {
+          "name": "channel_shanks.npy",
+          "bytes": 1664
+        },
+        {
+          "name": "cluster_Amplitude.tsv",
+          "bytes": 2971
+        },
+        {
+          "name": "cluster_ContamPct.tsv",
+          "bytes": 3076
+        },
+        {
+          "name": "cluster_group.tsv",
+          "bytes": 2958
+        },
+        {
+          "name": "cluster_KSLabel.tsv",
+          "bytes": 2958
+        },
+        {
+          "name": "diagnostics.png",
+          "bytes": 890444
+        },
+        {
+          "name": "drift_amount.png",
+          "bytes": 122179
+        },
+        {
+          "name": "drift_scatter.png",
+          "bytes": 8877441
+        },
+        {
+          "name": "kept_spikes.npy",
+          "bytes": 5639892
+        },
+        {
+          "name": "kilosort4.log",
+          "bytes": 114214
+        },
+        {
+          "name": "ops.npy",
+          "bytes": 3783328
+        },
+        {
+          "name": "params.py",
+          "bytes": 201
+        },
+        {
+          "name": "pc_feature_ind.npy",
+          "bytes": 13048
+        },
+        {
+          "name": "pc_features.npy",
+          "bytes": 1352253488
+        },
+        {
+          "name": "similar_templates.npy",
+          "bytes": 417444
+        },
+        {
+          "name": "spike_clusters.npy",
+          "bytes": 22537684
+        },
+        {
+          "name": "spike_detection_templates.npy",
+          "bytes": 22537684
+        },
+        {
+          "name": "spike_positions.npy",
+          "bytes": 45075240
+        },
+        {
+          "name": "spike_positions.png",
+          "bytes": 13426037
+        },
+        {
+          "name": "spike_templates.npy",
+          "bytes": 22537684
+        },
+        {
+          "name": "spike_times.npy",
+          "bytes": 45075240
+        },
+        {
+          "name": "templates.npy",
+          "bytes": 30263936
+        },
+        {
+          "name": "templates_ind.npy",
+          "bytes": 496256
+        },
+        {
+          "name": "whitening_mat.npy",
+          "bytes": 589952
+        },
+        {
+          "name": "whitening_mat_dat.npy",
+          "bytes": 589952
+        },
+        {
+          "name": "whitening_mat_inv.npy",
+          "bytes": 589952
+        }
+      ],
+      "original_log_sha256": "9e100dafc850126282d206ca2eac26bbe1c805d5a1416ef9e4101c6b4e2fd4c3",
+      "original_log_bytes": 176337,
+      "saved_log": "删除tqdm进度条行，其余逐行保留；完整原日志留在外置盘",
+      "settings_equal_excluding_paths": true,
+      "source_hashes_equal": true
+    },
+    {
+      "name": "sort_rans_0500MBps",
+      "source": "F:\\EphyPress_benchmarks\\patent_ks4_v03_20261111\\sort_rans_0500MBps",
+      "seconds": 784.4964114000322,
+      "input_read_bytes": 89779999356,
+      "payload_after_close_bytes": 89779999356,
+      "payload_after_timer_stop_bytes": 0,
+      "batches": 900,
+      "batch_size": 60000,
+      "source_samples": 54000000,
+      "spikes": 5635133,
+      "spike_time_min": 20,
+      "spike_time_max": 53999965,
+      "units": 323,
+      "exported_files": [
+        {
+          "name": "amplitudes.npy",
+          "bytes": 22540660
+        },
+        {
+          "name": "channel_map.npy",
+          "bytes": 1664
+        },
+        {
+          "name": "channel_positions.npy",
+          "bytes": 3200
+        },
+        {
+          "name": "channel_shanks.npy",
+          "bytes": 1664
+        },
+        {
+          "name": "cluster_Amplitude.tsv",
+          "bytes": 2971
+        },
+        {
+          "name": "cluster_ContamPct.tsv",
+          "bytes": 3074
+        },
+        {
+          "name": "cluster_group.tsv",
+          "bytes": 2960
+        },
+        {
+          "name": "cluster_KSLabel.tsv",
+          "bytes": 2960
+        },
+        {
+          "name": "diagnostics.png",
+          "bytes": 889893
+        },
+        {
+          "name": "drift_amount.png",
+          "bytes": 122179
+        },
+        {
+          "name": "drift_scatter.png",
+          "bytes": 8877582
+        },
+        {
+          "name": "kept_spikes.npy",
+          "bytes": 5640499
+        },
+        {
+          "name": "kilosort4.log",
+          "bytes": 114215
+        },
+        {
+          "name": "ops.npy",
+          "bytes": 3783336
+        },
+        {
+          "name": "params.py",
+          "bytes": 201
+        },
+        {
+          "name": "pc_feature_ind.npy",
+          "bytes": 13048
+        },
+        {
+          "name": "pc_features.npy",
+          "bytes": 1352432048
+        },
+        {
+          "name": "similar_templates.npy",
+          "bytes": 417444
+        },
+        {
+          "name": "spike_clusters.npy",
+          "bytes": 22540660
+        },
+        {
+          "name": "spike_detection_templates.npy",
+          "bytes": 22540660
+        },
+        {
+          "name": "spike_positions.npy",
+          "bytes": 45081192
+        },
+        {
+          "name": "spike_positions.png",
+          "bytes": 13451244
+        },
+        {
+          "name": "spike_templates.npy",
+          "bytes": 22540660
+        },
+        {
+          "name": "spike_times.npy",
+          "bytes": 45081192
+        },
+        {
+          "name": "templates.npy",
+          "bytes": 30263936
+        },
+        {
+          "name": "templates_ind.npy",
+          "bytes": 496256
+        },
+        {
+          "name": "whitening_mat.npy",
+          "bytes": 589952
+        },
+        {
+          "name": "whitening_mat_dat.npy",
+          "bytes": 589952
+        },
+        {
+          "name": "whitening_mat_inv.npy",
+          "bytes": 589952
+        }
+      ],
+      "original_log_sha256": "88a20f14465794737fc92a2ac9e76e5e8426de1f05281746558b8f5cde6eea57",
+      "original_log_bytes": 176339,
+      "saved_log": "删除tqdm进度条行，其余逐行保留；完整原日志留在外置盘",
+      "settings_equal_excluding_paths": true,
+      "source_hashes_equal": true
+    }
+  ]
+}

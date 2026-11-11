@@ -1,5 +1,7 @@
 # EphyPress
 
+This is the **patent** branch. See [专利实验复现](patent/复现.md) for the dataset, configurations, saved evidence and figure commands. The production source matches `main` at `1eca837`.
+
 Lossless compression and on-demand reading of electrophysiology recordings.
 The current codec uses independent blocks, reversible temporal differences and
 four-lane rANS entropy coding. Input and reconstructed samples are exact int16

@@ -1,0 +1,30 @@
+{
+  "profiles": [
+    "delta_ans0",
+    "mtscomp"
+  ],
+  "physical_cores": 8,
+  "cpus": [
+    0,
+    1,
+    10,
+    11,
+    12,
+    13,
+    22,
+    23
+  ],
+  "chunk_seconds": 2,
+  "chunk_alignment": "identical bounds including the final partial block",
+  "mtscomp": "unmodified 1.0.2 Writer; default zlib level, time diff, F order, spatial diff disabled; chunk_duration explicitly 2s",
+  "delta_ans0": "unchanged prototype: scale14, 4-way byte rANS, Zigzag [-512,511] plus ESC16, one table per block",
+  "ratio": "raw signal bytes / all archive bytes including model, escapes, metadata and index; mtscomp .cbin + .ch",
+  "decoder": "same ThreadPoolExecutor(8), same batches of at most 8 blocks; upstream mtscomp Reader.read_chunk bypasses LRU; no codec implementation edits",
+  "decode_scope": "open archive and metadata + read compressed bytes + integrity checks in codec/container + entropy decode + inverse delta + C-contiguous time-major int16 blocks in transient RAM; includes pool setup/teardown; excludes raw disk output and full-file SHA/comparison",
+  "cache": "before EACH decode run, sequentially pre-read the entire compressed archive and metadata; no decoded cache; OS caching not hard-guaranteed; available RAM checked; prewarm time reported separately",
+  "repeats": 5,
+  "decode_order": "alternate codec order by round and dataset; every job a fresh process; no concurrent benchmark jobs",
+  "full_verification": "separate whole-input byte comparison and SHA256 for both codecs",
+  "encode_timing": "ancillary only: upstream SHA1 versus prototype SHA256 and different writer overheads; includes fsync, excludes separate verification",
+  "smoke": false
+}

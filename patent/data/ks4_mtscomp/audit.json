@@ -1,0 +1,73 @@
+{
+  "status": "passed",
+  "runs": [
+    {
+      "rate": 5000,
+      "seconds": 1330.9714095999952,
+      "settings_path_differences": {
+        "filename": [
+          [
+            "F:\\EphyPress_benchmarks\\patent_ks4_v03_20261111\\recording_v3.ep"
+          ],
+          [
+            "F:\\EphyPress_benchmarks\\delta_rans_mtscomp_20261110\\full\\neuropixels_mtscomp.cbin"
+          ]
+        ],
+        "data_dir": [
+          "F:\\EphyPress_benchmarks\\patent_ks4_v03_20261111",
+          "F:\\EphyPress_benchmarks\\delta_rans_mtscomp_20261110\\full"
+        ],
+        "results_dir": [
+          "F:\\EphyPress_benchmarks\\patent_ks4_v03_20261111\\sort_rans_5000MBps\\results",
+          "F:\\EphyPress_benchmarks\\patent_mtscomp_ks4_20261111_matched\\sort_mtscomp_5000MBps\\results"
+        ]
+      }
+    },
+    {
+      "rate": 100,
+      "seconds": 1857.272349899984,
+      "settings_path_differences": {
+        "filename": [
+          [
+            "F:\\EphyPress_benchmarks\\patent_ks4_v03_20261111\\recording_v3.ep"
+          ],
+          [
+            "F:\\EphyPress_benchmarks\\delta_rans_mtscomp_20261110\\full\\neuropixels_mtscomp.cbin"
+          ]
+        ],
+        "data_dir": [
+          "F:\\EphyPress_benchmarks\\patent_ks4_v03_20261111",
+          "F:\\EphyPress_benchmarks\\delta_rans_mtscomp_20261110\\full"
+        ],
+        "results_dir": [
+          "F:\\EphyPress_benchmarks\\patent_ks4_v03_20261111\\sort_rans_0100MBps\\results",
+          "F:\\EphyPress_benchmarks\\patent_mtscomp_ks4_20261111_matched\\sort_mtscomp_0100MBps\\results"
+        ]
+      }
+    },
+    {
+      "rate": 500,
+      "seconds": 1386.4030282000313,
+      "settings_path_differences": {
+        "filename": [
+          [
+            "F:\\EphyPress_benchmarks\\patent_ks4_v03_20261111\\recording_v3.ep"
+          ],
+          [
+            "F:\\EphyPress_benchmarks\\delta_rans_mtscomp_20261110\\full\\neuropixels_mtscomp.cbin"
+          ]
+        ],
+        "data_dir": [
+          "F:\\EphyPress_benchmarks\\patent_ks4_v03_20261111",
+          "F:\\EphyPress_benchmarks\\delta_rans_mtscomp_20261110\\full"
+        ],
+        "results_dir": [
+          "F:\\EphyPress_benchmarks\\patent_ks4_v03_20261111\\sort_rans_0500MBps\\results",
+          "F:\\EphyPress_benchmarks\\patent_mtscomp_ks4_20261111_matched\\sort_mtscomp_0500MBps\\results"
+        ]
+      }
+    }
+  ],
+  "source_unchanged": true,
+  "note": "Initial run was stopped before completion to correct an inherited thread environment reset; only the matched directory is used."
+}

@@ -1,0 +1,22 @@
+{
+  "workers": 8,
+  "physical_cores": 8,
+  "cpus": [
+    0,
+    1,
+    10,
+    11,
+    12,
+    13,
+    22,
+    23
+  ],
+  "repeats": 5,
+  "archives": "F:\\EphyPress_benchmarks\\delta_rans_mtscomp_20261110\\full",
+  "script_sha256": "855d2eecacae431706e2cff49939304cafec8b4109d1d556a6be7a85b9e01826",
+  "output": "each worker decodes its contiguous chunk range into transient C-contiguous time-major int16 RAM; no full-array IPC",
+  "timed": "task submission + per-worker archive opening/metadata + read/decode/inverse delta/output allocation + completion; no output disk writes",
+  "excluded": "spawn/import/DLL initialization and synchronized worker readiness; process teardown; compressed archive pre-read; recorded separately",
+  "verification": "separate full byte comparison in all eight ranges, with matching source/reconstruction SHA256 per range; baseline already verified whole-file SHA256",
+  "interpretation": "supplement to single-process 8-thread reader; not a KS4 in-process API benchmark"
+}

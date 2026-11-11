@@ -1,0 +1,117 @@
+{
+  "seconds": 1330.9714095999952,
+  "cpu_seconds": 3430.265625,
+  "io_metrics": {
+    "input_read": {
+      "bytes": 64097807655,
+      "calls": 3021
+    },
+    "stream_read": {
+      "bytes": 45059683,
+      "calls": 177
+    },
+    "mapped_read": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "stream_write": {
+      "bytes": 1597560570,
+      "calls": 3185
+    },
+    "mapped_write": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "copy_reserved": {
+      "bytes": 0,
+      "calls": 0
+    },
+    "total_read_bytes": 64142867338,
+    "total_write_bytes": 1597560570
+  },
+  "input_metrics": {
+    "charged_file_bytes": 64097807655,
+    "read_calls": 3021,
+    "first_request": 919565.8696647,
+    "last_delivery_deadline": 920689.5397970387,
+    "aggregate_bytes_per_active_span_MB_s": 57.04326012616861
+  },
+  "units": 322,
+  "spikes": 5632075,
+  "spike_times_sha256": "8213dd8dfae47b420cc9c98e0dbdc98e31851179a91296b2a008400636654877",
+  "labels_sha256": "48335e1c0461737744bc958a0b3761a16b4116c3ba74af33c4b32db969e2bdb3",
+  "job": {
+    "name": "sort_mtscomp_5000MBps",
+    "operation": "sort",
+    "kind": "mtscomp",
+    "cpus": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "raw": "F:/EphyPress_benchmarks/bandwidth_30min_20261103/first30min.dat",
+    "samples": 54000000,
+    "channels": 384,
+    "fs": 30000,
+    "archive": "F:/EphyPress_benchmarks/delta_rans_mtscomp_20261110/full/neuropixels_mtscomp.cbin",
+    "probe": "D:\\EphyPress\\benchmarks\\sorting_bandwidth\\fixture\\ks4_probe.json",
+    "folder": "F:\\EphyPress_benchmarks\\patent_mtscomp_ks4_20261111_matched\\sort_mtscomp_5000MBps",
+    "sorter": "ks4",
+    "rate": 5000,
+    "bandwidth_MB_s": 5000,
+    "io_condition": "input_read_only",
+    "source_root": "D:\\EphyPress\\src",
+    "limiter_state": "F:\\EphyPress_benchmarks\\patent_mtscomp_ks4_20261111_matched\\sort_mtscomp_5000MBps\\input.bin",
+    "io_state": "F:\\EphyPress_benchmarks\\patent_mtscomp_ks4_20261111_matched\\sort_mtscomp_5000MBps\\io.bin",
+    "job_path": "F:\\EphyPress_benchmarks\\patent_mtscomp_ks4_20261111_matched\\sort_mtscomp_5000MBps\\job.json"
+  },
+  "status": "success",
+  "cpu_affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "process_peak_working_set_bytes": 8396021760
+}

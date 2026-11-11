@@ -1,0 +1,58 @@
+{
+  "job": {
+    "data": {
+      "name": "neuropixels",
+      "raw": "F:\\EphyPress_benchmarks\\bandwidth_30min_20261103\\first30min.dat",
+      "channels": 384,
+      "sample_rate": 30000,
+      "samples": 54000000,
+      "seconds": 1800.0,
+      "raw_bytes": 41472000000,
+      "raw_sha256": "b3f6ffaf23681be08af594a485aad7809aa2e7c37a5befb78656b2a436425499",
+      "raw_mtime_ns": 1793638675806495800,
+      "scope": "Previously established first 30 minutes, complete 384-channel matrix"
+    },
+    "operation": "verify",
+    "profile": "mtscomp",
+    "repeat": 0,
+    "cpus": [
+      0,
+      1,
+      10,
+      11,
+      12,
+      13,
+      22,
+      23
+    ],
+    "archive": "F:\\EphyPress_benchmarks\\delta_rans_mtscomp_20261110\\full\\neuropixels_mtscomp.cbin",
+    "result": "F:\\EphyPress_benchmarks\\delta_rans_mtscomp_20261110\\full\\neuropixels_verify_mtscomp_0\\result.json",
+    "codec_directory": "F:\\EphyPress_benchmarks\\delta_rans_mtscomp_20261110\\full\\source_snapshot\\benchmarks\\temporal_interpolation"
+  },
+  "status": "success",
+  "pid": 85556,
+  "seconds": 112.2337920999853,
+  "cpu_seconds": 208.859375,
+  "average_busy_cores": 1.8609312854183366,
+  "archive_bytes": 19095268935,
+  "ratio": 2.1718468664238273,
+  "raw_MB_s": 369.51437908338687,
+  "detail": {
+    "raw_bytes": 41472000000,
+    "exact_equal": true,
+    "raw_sha256": "b3f6ffaf23681be08af594a485aad7809aa2e7c37a5befb78656b2a436425499"
+  },
+  "cpu_affinity": [
+    0,
+    1,
+    10,
+    11,
+    12,
+    13,
+    22,
+    23
+  ],
+  "prewarm": null,
+  "available_memory_before": 104912441344,
+  "peak_working_set": 1224839168
+}

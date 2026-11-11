@@ -15,3 +15,12 @@ The main branch no longer contains patent experiments, plotting code or copied
 third-party source. The patent branch carries reproduction instructions and
 historical evidence. Those measured timings are not newly measured results of
 the cleaned implementation. No raw electrophysiology recording is distributed.
+
+## Licensing
+
+This revision uses AGPL-3.0-only, with separate commercial licenses available for
+uses requiring permission outside its terms. Personal, research and compliant
+commercial use may use the AGPLv3 option without a separate license fee. Existing
+MIT grants for older versions remain valid. New external contributions require
+explicit consent to the [CLA](CLA.md), including commercial relicensing rights.
+See [COMMERCIAL_LICENSE.md](COMMERCIAL_LICENSE.md) for details.

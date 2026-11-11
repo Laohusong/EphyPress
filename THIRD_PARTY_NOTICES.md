@@ -1,6 +1,8 @@
 # Third-party notices
 
-EphyPress source is distributed under the [MIT license](LICENSE). The maintained
+EphyPress source in this revision is offered under [AGPL-3.0-only](LICENSE),
+with separate commercial licenses available as described in
+[COMMERCIAL_LICENSE.md](COMMERCIAL_LICENSE.md). The maintained
 source tree does not vendor third-party implementations or repository snapshots.
 
 NumPy is installed separately. SpikeInterface, ProbeInterface, SciPy, Kilosort

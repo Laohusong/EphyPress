@@ -1,3 +1,1 @@
-# Preserve vendored upstream sources and license texts byte-for-byte.
-vendor/fse/** -whitespace
-LICENSES/** -whitespace
+* text=auto

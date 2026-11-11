@@ -14,7 +14,6 @@ dist/
 *.npy
 *.npz
 artifacts/
-tools/_reader_methods.tmp
 
 # Research artifacts are maintained on the patent branch.
 /patent/

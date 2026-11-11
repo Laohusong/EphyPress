@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: AGPL-3.0-only
 // Unconditional four-lane byte rANS, with block-local unconditional frequencies.
 #include <algorithm>
 #include <array>

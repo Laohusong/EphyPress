@@ -1,0 +1,16 @@
+EphyPress
+Copyright (c) 2026 Jiatai Song
+
+Except where a file explicitly states otherwise, the EphyPress project material
+in this revision is offered under the GNU Affero General Public License,
+version 3 only (SPDX: AGPL-3.0-only). See LICENSE for the complete terms.
+
+EphyPress is provided without warranty, to the extent permitted by applicable
+law. See sections 15 and 16 of LICENSE for the warranty and liability terms.
+
+Separate commercial licenses are available from Jiatai Song (GitHub: Laohusong).
+See COMMERCIAL_LICENSE.md. This notice does not grant a commercial license or
+add restrictions to the rights granted under AGPLv3.
+
+Third-party dependencies retain their own licenses. Existing grants for versions
+previously released under MIT are not revoked by this licensing change.

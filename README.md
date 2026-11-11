@@ -61,6 +61,19 @@ Current readers support production v3 archives. To migrate v1/v2 or experimental
 containers, restore their raw bytes with the matching previous implementation,
 then compress with the current version. See [release notes](RELEASE_NOTES.md).
 
-## License
+## License / 授权协议
 
-[MIT](LICENSE). See [third-party notices](THIRD_PARTY_NOTICES.md) for dependencies.
+EphyPress 采用 **[AGPL-3.0-only](LICENSE)＋付费商业许可**双许可模式。
+
+- **个人及科研用途免费**：须遵守 AGPLv3 的适用条款。
+- **需要免除 AGPLv3 义务的商业用途，须额外购买商业授权**，例如需要合同许可的闭源集成或专有分发。
+- **遵守 AGPLv3 的商业使用同样可以免费**；AGPLv3 本身不禁止商业使用。
+
+商业授权由 Jiatai Song（[Laohusong](https://github.com/Laohusong)）另行提供，具体范围和费用以双方签署的合同为准。详见[商业授权说明](COMMERCIAL_LICENSE.md)。历史版本已经授予的 MIT 权利不因本次变更而撤销。
+
+Personal and research use is free under AGPLv3. Commercial use that complies with
+AGPLv3 is also permitted without a separate license fee. A paid commercial license
+is required if you need contractual permission to use EphyPress outside the AGPLv3
+terms. The open-source license is version 3 **only**, not “version 3 or later.”
+
+贡献前请阅读 [CLA（贡献者许可协议）](CLA.md)和[贡献指南](CONTRIBUTING.md)。第三方依赖保留各自许可证，见[第三方声明](THIRD_PARTY_NOTICES.md)。

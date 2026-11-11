@@ -1,6 +1,26 @@
-# Contributing
+# 为 EphyPress 作出贡献
 
-Use a dedicated branch and install an editable development build:
+EphyPress 使用 **AGPL-3.0-only＋付费商业许可**双许可模式。贡献者保留著作权，但项目需要取得将贡献用于开源和商业版本的许可。提交前请阅读 [LICENSE](LICENSE)、[商业授权说明](COMMERCIAL_LICENSE.md)和 [CLA](CLA.md)。
+
+## 贡献权利与来源
+
+确认您是贡献的权利人，或已获权利人授权。雇主、学校、研究机构或委托方拥有贡献权利时，应取得其所需授权。不要提交未经许可的第三方源码、数据、商业秘密或保密内容。使用生成式工具不免除对来源和授权的核实义务。
+
+贡献包含第三方材料时，须逐项列出来源、权利人、许可证和限制，并在合并前确认其允许项目采用的开源及商业再许可方式。不能通过填写 CLA 消除第三方许可限制。
+
+## CLA 确认流程
+
+外部代码、测试、文档及图表贡献合并前，每位贡献权利人或其授权代表应按 [CLA 第 8 节](CLA.md#8-明确确认方式)的模板，在对应 PR 中作出明确确认，填写 CLA 版本、姓名或组织名称、签署身份、GitHub 用户名、贡献范围和日期。
+
+多作者 PR 必须覆盖所有实际权利人。组织贡献须由有权代表组织的人确认；必要授权证明可通过与维护者约定的渠道提供。后续新增权利人或超出原确认范围的提交，应补充确认。维护者应核对并留存 PR 链接、确认记录和所覆盖的提交 SHA。
+
+PR 检查项仅作提醒，不能替代完整确认。`Signed-off-by`、DCO 声明、自动检查成功或维护者自行勾选检查项，均不能代替贡献者的 CLA 同意。不得代替其他贡献者签署，也不将沉默视为同意。历史提交不因新增 CLA 自动获得商业再许可授权。
+
+维护者提交其本人有权许可的作品时，应标明维护者自有贡献；存在共同权利人或组织权利的，仍需核实授权。问题报告及普通讨论不要求签署 CLA。不接受包括商业再许可在内的授权时，可以先提出问题或协商。
+
+## 开发与验证
+
+使用独立分支，安装可编辑的开发版本：
 
 ```bash
 python -m pip install -e '.[dev,all]'
@@ -8,14 +28,20 @@ python -m pytest -q
 python -m ruff check src tests tools setup.py examples
 ```
 
-Rebuild the extension after C++ changes. Keep the public API, format specification
-and tests consistent. Changes to entropy coding must retain the golden-packet
-checks or explicitly introduce a new format version. Include meaningful tests
-for lossless reconstruction, malformed input and buffer ownership when changing
-those behaviors. Never silently overwrite an existing output file.
+C++ 修改后重新构建扩展。保持公开 API、格式规范、文档和测试一致。熵编码修改须保持黄金码流测试通过，或明确引入新的格式版本。涉及无损恢复、异常输入或缓冲区生命周期的变化，应加入有意义的测试。不得静默覆盖已有输出文件。
 
-The main branch contains production code only. Keep patent plotting, performance
-experiment scripts and their evidence on the patent branch. Install third-party
-libraries through their packages; do not copy their source trees into this repo.
-Do not commit raw recordings, build products, virtual environments or machine-local
-configuration. Document experiment data hashes and settings separately from code.
+仅修改许可或文档时，核对链接、许可标识、构建元数据和文件包含关系即可，不必为文案编写重复测试。修改打包配置时，应构建分发包并检查其许可文件和元数据。
+
+## 分支与目录约定
+
+- `main` 保存生产库、示例、测试和使用文档。
+- `patent` 保存相同生产代码及专利绘图、实验复现和证据。实验修改应以该分支为目标，按 `patent/复现.md` 记录数据身份、参数和计时范围。
+- 第三方库通过包管理器安装，不复制其他项目源码树。
+- 不提交原始记录、压缩实验数据、模型权重、虚拟环境、编译产物、凭据或本机私有配置。
+- 历史实测与新测量应分开记录，不能用冒烟测试或估计值替换完整实验结果。
+
+## PR 内容与合并检查
+
+PR 应说明问题、最终行为、验证方式和兼容性影响，并列出第三方材料。改动应集中于同一目的，避免附带无关重构。
+
+合并前，维护者核对实现及必要验证、贡献权利来源、CLA 确认范围和分支归属。许可修改还须同步检查 `LICENSE`、`NOTICE`、README、`pyproject.toml`、`CITATION.cff` 和第三方声明；共有许可政策应在 `main`、`patent` 两个分支保持一致。

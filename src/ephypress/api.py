@@ -19,16 +19,12 @@ def compress(
     sampling_frequency=30000.0,
     block_samples=60000,
     workers=4,
-    prediction="temporal",
-    entropy_backend="fse",
-    zstd_level=3,
     progress=None,
 ):
     """Compress headerless, time-major little-endian int16 to an .ep archive.
 
-    temporal predicts from the previous sample; spatiotemporal additionally
-    predicts across neighboring channels. No sample quantization is performed.
-    workers controls concurrent storage blocks.
+    Each block uses reversible temporal differences and four-lane rANS.
+    workers controls concurrent storage blocks. No quantization occurs.
     """
     source, destination = Path(source), Path(destination)
     if source.resolve() == destination.resolve():
@@ -47,44 +43,26 @@ def compress(
             sampling_frequency=sampling_frequency,
             block_samples=block_samples,
             workers=workers,
-            prediction=prediction,
-            entropy_backend=entropy_backend,
-            zstd_level=zstd_level,
             progress=progress,
         )
     finally:
         data._mmap.close()
 
 
-def open_recording(
-    path,
-    *,
-    reader_mode="auto",
-    prefetch=True,
-    cache_blocks=2,
-    prefetch_blocks=4,
-    verify_crc=True,
-    pool_frames=4,
-):
-    """Open an array-like .ep reader without expanding the full recording.
+def open_recording(path, *, prefetch=True, cache_blocks=None, prefetch_blocks=None, verify_crc=True):
+    """Open a read-only, on-demand v3 recording.
 
-    auto selects Linux RAM page remapping when available, otherwise normal block
-    assembly. Use a context manager or close() to release descriptors and workers.
+    Defaults to 32 workers/lookahead blocks and 64 retained blocks. Returned
+    arrays own their samples and remain valid after the reader is closed.
+    Use a context manager or close() to release descriptors and workers.
     """
-    if reader_mode not in ("auto", "blocks", "mapped"):
-        raise ValueError("reader_mode must be 'auto', 'blocks' or 'mapped'")
-    from ._mapping import _SHARED_AVAILABLE
-
-    if reader_mode == "mapped" and not _SHARED_AVAILABLE:
-        raise ValueError("Mapped mode requires Linux memfd/mmap; use auto or blocks")
-    kwargs = dict(
-        prefetch=prefetch, cache_blocks=cache_blocks, prefetch_blocks=prefetch_blocks, verify_crc=verify_crc
+    return CompressedRecording(
+        path,
+        prefetch=prefetch,
+        cache_blocks=cache_blocks,
+        prefetch_blocks=prefetch_blocks,
+        verify_crc=verify_crc,
     )
-    if reader_mode == "mapped" or (reader_mode == "auto" and _SHARED_AVAILABLE):
-        from ._mapped import MappedRecording
-
-        return MappedRecording(path, pool_frames=pool_frames, **kwargs)
-    return CompressedRecording(path, **kwargs)
 
 
 def info(path):
@@ -93,12 +71,12 @@ def info(path):
         return dict(reader.metadata)
 
 
-def verify(path, *, original=None, reader_mode="auto"):
+def verify(path, *, original=None):
     """Decode every core sample, verify SHA256, and optionally compare the source."""
     digest, count = hashlib.sha256(), 0
     source = None
     try:
-        with open_recording(path, reader_mode=reader_mode) as reader:
+        with open_recording(path) as reader:
             if original is not None:
                 if Path(original).stat().st_size != reader.size * 2:
                     raise ValueError("Original file size differs from archive shape")
@@ -129,7 +107,7 @@ def verify(path, *, original=None, reader_mode="auto"):
     )
 
 
-def decompress(source, destination, *, reader_mode="auto"):
+def decompress(source, destination):
     """Restore an .ep archive to int16 bytes atomically and verify the source SHA256."""
     source, destination = Path(source), Path(destination)
     if source.resolve() == destination.resolve():
@@ -143,7 +121,7 @@ def decompress(source, destination, *, reader_mode="auto"):
     temporary = Path(temporary)
     digest, count = hashlib.sha256(), 0
     try:
-        with os.fdopen(fd, "wb") as output, open_recording(source, reader_mode=reader_mode) as reader:
+        with os.fdopen(fd, "wb") as output, open_recording(source) as reader:
             for block in reader.iter_cores():
                 raw = memoryview(np.ascontiguousarray(block)).cast("B")
                 digest.update(raw)

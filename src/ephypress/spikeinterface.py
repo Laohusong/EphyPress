@@ -22,7 +22,7 @@ class EphyPressRecordingExtractor(BaseRecording):
     own reader. For multiprocess jobs use spawn, not fork with active readers.
     """
 
-    def __init__(self, file_path, *, reader_mode="auto", prefetch=True, cache_blocks=2, prefetch_blocks=4):
+    def __init__(self, file_path, *, prefetch=True, cache_blocks=None, prefetch_blocks=None):
         path = Path(file_path).expanduser().resolve()
         metadata = info(path)
         extra = metadata.get("ephypress_metadata", {})
@@ -33,7 +33,6 @@ class EphyPressRecordingExtractor(BaseRecording):
             sampling_frequency=metadata["sampling_frequency"], channel_ids=channel_ids, dtype="int16"
         )
         options = dict(
-            reader_mode=reader_mode,
             prefetch=prefetch,
             cache_blocks=cache_blocks,
             prefetch_blocks=prefetch_blocks,
@@ -112,8 +111,6 @@ def write_recording(
     *,
     block_samples=60000,
     workers=4,
-    prediction="temporal",
-    entropy_backend="fse",
     keep_metadata=True,
 ):
     """Compress an unscaled int16 BaseRecording to .ep, without a raw intermediate.
@@ -128,7 +125,7 @@ def write_recording(
             "Compress each recording segment separately; only one segment per .ep file is supported"
         )
     if np.dtype(recording.get_dtype()).kind != "i" or np.dtype(recording.get_dtype()).itemsize != 2:
-        raise ValueError("Lossless Level1 requires unscaled int16 traces; float data are not quantized")
+        raise ValueError("Lossless compression requires unscaled int16 traces; float data are not quantized")
     if recording.has_time_vector(0):
         raise ValueError(
             "Explicit timestamps are not stored; use a uniformly sampled recording without a time vector"
@@ -159,8 +156,6 @@ def write_recording(
         sampling_frequency=float(recording.get_sampling_frequency()),
         block_samples=block_samples,
         workers=workers,
-        prediction=prediction,
-        entropy_backend=entropy_backend,
         extra_metadata=extra,
     )
     return read_ephypress(destination)

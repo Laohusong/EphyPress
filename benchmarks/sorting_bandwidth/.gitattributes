@@ -1,6 +1,0 @@
-# Historical SHA256 evidence must survive Git checkout without EOL rewriting.
-*.py text eol=lf
-published/** -text
-fixture/** -text
-validation/** -text
-runtime/** -text

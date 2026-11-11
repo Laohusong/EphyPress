@@ -1,19 +1,17 @@
-# EphyPress 0.2.0
+# EphyPress 0.3
 
-Named lossless prediction and native desktop support.
+The maintained implementation uses production v3 delta/rANS archives only.
+Existing production v3 recordings remain readable and the rANS block format is
+unchanged. The cleanup removes alternate prediction/entropy backends and
+experimental readers, along with their API and CLI selection parameters.
 
-- `temporal` (default): reversible prediction from the previous sample.
-- `spatiotemporal`: additionally predict from neighboring channel residuals.
-- Descriptive coefficients and prediction rules replace experiment identifiers.
-- Native Windows wheels and MSVC source builds, with binary file handling,
-  synchronized positioned reads and statically linked C++ runtime.
-- Linux, macOS and Windows default readers, threaded compression/prefetch,
-  direct native KS4 and SpikeInterface integrations.
-- x86_64/ARM64 ABI3 wheels and a source distribution with platform CI.
+Calls should use `compress(..., block_samples=60000, workers=4)` and
+`open_recording(..., cache_blocks=64, prefetch_blocks=32)` as needed. Removed
+options include `prediction`, `entropy_backend`, `zstd_level`, `reader_mode`
+and `pool_frames`. For v1/v2 or prototype archives, use the matching previous
+implementation to restore raw bytes, verify them, then compress with this version.
 
-The new EphyPress v1 container intentionally does not read previous file formats.
-Recompress the original int16 data. Archives use `.ep` and both modes
-are completely lossless. Native ARM64 Windows requires ARM64 Python 3.11+.
-
-See the English/Chinese guides and `docs/validation.md` for setup and test scope.
-GPU sorting still requires appropriate PyTorch/CUDA and real probe geometry.
+The main branch no longer contains patent experiments, plotting code or copied
+third-party source. The patent branch carries reproduction instructions and
+historical evidence. Those measured timings are not newly measured results of
+the cleaned implementation. No raw electrophysiology recording is distributed.

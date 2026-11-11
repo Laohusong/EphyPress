@@ -1,8 +1,0 @@
-{
-  "exact_equal": true,
-  "all_ADC_windows_verified": true,
-  "matches_original_30min_sha256": true,
-  "raw_sha256": "b3f6ffaf23681be08af594a485aad7809aa2e7c37a5befb78656b2a436425499",
-  "windows": 871,
-  "samples": 54000000
-}

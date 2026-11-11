@@ -1,9 +1,0 @@
-{
-  "success": true,
-  "combinations": 12,
-  "formal_new_runs": 8,
-  "shared_curve_points": 7,
-  "new_raw_anchor": 1,
-  "historical_controls": 14,
-  "qa": "Node VM with minimal DOM; SVG renderer and controls checked; no native browser screenshot QA"
-}

@@ -3,13 +3,9 @@ import pytest
 
 from ephypress import compress, decompress, info, open_recording, verify
 from ephypress._container import PREFIX, write_blocks
-from ephypress._entropy import decode_bytes, encode_bytes
 
 
-@pytest.mark.parametrize("backend", ["fse", "zstd"])
-@pytest.mark.parametrize("prediction", ["temporal", "spatiotemporal"])
-@pytest.mark.parametrize("mode", ["blocks", "auto"])
-def test_lossless_extrema_cross_block_windows_and_view_lifetime(tmp_path, backend, prediction, mode):
+def test_lossless_extrema_cross_block_windows_and_view_lifetime(tmp_path):
     data = np.random.default_rng(17).integers(-32768, 32768, (12319, 3), dtype=np.int16)
     data[0, :2] = [-32768, 32767]
     raw, archive, restored = [tmp_path / name for name in ("input.dat", "test.ep", "restored.bin")]
@@ -20,13 +16,11 @@ def test_lossless_extrema_cross_block_windows_and_view_lifetime(tmp_path, backen
         3,
         sampling_frequency=20000,
         block_samples=4097,
-        entropy_backend=backend,
-        prediction=prediction,
         workers=2,
     )
     assert result["source_bytes"] == data.nbytes
-    assert info(archive)["prediction"] == prediction
-    with open_recording(archive, reader_mode=mode, prefetch_blocks=2) as reader:
+    assert info(archive)["prediction"] == "delta"
+    with open_recording(archive, prefetch_blocks=2) as reader:
         old = reader[4000:8300]
         assert np.array_equal(old, data[4000:8300])
         assert np.array_equal(reader[::-97, [2, 0]], data[::-97, [2, 0]])
@@ -43,26 +37,12 @@ def test_lossless_extrema_cross_block_windows_and_view_lifetime(tmp_path, backen
         assert not stats["raw_disk_cache"] and stats["max_pending_blocks"] <= 2
     assert np.array_equal(old, data[4000:8300])
     assert verify(archive, original=raw)["max_abs_error"] == 0
-    decompress(archive, restored, reader_mode=mode)
+    decompress(archive, restored)
     assert restored.read_bytes() == raw.read_bytes()
     with pytest.raises(FileExistsError):
         decompress(archive, restored)
     with pytest.raises(FileExistsError):
         compress(raw, archive, 3)
-
-
-@pytest.mark.parametrize(
-    "values",
-    [
-        np.zeros(7, dtype="u1"),
-        np.arange(256, dtype="u1"),
-        np.random.default_rng(7).integers(0, 9, 60000, dtype="u1"),
-    ],
-)
-def test_bundled_fse_raw_rle_and_compressed_packets(values):
-    assert np.array_equal(decode_bytes(encode_bytes(values), len(values)), values)
-    with pytest.raises(ValueError):
-        decode_bytes(b"", len(values))
 
 
 def test_corruption_and_unknown_formats_rejected(tmp_path):
@@ -112,17 +92,9 @@ def test_invalid_dimensions(tmp_path, value):
         compress(raw, tmp_path / "test.ep", value)
 
 
-def test_info_uses_descriptive_rules_without_numeric_model_identifiers(tmp_path):
-    raw, archive = tmp_path / "source.dat", tmp_path / "recording.ep"
-    np.arange(100, dtype="<i2").tofile(raw)
-    compress(raw, archive, 2, prediction="spatiotemporal")
-    metadata = info(archive)
-    assert metadata["format"] == "ephypress"
-    assert metadata["format_version"] == 1
-    assert metadata["prediction_parameters"] == {
-        "temporal_numerator": 5,
-        "temporal_denominator": 8,
-        "spatial_weights": [7, 11, 2, 4],
-        "spatial_denominator": 32,
-    }
-    assert set(metadata).isdisjoint({"predictor", "predictor_model", "quantum", "calibration_stride"})
+def test_delta_wire_bytes_match_independent_numpy_reference():
+    from ephypress._native import encode_channels16
+
+    data = np.array([[32767, -32768, 0], [-32768, 32767, -1], [19, -20, 1]], dtype="<i2")
+    expected = np.concatenate([data[:1], np.diff(data, axis=0)])
+    assert encode_channels16(data).tobytes() == expected.tobytes(order="F")

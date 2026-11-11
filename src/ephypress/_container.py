@@ -4,6 +4,7 @@ import hashlib
 import json
 import math
 import os
+import queue
 import struct
 import tempfile
 import threading
@@ -14,35 +15,21 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import numpy as np
-import zstandard as zstd
 
-from ._entropy import encode_bytes
 from ._io import PositionedFile, publish_file
-from ._native import decode_channels, decode_planes, encode_planes, library
-from ._prediction import prediction_parameters
+from ._native import library
+from ._rans import PARAMETERS as RANS_PARAMETERS
+from ._rans import Decoder as RansDecoder
+from ._rans import encode as encode_rans
 
 MAGIC = b"EPHYPRS\0"
-FORMAT_VERSION = 1
+FORMAT_VERSION = 3
+DELTA_PARAMETERS = {"temporal_numerator": 1, "temporal_denominator": 1}
 PREFIX = struct.Struct("<8sQQ")
-FRAME = struct.Struct("<III")
-LENGTH = struct.Struct("<I")
 
 
-def _encode_frame(data, prediction, zstd_level, entropy_backend):
-    low, high = encode_planes(data, prediction)
-    if entropy_backend == "fse":
-        count, padded = data.size, high.size // 2
-        planes = np.ascontiguousarray(high[:count].reshape(data.shape).T)
-        packets = []
-        for symbols in planes:
-            packet = encode_bytes(symbols)
-            packets.extend([LENGTH.pack(len(packet)), packet])
-        primary = b"".join(packets)
-        upper = zstd.ZstdCompressor(level=zstd_level).compress(high[padded:])
-    else:
-        primary = zstd.ZstdCompressor(level=zstd_level).compress(high)
-        upper = b""
-    frame = FRAME.pack(low.nbytes, len(primary), len(upper)) + low.tobytes() + primary + upper
+def _encode_frame(data):
+    frame = encode_rans(data)
     return frame, zlib.crc32(frame)
 
 
@@ -52,17 +39,13 @@ def write_blocks(
     shape,
     *,
     sampling_frequency=30000.0,
-    prediction="temporal",
     block_samples=60000,
     workers=4,
-    entropy_backend="fse",
-    zstd_level=3,
     extra_metadata=None,
     progress=None,
 ):
     """Stream immutable blocks from a callback, never materializing the entire recording."""
     samples, channels = shape
-    parameters = prediction_parameters(prediction)
     if (
         type(samples) is not int
         or type(channels) is not int
@@ -76,8 +59,6 @@ def write_blocks(
         raise ValueError("Invalid recording dimensions, block size or workers")
     if not math.isfinite(sampling_frequency) or sampling_frequency <= 0:
         raise ValueError("sampling_frequency must be finite and positive")
-    if entropy_backend not in ("fse", "zstd"):
-        raise ValueError("entropy_backend must be 'fse' or 'zstd'")
     destination = Path(destination)
     if destination.exists():
         raise FileExistsError(destination)
@@ -108,9 +89,8 @@ def write_blocks(
                     data = np.array(source, dtype="<i2", order="C", copy=True)
                     if data.shape != (b - a, channels):
                         raise ValueError("Source returned an unexpected block shape")
-                    core_stop = min(samples, (submit + 1) * block_samples)
-                    digest.update(memoryview(data[submit * block_samples - a : core_stop - a]).cast("B"))
-                    future = executor.submit(_encode_frame, data, prediction, zstd_level, entropy_backend)
+                    digest.update(memoryview(data).cast("B"))
+                    future = executor.submit(_encode_frame, data)
                     pending[submit] = (a, b, future)
                     submit += 1
                 a, b, future = pending.pop(block)
@@ -125,16 +105,17 @@ def write_blocks(
                 shape=[samples, channels],
                 dtype="<i2",
                 sampling_frequency=float(sampling_frequency),
-                prediction=prediction,
-                prediction_parameters=parameters,
-                low_bits=4,
+                prediction="delta",
+                prediction_parameters=dict(DELTA_PARAMETERS),
+                low_bits=0,
+                residual_layout="channel_int16",
                 block_samples=block_samples,
-                zstd_level=zstd_level,
                 source_bytes=samples * channels * 2,
                 source_sha256=digest.hexdigest(),
-                entropy_backend=entropy_backend,
+                entropy_backend="rans",
                 blocks=entries,
             )
+            metadata["rans_parameters"] = dict(RANS_PARAMETERS)
             if extra_metadata is not None:
                 metadata["ephypress_metadata"] = extra_metadata
             index = json.dumps(metadata, separators=(",", ":"), allow_nan=False).encode()
@@ -160,8 +141,8 @@ def write_blocks(
         source_sha256=digest.hexdigest(),
         encode_seconds=time.perf_counter() - start,
         blocks=blocks,
-        prediction=prediction,
-        entropy_backend=entropy_backend,
+        prediction="delta",
+        entropy_backend="rans",
     )
 
 
@@ -172,11 +153,13 @@ class CompressedRecording:
     Concurrent consumers should use separate readers or an external lock.
     """
 
-    def __init__(self, path, *, prefetch=True, cache_blocks=2, prefetch_blocks=4, verify_crc=True):
-        if type(cache_blocks) is not int or cache_blocks < 1:
+    def __init__(self, path, *, prefetch=True, cache_blocks=None, prefetch_blocks=None, verify_crc=True):
+        if cache_blocks is not None and (type(cache_blocks) is not int or cache_blocks < 1):
             raise ValueError("cache_blocks must be a positive integer")
-        if prefetch_blocks not in (1, 2, 4, 8):
-            raise ValueError("prefetch_blocks must be 1, 2, 4 or 8")
+        if prefetch_blocks is not None and (
+            type(prefetch_blocks) is not int or not 1 <= prefetch_blocks <= 256
+        ):
+            raise ValueError("prefetch_blocks must be an integer from 1 to 256")
         self.path = Path(path)
         self._file = PositionedFile(self.path)
         try:
@@ -193,18 +176,23 @@ class CompressedRecording:
             if hashlib.sha256(index).digest() != self._file.read_at(32, offset + length):
                 raise ValueError("Archive index checksum mismatch")
             self.metadata = metadata = json.loads(index)
-            if metadata.get("format") != "ephypress" or metadata.get("format_version") != FORMAT_VERSION:
-                raise ValueError("Unsupported EphyPress format version")
-            self._prediction = metadata["prediction"]
             if (
-                metadata["prediction_parameters"] != prediction_parameters(self._prediction)
-                or metadata["low_bits"] != 4
+                metadata.get("format") != "ephypress"
+                or type(metadata.get("format_version")) is not int
+                or metadata["format_version"] != FORMAT_VERSION
             ):
-                raise ValueError("Prediction parameters or residual layout do not match the codec")
+                raise ValueError("Unsupported EphyPress format version; expected v3")
+            if (
+                metadata.get("prediction") != "delta"
+                or metadata.get("entropy_backend") != "rans"
+                or metadata.get("rans_parameters") != RANS_PARAMETERS
+                or metadata.get("prediction_parameters") != DELTA_PARAMETERS
+                or metadata.get("low_bits") != 0
+                or metadata.get("residual_layout") != "channel_int16"
+            ):
+                raise ValueError("Invalid delta/rANS format parameters")
             self.shape, self.dtype = tuple(metadata["shape"]), np.dtype("<i2")
             self._batch, self._entries = metadata["block_samples"], metadata["blocks"]
-            self._halo = 0
-            self._entropy_backend = metadata["entropy_backend"]
             if (
                 len(self.shape) != 2
                 or any(type(value) is not int or value < 1 for value in self.shape)
@@ -218,8 +206,6 @@ class CompressedRecording:
             ):
                 raise ValueError("Invalid recording dimensions or sampling frequency")
             self.ndim, self.size = 2, self.shape[0] * self.shape[1]
-            if self._entropy_backend not in ("fse", "zstd"):
-                raise ValueError("Invalid entropy backend")
             if len(self._entries) != (self.shape[0] + self._batch - 1) // self._batch:
                 raise ValueError("Invalid block count")
             previous = PREFIX.size
@@ -229,7 +215,7 @@ class CompressedRecording:
                 position, size, first, last, checksum = entry
                 if (
                     position != previous
-                    or size < FRAME.size
+                    or size < 2074
                     or position + size > offset
                     or not 0 <= checksum <= 2**32 - 1
                     or first != block * self._batch
@@ -250,11 +236,17 @@ class CompressedRecording:
         except BaseException:
             self._file.close()
             raise
-        self._cache, self._pending = OrderedDict(), {}
+        # Copy returned windows before recycling output blocks; retained user views stay valid.
+        cache_blocks = 64 if cache_blocks is None else cache_blocks
+        prefetch_blocks = 32 if prefetch_blocks is None else prefetch_blocks
         self._cache_limit, self._prefetch_enabled = cache_blocks, prefetch
         self._prefetch_blocks, self._verify_crc = prefetch_blocks, verify_crc
         self._executor = ThreadPoolExecutor(max_workers=prefetch_blocks, thread_name_prefix="ephypress")
         self._lock = threading.Lock()
+        self._local = threading.local()
+        self._decoders = []
+        self._online_frames = OrderedDict()
+        self._free_outputs = queue.LifoQueue(maxsize=prefetch_blocks)
         self._stats = dict(
             decoded_blocks=0,
             cache_hits=0,
@@ -266,37 +258,34 @@ class CompressedRecording:
             cross_block_requests=0,
             assembled_bytes=0,
             max_pending_blocks=0,
+            output_buffer_reuses=0,
         )
-        self._last, self._stride, self._closed = None, 1, False
+        self._closed = False
+
+    def _decode_rans(self, block, out):
+        if not hasattr(self._local, "decoder"):
+            decoder = RansDecoder(self.path)
+            self._local.decoder = decoder
+            with self._lock:
+                self._decoders.append(decoder)
+        position, size, first, last, checksum = self._entries[block]
+        shape = (last - first, self.shape[1])
+        if out is None:
+            try:
+                candidate = self._free_outputs.get_nowait()
+                if candidate.shape == shape:
+                    out = candidate
+                    out.flags.writeable = True
+                    with self._lock:
+                        self._stats["output_buffer_reuses"] += 1
+            except queue.Empty:
+                pass
+        return self._local.decoder.decode(position, size, checksum, shape, self._verify_crc, out)
 
     def _decode(self, block, *, out=None):
         started = time.perf_counter()
         position, size, first, last, checksum = self._entries[block]
-        payload = self._file.read_at(size, position)
-        if len(payload) != size or (self._verify_crc and zlib.crc32(payload) != checksum):
-            raise ValueError(f"Block {block} checksum mismatch or truncation")
-        rows, channels = last - first, self.shape[1]
-        count = rows * channels
-        padded = (count + 7) // 8 * 8
-        low_length, primary_length, upper_length = FRAME.unpack_from(payload)
-        if low_length != padded // 2 or FRAME.size + low_length + primary_length + upper_length != size:
-            raise ValueError("Invalid residual frame lengths")
-        low = memoryview(payload)[FRAME.size : FRAME.size + low_length]
-        primary = memoryview(payload)[FRAME.size + low_length : FRAME.size + low_length + primary_length]
-        if self._entropy_backend == "fse":
-            upper = zstd.ZstdDecompressor().decompress(
-                memoryview(payload)[FRAME.size + low_length + primary_length :], max_output_size=padded
-            )
-            if len(upper) != padded:
-                raise ValueError("Invalid upper plane length")
-            high = np.empty(padded * 2, dtype="u1")
-            high[padded:], high[count:padded] = np.frombuffer(upper, dtype="u1"), 0
-            decode_channels(primary, rows, channels, high[:count])
-        else:
-            if upper_length:
-                raise ValueError("Unexpected upper plane in a Zstd frame")
-            high = zstd.ZstdDecompressor().decompress(primary, max_output_size=padded * 2)
-        data = decode_planes(low, high, (rows, channels), self._prediction, out=out)
+        data = self._decode_rans(block, out)
         data.flags.writeable = False
         with self._lock:
             self._stats["decoded_blocks"] += 1
@@ -307,81 +296,52 @@ class CompressedRecording:
     def __len__(self):
         return self.shape[0]
 
-    def _block(self, block):
-        if block in self._cache:
-            self._stats["cache_hits"] += 1
-            self._cache.move_to_end(block)
-            return self._cache[block]
-        start = time.perf_counter()
-        future = self._pending.pop(block, None)
-        data = self._decode(block) if future is None else future.result()
-        self._stats["caller_wait_seconds"] += time.perf_counter() - start
-        self._cache[block] = data
-        while len(self._cache) > self._cache_limit:
-            self._cache.popitem(last=False)
-        used = sum(v.nbytes for v in self._cache.values())
-        self._stats["max_decoded_cache_bytes"] = max(used, self._stats["max_decoded_cache_bytes"])
-        return data
-
-    def _queue_blocks(self, wanted):
-        wanted = list(dict.fromkeys(wanted))[: self._prefetch_blocks]
-        for old in list(self._pending):
-            if old not in wanted:
-                self._pending.pop(old).cancel()
-        for nxt in wanted:
-            if 0 <= nxt < len(self._entries) and nxt not in self._cache and (nxt not in self._pending):
-                self._pending[nxt] = self._executor.submit(self._decode, nxt)
-        with self._lock:
-            self._stats["max_pending_blocks"] = max(self._stats["max_pending_blocks"], len(self._pending))
-
-    def _prime_blocks(self, needed):
-        if not self._prefetch_enabled:
-            return
-        wanted = [block for block in needed if block not in self._cache]
-        wanted.extend(range(needed[-1] + 1, needed[-1] + 1 + self._prefetch_blocks))
-        self._queue_blocks(wanted)
-
-    def _prefetch(self, block, *, contiguous=False):
-        if not self._prefetch_enabled:
-            return
-        if contiguous:
-            self._stride = 1
-        elif self._last is not None:
-            delta = block - self._last
-            if delta > 0:
-                self._stride = delta
-            elif delta < 0:
-                self._stride = 1
-        self._last = block
-        self._queue_blocks([block + self._stride * i for i in range(1, self._prefetch_blocks + 1)])
-
     def _read(self, start, stop):
         if start >= stop:
             return np.empty((0, self.shape[1]), dtype=self.dtype)
-        block = min((start + self._halo) // self._batch, len(self._entries) - 1)
-        a, b = self._entries[block][2:4]
-        if start >= a and stop <= b:
-            data = self._block(block)[start - a : stop - a]
-            self._prefetch(block)
-            return data
-        segments = []
-        pos = start
-        while pos < stop:
-            block = min((pos + self._halo) // self._batch, len(self._entries) - 1)
-            a, b = self._entries[block][2:4]
-            end = min(stop, b)
-            segments.append((block, a, pos, end))
-            pos = end
         data = np.empty((stop - start, self.shape[1]), dtype=self.dtype)
-        for i, (block, a, lo, hi) in enumerate(segments):
-            self._prime_blocks([s[0] for s in segments[i : i + self._prefetch_blocks]])
-            decoded = self._block(block)
+        first_block, last_block = start // self._batch, (stop - 1) // self._batch
+        for block in range(first_block, last_block + 1):
+            decoded = self._online_block(block)
+            a, b = self._entries[block][2:4]
+            lo, hi = max(a, start), min(b, stop)
             data[lo - start : hi - start] = decoded[lo - a : hi - a]
-        self._prefetch(block, contiguous=True)
         data.flags.writeable = False
         with self._lock:
-            self._stats["cross_block_requests"] += 1
+            self._stats["cross_block_requests"] += int(first_block != last_block)
             self._stats["assembled_bytes"] += data.nbytes
+        return data
+
+    def _online_block(self, block):
+        width = self._prefetch_blocks if self._prefetch_enabled else 1
+        wanted = range(block, min(len(self._entries), block + width))
+        limit = max(self._cache_limit, width)
+        for nxt in wanted:
+            if nxt in self._online_frames:
+                continue
+            while len(self._online_frames) >= limit:
+                victim = next(i for i in self._online_frames if i not in wanted)
+                future = self._online_frames.pop(victim)
+                if not future.cancel():
+                    discarded = future.result()
+                    try:
+                        self._free_outputs.put_nowait(discarded)
+                    except queue.Full:
+                        pass
+            self._online_frames[nxt] = self._executor.submit(self._decode, nxt)
+        future = self._online_frames[block]
+        if future.done():
+            self._stats["cache_hits"] += 1
+        start = time.perf_counter()
+        data = future.result()
+        self._stats["caller_wait_seconds"] += time.perf_counter() - start
+        self._online_frames.move_to_end(block)
+        with self._lock:
+            self._stats["max_pending_blocks"] = max(self._stats["max_pending_blocks"], width)
+            used = sum(
+                f.result().nbytes for f in self._online_frames.values() if f.done() and not f.cancelled()
+            )
+            self._stats["max_decoded_cache_bytes"] = max(self._stats["max_decoded_cache_bytes"], used)
         return data
 
     def read_batch(self, start, batch_samples, *, halo=0, pad="edge", channels=slice(None)):
@@ -469,12 +429,11 @@ class CompressedRecording:
         return result
 
     def iter_cores(self):
+        if self._closed:
+            raise ValueError("Recording is closed")
         for i in range(len(self._entries)):
-            a, b = self._entries[i][2:4]
-            start = i * self._batch
-            stop = min(self.shape[0], start + self._batch)
-            data = self._block(i)[start - a : stop - a]
-            self._prefetch(i)
+            data = self._online_block(i).copy()
+            data.flags.writeable = False
             yield data
 
     def statistics(self):
@@ -482,9 +441,12 @@ class CompressedRecording:
             return dict(
                 self._stats,
                 cache_blocks=self._cache_limit,
+                effective_cache_blocks=max(self._cache_limit, self._prefetch_blocks)
+                if self._prefetch_enabled
+                else self._cache_limit,
+                worker_contexts=len(self._decoders),
                 speculative_blocks_limit=self._prefetch_blocks,
                 prefetch_enabled=self._prefetch_enabled,
-                reader_mode="blocks",
                 full_recording_materialized=False,
                 raw_disk_cache=False,
             )
@@ -492,8 +454,12 @@ class CompressedRecording:
     def close(self):
         if not self._closed:
             self._executor.shutdown(wait=True, cancel_futures=True)
-            self._pending.clear()
-            self._cache.clear()
+            self._online_frames.clear()
+            for decoder in self._decoders:
+                decoder.close()
+            self._decoders.clear()
+            while not self._free_outputs.empty():
+                self._free_outputs.get_nowait()
             self._file.close()
             self._closed = True
 

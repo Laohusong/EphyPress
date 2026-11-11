@@ -1,49 +1,56 @@
-# EphyPress container v1
+# EphyPress v3 format
 
-Version 0.2 uses one versioned container for both entropy backends. Earlier file
-layouts are unsupported. All integer fields are little-endian; files are portable
-between native Linux, macOS and Windows installations.
+All wire integers are little-endian. Current writers and readers use production
+v3 only. The filename extension is `.ep`.
 
-Archives use the `.ep` extension. The extension change does not alter the v1
-container: existing v1 archives can be renamed without recompression. The reader
-identifies the container by its header rather than its filename suffix.
+## Container
 
-## Layout
-
-1. A 24-byte prefix `<8sQQ>` contains magic `EPHYPRS\0`, index offset and length.
-2. Independent compressed blocks follow the prefix, with no duplicated storage halos.
-3. A UTF-8 JSON index describes the complete recording.
+1. A 24-byte prefix `<8sQQ>` stores magic `EPHYPRS\0`, JSON index offset and length.
+2. Independent compressed blocks follow, with no duplicated storage halos.
+3. The UTF-8 JSON index describes the recording and each block.
 4. SHA256 of the exact index bytes occupies the final 32 bytes.
 
-The index contains `format="ephypress"`, `format_version=1`, `shape`, `dtype`,
-`sampling_frequency`, `block_samples`, `prediction`, `prediction_parameters`,
-`entropy_backend`, `low_bits=4`, `source_bytes`, `source_sha256`, and `blocks`.
-Each block entry is `[offset, length, first_sample, last_sample, crc32]`.
-Index size is limited to 16MiB. Optional `ephypress_metadata` preserves supported
-SpikeInterface metadata. The reader checks dimensions, bounds, parameters,
-checksums and the version before decoding.
+The index includes `format="ephypress"`, `format_version=3`, `shape`, `dtype="<i2"`,
+`sampling_frequency`, `block_samples`, `source_bytes`, `source_sha256`, and `blocks`.
+Each block entry is `[offset, length, first_sample, last_sample, crc32]`, with an
+exclusive last sample. The index is limited to 16 MiB. Optional
+`ephypress_metadata` stores supported SpikeInterface metadata. Readers validate
+bounds, dimensions, contiguous coverage and checksums before exposing data.
 
-Each frame uses `<III>` lengths for packed low bits, primary payload and upper
-payload. FSE uses one length-prefixed packet per channel; packet modes are raw,
-FSE-compressed or run-length encoded. The upper residual plane uses Zstd. In the
-Zstd backend, both high planes occupy the primary payload and the upper payload
-is empty. Internal padding to eight-value groups is never returned as samples.
+Fixed codec fields are `prediction="delta"`,
+`prediction_parameters={"temporal_numerator":1,"temporal_denominator":1}`,
+`entropy_backend="rans"`, `residual_layout="channel_int16"`, `low_bits=0`, and
+`rans_parameters={"scale_bits":14,"lanes":4,"escape_symbol":1024,
+"model":"block_unconditional"}`.
 
-## Named prediction rules
+## Prediction and symbols
 
-`temporal` predicts each sample as `floor(5 * previous_sample / 8)` within its
-block. The first sample has prediction zero. Signed subtraction and restoration
-use reversible 16-bit modular arithmetic, followed by Zigzag mapping. There is
-no quantization or signal filtering.
+For each channel within an independent block, `d[0]=x[0]` and
+`d[t]=x[t]-x[t-1]` using reversible 16-bit modular arithmetic. The residuals are
+serialized channel-first. Signed residuals are Zigzag-mapped; values 0 through
+1023 become direct symbols, while all others emit escape symbol 1024 and the
+original 16-bit residual pattern. Escape values are stored in forward order.
 
-`spatiotemporal` first performs temporal prediction, then predicts residuals
-from the previous four channel residuals with weights `[7,11,2,4]/32`, rounded
-with integer floor division. All blocks reset prediction state independently.
+A single 1025-symbol histogram is normalized to a total of 16384. Each observed
+symbol receives at least one frequency unit. The encoder distributes deficits
+to the most frequent symbol and reduces excess in descending count order.
 
-Coefficients have one definition in `_prediction.h`; the native module exposes
-them to Python. Archive metadata stores those meaningful parameters rather than
-opaque model identifiers. Reader/encoder use explicitly named native functions.
+## Block packet
 
-Source SHA256 validates every restored ADC byte; block CRC and index SHA256
-locate corruption. These checksums are integrity checks, not authentication.
-Consumer batch sizes and requested context remain independent of storage blocks.
+1. `<II>`: model count (1), escape byte count (even).
+2. 1025 uint16 normalized frequencies totaling 16384.
+3. Four uint32 rANS states in `[2^23, 2^31)`.
+4. The interleaved byte-renormalization stream.
+5. Escaped residual bit patterns as little-endian uint16.
+
+The fixed overhead is 2074 bytes. Symbol index `i` uses state `i % 4`. Encoding
+traverses symbols in reverse order; decoding consumes them forwards. Byte
+renormalization uses a lower state bound of `2^23`. All four terminal states
+must equal that bound, and both byte streams must be consumed exactly.
+
+The decoder maintains per-worker frequency tables, input and residual buffers.
+A tiled inverse-difference/transpose pass produces time-major int16 samples.
+Requested windows are copied before cached output buffers are recycled, so
+caller-held windows remain valid. Consumer batch sizes are independent of
+storage blocks. Block CRC32 and index/source SHA256 detect accidental corruption;
+they are not authentication mechanisms.

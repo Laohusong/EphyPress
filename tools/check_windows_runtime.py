@@ -16,7 +16,6 @@ def main():
     extra_runtimes = ("msvcp", "vcomp", "libomp", "libiomp", "concrt")
     if any(name.startswith(extra_runtimes) for name in dependencies):
         raise RuntimeError("Codec depends on an unbundled C++/OpenMP runtime")
-    assert _codec.openmp_enabled == 0
 
 
 if __name__ == "__main__":

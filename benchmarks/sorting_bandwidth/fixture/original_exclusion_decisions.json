@@ -1,5 +1,0 @@
-{
-  "chronosort_raw_5000MBps": "First successful run is warmup only. Finalize script preserves it and reruns this formal point at the end.",
-  "chronosort_compressed_5000MBps": "First run is a prefetch diagnostic using generic EphyPress prefetch. Formal runs preserve the current ChronoSort WindowPrefetch policy; finalize preserves and replaces this point.",
-  "default_memory_failure": "Initial ChronoSort attempt exhausted the default 1.4 GiB initial GPU owner budget and encountered Windows temp-log cleanup locking. All successful/formal runs use public initial_cluster_gpu_owner_memory_gib=4.0; source is unchanged."
-}

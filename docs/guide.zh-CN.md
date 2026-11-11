@@ -1,229 +1,85 @@
-# EphyPress 中文用户指南
+# EphyPress 使用指南
 
-[English](../README.md) · [发行版本](https://github.com/Laohusong/EphyPress/releases) · [文件格式](format.md) · [验证记录](validation.md)
+EphyPress 对电生理 int16 采样值进行无损压缩，并为 SpikeInterface 和
+Kilosort4 提供按需读取接口。当前实现采用块内一阶时间差分、通道优先残差
+排列和四路 rANS 熵编码；每个存储块独立解码。
 
-EphyPress 将电生理 `int16` 原始记录无损压缩为一个带索引的 `.ep` 文件。
-它支持完整还原、按需读取任意时间窗口，以及让 KS4 和 SpikeInterface 直接读取压缩后的采样值。
-读取器只在内存中保存有界的解码缓存，不自动生成完整原始数据副本。
+## 安装
 
-默认使用 **temporal（时间预测）**，可选 **spatiotemporal（时间与跨通道预测）**。
-两者都采用可逆整数预测、Zigzag、四个低位直接打包、逐通道 FSE 和极高位 Zstd，完整保留每个 int16 ADC 值。文件头记录预测方式与明确的系数，不再使用实验编号。FSE 随包分发。
-
-## 1. Linux、macOS、原生 Windows 安装
-
-三种桌面系统均默认支持相同的压缩、解压、窗口读取、SpikeInterface 和 KS4 接口。
-使用 64 位 CPython 3.10+。Windows 直接使用原生 Python，在 PowerShell 或命令提示符运行即可；无需 Linux 子系统。
-默认读取器自动选择适合系统的实现：Linux 可用 RAM 页映射，Windows/macOS 使用线程安全的块读取。并行压缩块和预取在三种系统都可用。
-
-在 [GitHub Release](https://github.com/Laohusong/EphyPress/releases/tag/v0.2.0) 下载与操作系统及架构匹配的 wheel：
+要求 Python 3.10 以上及 C++17 编译器。Windows 使用 MSVC Build Tools，
+Linux 使用 GCC/Clang，macOS 使用 Xcode Command Line Tools。
 
 ```bash
-python -m pip install /path/to/ephypress-0.2.0-...whl
+python -m pip install .
+python -m pip install '.[all]'  # 可选：SpikeInterface 和 Kilosort4
 ```
 
-提供 Linux、macOS、Windows 的 x86_64/ARM64 包。Windows wheel 静态链接 C++ 运行库，不需要用户另装编译器运行库。
-Windows ARM64 请使用原生 ARM64 Python 3.11+ 和 ARM64 wheel；其他架构使用对应的 64 位 Python。
+基础依赖只有 NumPy。GPU 分选另行安装适配设备的 PyTorch/CUDA 版本。
+第三方依赖通过包管理器安装，仓库不附带其他项目的源码。
 
-源码安装需要原生编译器：Linux 的 GCC/Clang 与 Python 开发头文件、macOS 的 Xcode Command Line Tools、Windows 的 Microsoft Visual C++ Build Tools（C++ 工作负载）。
+## 压缩与验证
+
+```python
+from ephypress import compress, info, verify, decompress
+
+compress("recording.dat", "recording.ep", n_channels=384,
+         sampling_frequency=30000, block_samples=60000, workers=4)
+print(info("recording.ep"))
+print(verify("recording.ep", original="recording.dat"))
+decompress("recording.ep", "restored.dat")
+```
+
+输入必须为无文件头、时间优先、小端 int16 数据。通道数和采样率需正确指定。
+默认每块 60000 个时间采样点；30 kHz 下对应两秒。压缩不做量化、滤波或幅值缩放。
+`workers` 控制并行压缩的块数。校验会检查所有块和完整原始字节 SHA256；
+指定 `original` 后还会逐块比较采样值。文件通过临时文件原子发布，不覆盖已有目标。
 
 ```bash
-python -m pip install "ephypress @ git+https://github.com/Laohusong/EphyPress.git@v0.2.0"
-python -m pip install "ephypress[spikeinterface] @ git+https://github.com/Laohusong/EphyPress.git@v0.2.0"
-python -m pip install "ephypress[ks4] @ git+https://github.com/Laohusong/EphyPress.git@v0.2.0"
-python -m pip install "ephypress[all] @ git+https://github.com/Laohusong/EphyPress.git@v0.2.0"
-```
-
-KS4 的 GPU 排序还需要适合显卡的 PyTorch/CUDA 环境和实际探针配置；见 [KS4 指南](https://github.com/MouseLand/Kilosort#instructions) 和 [PyTorch 安装页面](https://pytorch.org/get-started/locally/)。本版本从 GitHub 分发。
-
-### 新文件格式
-
-0.2 版本使用 EphyPress v1 文件格式，预测器名称直接表达算法含义。旧格式不再读取，请从原始 int16 数据重新压缩。文件后缀为 `.ep`；已有 v1 文件只需改名，无需重新压缩。
-
-## 2. 原始数据要求
-
-命令行输入必须是**无文件头、小端、有符号 int16、时间 × 通道顺序**：
-
-```text
-时间0通道0、时间0通道1、……、时间1通道0、时间1通道1、……
-```
-
-必须提供文件真实列数和采样率。含同步列的 385 列文件应填 `--channels 385`，即使排序只用 384 个电极通道。
-文件字节数应能被 `2 × 通道数` 整除。浮点、24 位、其他端序或带文件头的数据，应先用对应的 SpikeInterface extractor 读取；本包不会把浮点采样静默量化为整数。
-
-## 3. 压缩、校验与解压
-
-```bash
-ephypress compress continuous.dat recording.ep --channels 384 --fs 30000 --workers 4
+ephypress compress recording.dat recording.ep --channels 384 --fs 30000
 ephypress info recording.ep
-ephypress verify recording.ep --original continuous.dat
+ephypress verify recording.ep --original recording.dat
 ephypress decompress recording.ep restored.dat
 ```
 
-也可使用 `python -m ephypress`。输出是 JSON，失败时退出码非零。目标文件必须不存在，写入成功后才原子发布；失败会清理临时文件。
-
-`info` 只读取并核对索引。`verify` 解码全部采样并核对原始 SHA-256；提供 `--original` 时还逐值比较原文件。`decompress` 在发布还原文件前完成完整 SHA-256 核对。这些操作保留块 CRC 和索引校验。
-
-Python 接口：
+## 按需读取
 
 ```python
-import ephypress as ep
+from ephypress import open_recording
 
-report = ep.compress("continuous.dat", "recording.ep", n_channels=384,
-                     sampling_frequency=30000, workers=4)
-print(report["ratio"])  # 原始字节数 / 完整压缩文件字节数
-ep.verify("recording.ep", original="continuous.dat")
-ep.decompress("recording.ep", "restored.dat")
+with open_recording("recording.ep", cache_blocks=64, prefetch_blocks=32) as data:
+    window = data[59950:60100, :32]
 ```
 
-默认压缩块为 60000 点，不必与后续 sorting 的 batch 大小相同。
-默认 `prediction="temporal"`。使用时间与跨通道预测时，传入 `prediction="spatiotemporal"` 或 `--prediction spatiotemporal`。两种模式均不存储重复 halo。
-高位全部使用 Zstd 时用 `entropy_backend="zstd"` 或 `--entropy zstd`，仍完全无损。
+支持跨块窗口与步进切片，返回的数组只读，缓存淘汰或关闭读取器后仍有效。
+默认保留 64 块并最多预取 32 块。以 60000×384×2 字节计算，缓存采样值本身
+可接近 2.95 GB，另有工作区、预取和用户保留的窗口。内存有限时调小
+`cache_blocks`、`prefetch_blocks`，或设置 `prefetch=False`。
 
-## 4. 不展开整个文件，直接读取窗口
+使用上下文管理器及时关闭读取器。并发消费者应分别打开读取器或使用外部锁；
+多进程采用 `spawn`，在子进程中创建读取器。
+
+## 分选与 SpikeInterface
 
 ```python
-with ep.open_recording("recording.ep") as recording:
-    print(recording.shape, recording.dtype, recording.metadata["sampling_frequency"])
-    traces = recording[100000:160000, :]
-    selected = recording[100000:160000, [0, 2, 7]]
-    batch = recording.read_batch(100000, 65536, halo=(2000, 2000), pad="edge")
-    print(batch.shape)  # (69536, 通道数)
-    print(recording.statistics())
+from ephypress.kilosort import run_kilosort
+
+run_kilosort("recording.ep", probe=probe,
+             settings={"batch_size": 60000}, results_dir="ks4_output")
 ```
 
-默认 `reader_mode="auto"` 在 Linux 上选页映射，其余平台用块拼接；`reader_mode="blocks"` 可显式选择普通读取器。
-默认缓存两帧、最多预取四帧，并在 Linux 上复用四个空闲背板。`prefetch=False` 关闭预取；`prefetch_blocks` 可为 1、2、4、8。
-返回数组只读，在后续读取或关闭后仍保持原值。调用者长期保留很多数组时，这部分内存不属于内部缓存预算。
-用 `with` 或 `close()` 释放读取器资源；多个并发消费者应各开读取器或自行加锁。
-
-## 5. 用原生 KS4 直接排序压缩文件
-
-便利接口自动读取文件中的采样率和通道数：
+`probe` 必须使用真实探针几何和通道映射。通过 Kilosort4 公开的 `file_object`
+接口按需获取采样值，默认不保存预处理数据副本。结果目录必须为空或尚不存在。
 
 ```python
-from kilosort.io import load_probe
-import ephypress as ep
-
-result = ep.run_kilosort(
-    "recording.ep", probe=load_probe("ProbeA.json"),
-    results_dir="ks4_output", settings={"batch_size": 60000},
-    torch_thread_lim=8,
-)
-```
-
-使用实际探针几何和通道映射，输出目录须为新目录或空目录。其余 KS4 参数会原样传递；返回值就是 KS4 原始结果元组。
-如果显式设置的 `fs` 或 `n_chan_bin` 与文件冲突，接口会报错。
-
-也可直接调用 KS4 的原有接口：
-
-```python
-from kilosort import run_kilosort
-from kilosort.io import load_probe
-
-with ep.open_recording("recording.ep") as recording:
-    result = run_kilosort(
-        settings={"n_chan_bin": recording.shape[1], "fs": recording.metadata["sampling_frequency"]},
-        probe=load_probe("ProbeA.json"), filename="recording.ep",
-        file_object=recording, data_dtype="int16", results_dir="ks4_output",
-        save_preprocessed_copy=False,
-    )
-```
-
-关键是 `file_object=recording`；仅把 `.ep` 路径交给 KS4 不会自动选择解码器。
-无需修改安装的 KS4 源码，但 KS4 GUI 不会自动识别 `.ep`。时间子集沿用 KS4 的 `tmin`、`tmax` 参数。
-
-## 6. 用 SpikeInterface 读取
-
-```python
-from ephypress.spikeinterface import read_ephypress
-
+from ephypress.spikeinterface import read_ephypress, write_recording
 recording = read_ephypress("recording.ep")
 traces = recording.get_traces(start_frame=0, end_frame=30000)
-subset = recording.select_channels(recording.get_channel_ids()[:32])
-recording.dump_to_json("recording.json")
-
-from spikeinterface.core import load
-reloaded = load("recording.json")
-reloaded.close()
-```
-
-它是标准 `BaseRecording`，可用于 SI 的切片、预处理、SortingAnalyzer 和 sorter 接口。入口由 EphyPress 提供，不要求修改或注册到上游 `spikeinterface.extractors`。
-JSON 保存压缩文件路径，不嵌入原始采样；新进程需安装 EphyPress，并能访问同一文件。移动文件后请更新或重新生成路径引用。
-
-### 探针和微伏单位
-
-原始二进制本身没有探针或增益信息，请按设备元数据补齐：
-
-```python
-recording.set_channel_locations(channel_positions_um)  # (通道数, 2或3)
-recording.set_channel_gains(gain_to_uV)
-recording.set_channel_offsets(offset_to_uV)
-traces_uV = recording.get_traces(start_frame=0, end_frame=30000, return_in_uV=True)
-```
-
-也可通过 `set_probe(probe)` 附加 ProbeInterface 探针，device channel indices 要匹配压缩文件列顺序。
-若文件含同步列而探针只有电极接触点，先 `select_channels` 排除同步列。
-
-### 直接压缩已有 SI Recording
-
-```python
-from ephypress.spikeinterface import write_recording
-
-compressed = write_recording(source_recording, "recording.ep", workers=4)
+recording.close()
+# 从单段、均匀采样的 int16 BaseRecording 写入：
+compressed = write_recording(source_recording, "new_recording.ep")
 compressed.close()
 ```
 
-输入须为单 segment、均匀采样的 int16 recording。写入按块进行，不生成完整 raw 中间文件。
-通道 ID、位置、增益、偏移、分组、常数时间起点、滤波标记和完整连接的探针会保存在校验索引中。
-任意自定义注释不保存；显式时间向量和多 segment 会报错。多 segment 请分别压缩，或按 SI 的明确语义处理后再写。
-`keep_metadata=False` 可只保存采样及基础信息。浮点 recording 不会被隐式转换为有损 int16。
-
-多进程工作使用 `spawn`，每个进程通过序列化描述重新加载私有读取器；不要继承已经启动预取的活动读取器。
-
-### 通过 SpikeInterface 直接运行 KS4
-
-```python
-import spikeinterface.sorters as ss
-from ephypress.spikeinterface import read_ephypress
-
-recording = read_ephypress("recording.ep")
-recording.set_channel_locations(channel_positions_um)
-sorting = ss.run_sorter(
-    "kilosort4", recording, folder="ks4_si_output",
-    use_binary_file=False, save_preprocessed_copy=False,
-    torch_device="cuda", verbose=True,
-)
-recording.close()
-```
-
-`use_binary_file=False` 强制走 SI 数组读取接口，`save_preprocessed_copy=False` 关闭额外预处理副本。
-若用 `write_recording` 保存了探针/位置，可直接复用这些信息。
-
-## 7. Phy 波形查看
-
-本包不安装 Phy 的 `.ep` 解码器。需要查看 raw 波形时，显式解压到 `restored.dat`，并在 KS4 输出的 `params.py` 中把 `dat_path` 改为其绝对路径；dtype、采样率和**完整文件列数**须正确。
-也可设置 `save_preprocessed_copy=True` 让 KS4 导出预处理数据，但会生成额外文件。
-
-## 8. 验证、性能和开发
-
-压缩率依赖信号，吞吐依赖硬件及读取配置。已验证无损、损坏检测、跨块窗口、两种具名预测、数组生命周期、CLI、SI 元数据重载和 KS4 padding；还对真实 60 秒记录完成了原生 KS4 与 SI KS4 的完整运行。具体版本、范围和限制见 [验证记录](validation.md)。
-
-`workers` 只控制并行压缩块，Linux OpenMP 内核每阶段还可使用两个线程；预取线程与 Torch/BLAS 线程分别配置。构建时设置 `EPHYPRESS_OPENMP=0` 可生成单线程原生内核。
-
-```bash
-git clone https://github.com/Laohusong/EphyPress.git
-cd EphyPress
-python -m pip install -e '.[dev,spikeinterface]'
-pytest
-python -m build
-python -m twine check dist/*
-```
-
-GitHub CI 自动构建和测试；版本标签构建 Linux/macOS/Windows wheel 与源码包。
-`tools/validate_real_recording.py` 可用用户自己的真实数据进行 GPU 验证，数据和结果保留在本地。
-主体代码 MIT 许可，FSE 为 BSD-2-Clause；详见 [第三方声明](../THIRD_PARTY_NOTICES.md)。
-
-
-## Sorting bandwidth benchmarks and reproduction
-
-[KS4 and ChronoSort bandwidth benchmarks](../benchmarks/sorting_bandwidth/README.md) include historical curves, CSV and HTML reports, environment and provenance records, and a standalone Windows KS4 reproduction runner. ChronoSort results use a 62000-sample core with context. Read/write measurements for that configuration are not yet available; results from other segment configurations are excluded.
+元数据与物理单位设置见 [SpikeInterface 文档](spikeinterface.md)。
+当前读取器只支持正式 v3 格式。旧格式需用对应旧版本先恢复原始数据再重新压缩。
+专利附图及实验复现资料集中在 `patent` 分支的 `patent/复现.md`。

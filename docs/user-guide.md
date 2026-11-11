@@ -1,234 +1,82 @@
-# EphyPress user guide
-
-[README](../README.md) · [Benchmark results](benchmarks.md)
-
-**Lossless electrophysiology compression, with direct SpikeInterface and Kilosort4 access.**
-
-[Chinese user guide](guide.zh-CN.md) · [Releases](https://github.com/Laohusong/EphyPress/releases) · [File format](format.md) · [Validation](validation.md)
-
-EphyPress turns headerless `int16` recordings into a single indexed `.ep` file.
-You can restore the original bytes, read arbitrary sample windows, or run sorting
-directly on compressed data. Decoded blocks are cached in bounded RAM; reading
-does not create a full raw data file.
-
-The default **temporal** predictor uses the previous sample in each channel.
-The optional **spatiotemporal** predictor also uses neighboring-channel residuals.
-Both preserve every int16 ADC value with integer prediction, Zigzag mapping,
-four packed low bits, per-channel FSE and a Zstd upper plane. Prediction names
-and explicit coefficients are stored in the checked index. FSE is bundled.
+# User guide
 
 ## Installation on Linux, macOS and native Windows
 
-Use 64-bit CPython 3.10 or newer. The same CLI, Python, SpikeInterface and KS4
-interfaces run natively on all three desktop operating systems. Default readers
-select Linux RAM page remapping when available and portable block assembly on
-Windows/macOS. Threaded block encoding and prefetch are available everywhere.
-
-[GitHub Releases](https://github.com/Laohusong/EphyPress/releases/tag/v0.2.0)
-provides Linux, macOS and native Windows wheels for x86_64 and ARM64. Choose the
-wheel for your Python/OS architecture and install it without a compiler:
+Use Python 3.10 or newer and a C++17 compiler. From a checkout:
 
 ```bash
-python -m pip install /path/to/ephypress-0.2.0-...whl
+python -m pip install .
+python -m pip install '.[spikeinterface]'  # optional
+python -m pip install '.[ks4]'            # optional
 ```
 
-On Windows use a native Python installation and run the same command in
-PowerShell or Command Prompt; no Linux subsystem is required. Windows wheels
-statically link the compiler C++ runtime. ARM64 Windows requires a native ARM64
-Python release (3.11+); select the ARM64 wheel rather than the x86_64 wheel.
+For CUDA sorting, install the appropriate PyTorch build for your GPU separately.
+Windows source builds require MSVC Build Tools; the extension uses a static C++
+runtime and has no OpenMP dependency.
 
-### Install from the version tag
-
-Source builds require a native C/C++ compiler: GCC/Clang and Python development
-headers on Linux, `xcode-select --install` on macOS, or Microsoft Visual C++ Build
-Tools with the C++ workload on Windows.
-
-```bash
-python -m pip install "ephypress @ git+https://github.com/Laohusong/EphyPress.git@v0.2.0"
-python -m pip install "ephypress[spikeinterface] @ git+https://github.com/Laohusong/EphyPress.git@v0.2.0"
-python -m pip install "ephypress[ks4] @ git+https://github.com/Laohusong/EphyPress.git@v0.2.0"
-python -m pip install "ephypress[all] @ git+https://github.com/Laohusong/EphyPress.git@v0.2.0"
-```
-
-The initial distribution is hosted on GitHub, so the commands use an explicit
-repository URL. GPU sorting additionally needs a compatible PyTorch/CUDA build
-and real probe geometry; follow the [Kilosort guide](https://github.com/MouseLand/Kilosort#instructions)
-and [PyTorch selector](https://pytorch.org/get-started/locally/).
-
-### Format version
-
-Version 0.2 uses the EphyPress v1 container and descriptive prediction names.
-Earlier archive layouts are unsupported; recompress the original int16 data.
-Archives use the `.ep` extension; existing v1 archives only need to be renamed.
-
-## Input format
-
-The raw file must have no header and contain **little-endian signed 16-bit ADC
-samples in time × channel order**:
-
-```text
-time0/channel0, time0/channel1, ..., time1/channel0, time1/channel1, ...
-```
-
-Supply the actual file channel count and sample rate. A 385-column Neuropixels
-file with a synchronization channel requires `--channels 385`, even if only 384
-channels are sorted. The file size must be divisible by `2 × channels`.
-Float, 24-bit, big-endian or header-bearing files require an appropriate input
-extractor; EphyPress never silently quantizes float traces.
-
-## Compress, verify and decompress
-
-### Command line
-
-```bash
-ephypress compress continuous.dat recording.ep --channels 384 --fs 30000 --workers 4
-ephypress info recording.ep
-ephypress verify recording.ep --original continuous.dat
-ephypress decompress recording.ep restored.dat
-```
-
-`python -m ephypress` accepts the same commands. Commands print JSON and return
-nonzero on failure. Output files must not already exist; completed files are
-published atomically. A failed operation removes its temporary output.
-
-`verify` reads every sample and checks the stored source SHA256. With `--original`
-it also compares every sample with that raw file. `decompress` performs the full
-SHA256 check before publishing its output. Both operations check block CRCs and
-the index checksum. Metadata inspection does not decode the recording.
-
-### Python
+## Compress, inspect and restore
 
 ```python
-import ephypress as ep
+from ephypress import compress, decompress, info, verify
 
-report = ep.compress("continuous.dat", "recording.ep", n_channels=384,
-                     sampling_frequency=30000, workers=4)
-print(report["ratio"])  # raw bytes / complete archive bytes
-ep.verify("recording.ep", original="continuous.dat")
-ep.decompress("recording.ep", "restored.dat")
+result = compress("recording.dat", "recording.ep", n_channels=384,
+                  sampling_frequency=30000, block_samples=60000, workers=4)
+metadata = info("recording.ep")
+verification = verify("recording.ep", original="recording.dat")
+decompress("recording.ep", "restored.dat")
 ```
 
-The default block size is 60000 samples; it does not need to match a future
-sorter's batch size. Select spatial prediction with
-`prediction="spatiotemporal"` or `--prediction spatiotemporal`.
-The default is `prediction="temporal"`. To use Zstd for both high planes,
-pass `entropy_backend="zstd"` or `--entropy zstd`. Both modes are lossless and
-storage blocks do not include duplicated halos.
+Input is headerless time-major little-endian int16. There is no filtering,
+quantization or scaling. Blocks are independent; the default 60000 samples
+represent two seconds at 30 kHz. `workers` controls concurrent compression blocks.
+`info` checks the index without decoding samples. `verify` checks every block and
+the original-byte SHA256; `original` additionally compares all samples directly.
+Restoration performs the same full SHA256 check. Failed writes do not publish
+partial output, and existing destinations are never overwritten.
 
-## Read compressed windows
+The equivalent CLI commands are `ephypress compress`, `info`, `verify` and
+`decompress`; use `--help` on any command for all options.
+
+## Read windows
 
 ```python
-import ephypress as ep
+from ephypress import open_recording
 
-with ep.open_recording("recording.ep") as recording:
-    print(recording.shape, recording.dtype, recording.metadata["sampling_frequency"])
-    traces = recording[100000:160000, :]
-    selected = recording[100000:160000, [0, 2, 7]]
-    batch = recording.read_batch(100000, 65536, halo=(2000, 2000), pad="edge")
-    print(batch.shape)  # (69536, n_channels)
-    print(recording.statistics())
+with open_recording("recording.ep", cache_blocks=64, prefetch_blocks=32) as data:
+    window = data[59950:60100, :32]  # may cross a storage-block boundary
+    every_second = data[100:200:2]
+    shape, dtype = data.shape, data.dtype
 ```
 
-`reader_mode="auto"` selects Linux page remapping when available, with block
-assembly elsewhere. `reader_mode="blocks"` explicitly selects normal assembly.
-Defaults are two cached blocks, up to four prefetch blocks and four reusable
-Linux backing buffers. `prefetch=False` disables lookahead; `prefetch_blocks`
-accepts 1, 2, 4 or 8. Returned arrays are read-only and retain their storage after
-subsequent reads or close. Keeping many returned arrays alive adds memory beyond
-the internal cache budget. Use a context manager to close descriptors/workers.
-Concurrent consumers should use separate readers or an external lock.
+Windows contain exact, read-only time-major samples and remain valid after cache
+eviction or reader closure. Cached blocks and per-worker decoding workspaces
+consume memory; with 384 channels, 60000 samples per block and the default
+64-block cache, cached samples alone can approach 2.95 GB. Active workspaces,
+prefetch and caller-retained windows add to this. For less memory, reduce
+`cache_blocks` and `prefetch_blocks`, or use `prefetch=False` for synchronous
+single-block decoding. A large strided request can still touch many blocks.
 
-## Native Kilosort4: sort the `.ep` directly
+Close readers or use a context manager. Each concurrent consumer should own its
+reader or use an external lock. For multiprocessing use `spawn` and open readers
+inside workers. Integrity checks detect accidental corruption, not malicious
+modification. The supported archive format is v3.
 
-### Convenience API
+## Direct Kilosort4 sorting
 
 ```python
-from kilosort.io import load_probe
-import ephypress as ep
+from ephypress.kilosort import run_kilosort
 
-probe = load_probe("ProbeA.json")  # your actual geometry/channel map
-result = ep.run_kilosort(
-    "recording.ep", probe=probe, results_dir="ks4_output",
-    settings={"batch_size": 60000}, torch_thread_lim=8,
-)
+run_kilosort("recording.ep", probe=probe,
+             settings={"batch_size": 60000}, results_dir="ks4_output",
+             reader_options={"cache_blocks": 64, "prefetch_blocks": 32})
 ```
 
-The helper infers `fs` and `n_chan_bin` from the archive and rejects contradictory
-values. Other settings and keyword arguments go to Kilosort. Use a new or empty
-results directory. The return value is the original Kilosort result tuple.
-No KS4 source modification is required.
+`probe` must describe the actual electrode geometry and channel mapping.
+The adapter uses Kilosort's public `file_object` interface, fills `fs` and
+`n_chan_bin` from the archive, and defaults to `save_preprocessed_copy=False`.
+Choose a new or empty output directory. Other keyword arguments pass through to
+Kilosort. On-demand reading eliminates a full raw intermediate; its speed depends
+on compressed size, decoding cost and the access pattern.
 
-### Kilosort's original API
-
-```python
-from kilosort import run_kilosort
-from kilosort.io import load_probe
-import ephypress as ep
-
-with ep.open_recording("recording.ep") as recording:
-    result = run_kilosort(
-        settings={"n_chan_bin": recording.shape[1], "fs": recording.metadata["sampling_frequency"]},
-        probe=load_probe("ProbeA.json"), filename="recording.ep",
-        file_object=recording, data_dtype="int16", results_dir="ks4_output",
-        save_preprocessed_copy=False,
-    )
-```
-
-The important argument is `file_object`. Passing only a `.ep` filename to KS4
-does not select an EphyPress decoder. The GUI also does not automatically detect
-this format. A real probe map is required; channel count does not define geometry.
-For partial sorting, use standard `settings={"tmin": ..., "tmax": ...}` options.
-
-## SpikeInterface
-
-See the [SpikeInterface guide](spikeinterface.md) for reading and writing recordings, metadata, and running KS4 without a raw copy.
-
-## Phy and waveform viewing
-
-Compressed sorting does not install a Phy `.ep` decoder. To view raw waveforms
-in Phy, explicitly decompress to `restored.dat` and set `dat_path` in the exported
-`params.py` to that absolute path, keeping the correct dtype, sample rate and
-**full file channel count**. Alternatively let KS4 export a preprocessed copy
-with `save_preprocessed_copy=True`; that creates an additional, processed file.
-
-## Performance and validation
-
-Compression ratio depends on the signal. No universal ratio or sorting speed
-is promised. This release is tested for exact reconstruction, corruption
-detection, arbitrary cross-block windows, retained-view lifetime, named prediction modes, CLI installation, SpikeInterface metadata/JSON reload, and native KS4
-padded batches. Full native KS4 and SpikeInterface KS4 were also run on a real
-60-second, 384-channel recording; see [validation details](validation.md).
-
-CPU `workers` controls encoding blocks; a Linux OpenMP kernel can additionally
-use two threads per phase. Reader prefetch workers are independent. Control
-Torch/BLAS threads separately in a sorting pipeline. `EPHYPRESS_OPENMP=0` at
-**build time** produces a serial native extension for reproducible CPU controls.
-
-The [sorting bandwidth benchmark](../benchmarks/sorting_bandwidth/README.md) includes
-recorded KS4/ChronoSort curves, data and environment provenance, and a standalone
-Windows KS4 reproduction runner for input-read and independent read/write caps.
-ChronoSort results use 62000-sample cores with context; missing read/write
-measurements are explicitly identified.
-
-## Development and release
-
-```bash
-git clone https://github.com/Laohusong/EphyPress.git
-cd EphyPress
-python -m pip install -e '.[dev,spikeinterface]'
-pytest
-python -m build
-python -m twine check dist/*
-```
-
-GitHub CI builds and tests the package. Tagged releases build Linux/macOS/Windows wheels
-and a source distribution. GPU/real-data validation is opt-in via
-`tools/validate_real_recording.py`; recordings and sorting artifacts stay local.
-See [CONTRIBUTING](../CONTRIBUTING.md) and [CHANGELOG](../CHANGELOG.md).
-
-## License and acknowledgments
-
-EphyPress is MIT-licensed. Bundled FiniteStateEntropy is BSD-2-Clause; its source,
-license and pinned revision are in `vendor/fse`. Binary Linux wheels may include
-the GCC OpenMP runtime under its runtime-library exception. Dependencies retain
-their own licenses; see [third-party notices](../THIRD_PARTY_NOTICES.md).
+For serializable recordings, physical units and preprocessing, see the
+[SpikeInterface guide](spikeinterface.md).

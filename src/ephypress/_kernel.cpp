@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: AGPL-3.0-only
 // Reversible temporal difference and channel-major residual layout.
 #include <algorithm>
 #include <cstdint>
